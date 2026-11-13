@@ -875,7 +875,8 @@ body.dnd-on{-webkit-user-select:none;user-select:none}
 .ib2.emo.info:hover .em,.ib2.emo.info:focus-visible .em{filter:none;opacity:1}
 @keyframes emoOn{0%{transform:scale(.7) rotate(-15deg)}100%{transform:none}}
 .chip.dl{color:var(--fg2)}.chip.dl.hot{color:#FF9A7E;border-color:#FF7A5947;background:#FF7A5914}.chip.dl.late{color:#FF9A7E;border-color:#FF7A5947}
-.gspark{display:inline-flex;gap:3px;align-items:flex-end;height:24px}.gspark i{display:block;width:6px;border-radius:2px;background:color-mix(in srgb,var(--c) 65%,transparent)}.gspark i.z{background:var(--line2)}.gspark i:last-child:not(.z){background:var(--c);box-shadow:0 0 8px color-mix(in srgb,var(--c) 70%,transparent)}
+.gspark{display:inline-flex;gap:3px;align-items:flex-end;height:24px}.gspark i{display:block;width:6px;border-radius:2px;background:color-mix(in srgb,var(--c) 65%,transparent)}.gspark i.z{background:var(--line2)}.gspark i:last-child:not(.z){background:var(--c);box-shadow:0 0 12px var(--c),0 0 3px var(--c)}.gspark i.z:last-child{background:color-mix(in srgb,var(--c) 22%,transparent);box-shadow:0 0 8px color-mix(in srgb,var(--c) 45%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--c) 60%,transparent)}
+.dgc-wk .gspark i{border-radius:4px}
 .gring{position:relative;width:62px;height:62px;flex:none}.gring svg{width:100%;height:100%;transform:rotate(-90deg)}.gring circle{fill:none;stroke-width:6}.gring .bg{stroke:var(--line2)}
 .gring .fg{stroke:var(--c);stroke-linecap:round;stroke-dashoffset:var(--off);filter:drop-shadow(0 0 5px color-mix(in srgb,var(--c) 55%,transparent))}
 .gring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 .92rem var(--display)}.gring b small{font-size:.6em;color:var(--fg2);margin-left:1px}
@@ -1958,9 +1959,9 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .card.c7:has(> .dgc-row){align-self:stretch;display:flex;flex-direction:column}.card.c7>.dgc-row{flex:1;align-items:stretch}
 .card.c7>.dgc-row>.dgc:not(.more){justify-content:space-between}.card.c7>.dgc-row .dgc-wk{flex:0 1 150px;margin-top:0;min-height:52px}.card.c7>.dgc-row .dgc-wk .gspark{flex:1;height:auto;min-height:30px}
 .dash-scroll{max-height:290px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#2A322C transparent;margin-right:-6px;padding-right:6px}
-.dash-scroll.over:not(.end){-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent)}
-.dash-scroll.over:not(.end):not(.top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent)}
-.dash-scroll.over.end:not(.top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px);mask-image:linear-gradient(to bottom,transparent,#000 28px)}
+.dash-scroll.fl-over:not(.fl-end){-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent)}
+.dash-scroll.fl-over:not(.fl-end):not(.fl-top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent)}
+.dash-scroll.fl-over.fl-end:not(.fl-top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px);mask-image:linear-gradient(to bottom,transparent,#000 28px)}
 .t-more{display:flex;align-items:center;gap:12px;margin:10px 0 4px;padding:14px 16px;border:1.5px dashed #B7F36B55;border-radius:16px;background:var(--s1);color:var(--fg);text-decoration:none;transition:border-color .2s,background .2s,transform .16s}
 .t-more:hover{border-color:#B7F36B99;background:#B7F36B0d}.t-more:active{transform:scale(.98)}
 .t-more b{font:800 1.45rem var(--display);color:var(--lime);letter-spacing:-.02em;min-width:2.2ch}
@@ -3668,15 +3669,16 @@ const TCHECK = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="tc-bg
 const DONE_MAX = 5, DASH_TASKS_MAX = 7, DASH_TASKS_MOB = 5;
 function fadeLists(root) {
   root.querySelectorAll('[data-fade]').forEach(el => {
-    const upd = () => { const over = el.scrollHeight > el.clientHeight + 2; el.classList.toggle('over', over); el.classList.toggle('end', !over || el.scrollTop + el.clientHeight >= el.scrollHeight - 4); el.classList.toggle('top', el.scrollTop <= 2); };
-    upd(); el.addEventListener('scroll', upd, { passive: true });
+    const k = el.dataset.fade; if (k && UI.fadePos && UI.fadePos[k] != null) el.scrollTop = UI.fadePos[k];
+    const upd = () => { const over = el.scrollHeight > el.clientHeight + 2; el.classList.toggle('fl-over', over); el.classList.toggle('fl-end', !over || el.scrollTop + el.clientHeight >= el.scrollHeight - 4); el.classList.toggle('fl-top', el.scrollTop <= 2); };
+    upd(); el.addEventListener('scroll', () => { upd(); if (k) (UI.fadePos = UI.fadePos || {})[k] = el.scrollTop; }, { passive: true });
   });
 }
 function dashTasks(tasks) {
   const st0 = S(), pend = tasks.filter(x => !x.done).sort((a, b) => isPrio(st0, b) - isPrio(st0, a)), done = tasks.filter(x => x.done);
   if (!tasks.length) return `<button type="button" class="t-empty" data-act="tq-focus"><span class="t-empty-ic">${icon('back')}</span><div class="t-empty-txt"><b>Tu semana empieza aquí</b><span>¿Tienes algo pendiente? Escríbelo arriba, dale un día y sácalo de tu cabeza. Con tres prioridades basta.</span></div></button>`;
   let h = pend.length
-    ? `<div class="dash-scroll" data-fade><div class="list dash-tasks">${pend.slice(0, DASH_TASKS_MAX).map(taskRow).join('')}</div>${pend.length > DASH_TASKS_MOB ? (() => { const n7 = pend.length - DASH_TASKS_MAX, n5 = pend.length - DASH_TASKS_MOB, w = n => n === 1 ? 'tarea pendiente' : 'tareas pendientes'; return `<a class="t-more ${n7 > 0 ? '' : 'mob-only'}" href="#tareas"><b class="num"><span class="tm-d">+${n7}</span><span class="tm-m">+${n5}</span></b><span class="tm-t"><span class="tm-d">${w(n7)}</span><span class="tm-m">${w(n5)}</span></span><small>Ver todas ${icon('right')}</small></a>`; })() : ''}</div>`
+    ? `<div class="dash-scroll" data-fade="wk"><div class="list dash-tasks">${pend.slice(0, DASH_TASKS_MAX).map(taskRow).join('')}</div>${pend.length > DASH_TASKS_MOB ? (() => { const n7 = pend.length - DASH_TASKS_MAX, n5 = pend.length - DASH_TASKS_MOB, w = n => n === 1 ? 'tarea pendiente' : 'tareas pendientes'; return `<a class="t-more ${n7 > 0 ? '' : 'mob-only'}" href="#tareas"><b class="num"><span class="tm-d">+${n7}</span><span class="tm-m">+${n5}</span></b><span class="tm-t"><span class="tm-d">${w(n7)}</span><span class="tm-m">${w(n5)}</span></span><small>Ver todas ${icon('right')}</small></a>`; })() : ''}</div>`
     : `<div class="t-clear ${UI.justCleared ? 'go' : ''}" role="status"><span class="t-check">${TCHECK}</span><div class="t-clear-txt"><b>No hay tareas pendientes para lo que queda de la semana.</b><span>Bien hecho.</span></div></div>`;
   if (done.length) h += `<button class="t-foot" data-act="done-toggle" aria-expanded="${!!UI.showDone}"><span>${icon('check')}${done.length} ${done.length === 1 ? 'completada' : 'completadas'} esta semana${icon('right')}</span></button>${UI.showDone ? `<div class="list dash-done">${done.slice(0, DONE_MAX).map(taskRow).join('')}</div>${done.length > DONE_MAX ? `<a class="done-more" href="#tareas">y ${done.length - DONE_MAX} ${done.length - DONE_MAX === 1 ? 'completada más' : 'completadas más'} · ver en Tareas${icon('right')}</a>` : ''}` : ''}`;
   return h;
