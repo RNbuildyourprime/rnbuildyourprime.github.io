@@ -1738,7 +1738,7 @@ button.fs-i{cursor:pointer;transition:border-color .2s,transform .2s}button.fs-i
 .dgc.main{background:radial-gradient(110% 90% at 0 0,color-mix(in srgb,var(--c) 22%,transparent),transparent 60%),var(--s2);border-color:color-mix(in srgb,var(--c) 45%,transparent)}
 .dgc-h{display:flex;gap:12px;align-items:center}
 .dgc .gring,.dgc .gring.big{width:58px;height:58px}.dgc.main .gring.big{width:70px;height:70px}
-.card:has(> .dgc-row){align-self:start}
+
 @media (max-width:860px){.dgc{flex-basis:84%}}
 .dgc-tt{min-width:0;display:flex;flex-direction:column;gap:2px}
 .dgc-a{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:6px}.dgc-a i{width:7px;height:7px;border-radius:50%;background:var(--c)}
@@ -1954,12 +1954,31 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .ob-import{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:14px;border:1px dashed var(--line);font-size:.88rem;color:var(--muted);max-width:520px}
 
 /* Semana del Inicio: alto máximo, el resto se desliza adentro */
-.dash-scroll{max-height:min(430px,58vh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#2A322C transparent;margin-right:-6px;padding-right:6px}
+.wk-card{align-self:stretch;display:flex;flex-direction:column}.wk-card>.row:last-child{margin-top:auto!important;padding-top:14px}
+.card.c7:has(> .dgc-row){align-self:stretch;display:flex;flex-direction:column}.card.c7>.dgc-row{flex:1;align-items:stretch}
+.card.c7>.dgc-row>.dgc:not(.more){justify-content:space-between}.card.c7>.dgc-row .dgc-wk{flex:0 1 150px;margin-top:0;min-height:52px}.card.c7>.dgc-row .dgc-wk .gspark{flex:1;height:auto;min-height:30px}
+.dash-scroll{max-height:290px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#2A322C transparent;margin-right:-6px;padding-right:6px}
 .dash-scroll.over:not(.end){-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent)}
 .dash-scroll.over:not(.end):not(.top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent)}
 .dash-scroll.over.end:not(.top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px);mask-image:linear-gradient(to bottom,transparent,#000 28px)}
-.dash-all{display:inline-flex;align-items:center;gap:4px;margin-top:8px;color:var(--lime);font-size:.86rem;text-decoration:none}.dash-all:hover{text-decoration:underline}
-@media (max-width:860px){.dash-scroll{max-height:none;overflow:visible;-webkit-mask-image:none!important;mask-image:none!important}.dash-tasks>*:nth-child(n+6){display:none}}
+.t-more{display:flex;align-items:center;gap:12px;margin:10px 0 4px;padding:14px 16px;border:1.5px dashed #B7F36B55;border-radius:16px;background:var(--s1);color:var(--fg);text-decoration:none;transition:border-color .2s,background .2s,transform .16s}
+.t-more:hover{border-color:#B7F36B99;background:#B7F36B0d}.t-more:active{transform:scale(.98)}
+.t-more b{font:800 1.45rem var(--display);color:var(--lime);letter-spacing:-.02em;min-width:2.2ch}
+.t-more .tm-t{font-size:.9rem;flex:1}.t-more small{display:inline-flex;align-items:center;gap:4px;color:var(--muted);font-size:.78rem;white-space:nowrap}.t-more small svg{width:13px;height:13px}
+.t-more .tm-m,.t-more.mob-only{display:none}
+@media (max-width:860px){.wk-card,.card.c7:has(> .dgc-row){align-self:start}.dgc-wk .gspark{flex:none;height:30px}.dash-scroll{max-height:none;overflow:visible;-webkit-mask-image:none!important;mask-image:none!important}.dash-tasks>*:nth-child(n+6){display:none}.t-more.mob-only{display:flex}.t-more .tm-m{display:inline}.t-more .tm-d{display:none}}
+/* aviso de campo propio */
+.f-tip{position:fixed;z-index:9999;display:flex;align-items:center;gap:9px;max-width:min(320px,calc(100vw - 24px));padding:9px 13px 9px 9px;border-radius:12px;background:#171B19;border:1px solid #E6B65C55;box-shadow:0 10px 30px #0009,0 0 0 4px #E6B65C0f;color:var(--fg);font-size:.86rem;line-height:1.3;transform-origin:var(--ax,20px) 0;animation:ftIn .32s cubic-bezier(.2,.9,.3,1.25) both;pointer-events:none}
+.f-tip.up{transform-origin:var(--ax,20px) 100%}
+.f-tip::before{content:"";position:absolute;left:calc(var(--ax,20px) - 6px);top:-6px;width:10px;height:10px;background:#171B19;border-left:1px solid #E6B65C55;border-top:1px solid #E6B65C55;transform:rotate(45deg)}
+.f-tip.up::before{top:auto;bottom:-6px;transform:rotate(225deg)}
+.f-tip i{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#E6B65C22;color:var(--amber);font:800 .8rem var(--display);font-style:normal}
+.f-tip.out{animation:ftOut .18s ease-in both}
+@keyframes ftIn{from{opacity:0;transform:translateY(-6px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes ftOut{to{opacity:0;transform:translateY(-4px) scale(.96)}}
+.f-bad{border-color:#E6B65C!important;box-shadow:0 0 0 3px #E6B65C22!important;animation:fShake .38s cubic-bezier(.36,.07,.19,.97)}
+@keyframes fShake{20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-2.5px)}80%{transform:translateX(1.5px)}}
+@media (prefers-reduced-motion:reduce){.f-tip,.f-tip.out,.f-bad{animation:none}}
 
 /* Tarjetas con su alto natural: ninguna se estira para igualar a su vecina (evita huecos vacíos) */
 .main .grid,.ev-two{align-items:start}
@@ -3646,7 +3665,7 @@ function streakBox(st, t) {
 function countUp(el) { const n = +el.dataset.n; let i = 0; const step = () => { i++; el.textContent = Math.min(n, i); if (i < n) setTimeout(step, Math.max(40, 420 / n)); }; setTimeout(step, 380); }
 /* ---------- Tareas del dashboard: solo pendientes ---------- */
 const TCHECK = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="tc-bg" cx="24" cy="24" r="21"/><circle class="tc-ring" cx="24" cy="24" r="21"/><path class="tc-tick" d="M14.5 24.8l6.4 6.4 12.8-13.6"/></svg>`;
-const DONE_MAX = 5;
+const DONE_MAX = 5, DASH_TASKS_MAX = 7, DASH_TASKS_MOB = 5;
 function fadeLists(root) {
   root.querySelectorAll('[data-fade]').forEach(el => {
     const upd = () => { const over = el.scrollHeight > el.clientHeight + 2; el.classList.toggle('over', over); el.classList.toggle('end', !over || el.scrollTop + el.clientHeight >= el.scrollHeight - 4); el.classList.toggle('top', el.scrollTop <= 2); };
@@ -3657,7 +3676,7 @@ function dashTasks(tasks) {
   const st0 = S(), pend = tasks.filter(x => !x.done).sort((a, b) => isPrio(st0, b) - isPrio(st0, a)), done = tasks.filter(x => x.done);
   if (!tasks.length) return `<button type="button" class="t-empty" data-act="tq-focus"><span class="t-empty-ic">${icon('back')}</span><div class="t-empty-txt"><b>Tu semana empieza aquí</b><span>¿Tienes algo pendiente? Escríbelo arriba, dale un día y sácalo de tu cabeza. Con tres prioridades basta.</span></div></button>`;
   let h = pend.length
-    ? `<div class="dash-scroll" data-fade><div class="list dash-tasks">${pend.map(taskRow).join('')}</div></div>${pend.length > 5 ? `<a class="dash-all" href="#tareas">Ver las ${pend.length} tareas ${icon('right')}</a>` : ''}`
+    ? `<div class="dash-scroll" data-fade><div class="list dash-tasks">${pend.slice(0, DASH_TASKS_MAX).map(taskRow).join('')}</div>${pend.length > DASH_TASKS_MOB ? (() => { const n7 = pend.length - DASH_TASKS_MAX, n5 = pend.length - DASH_TASKS_MOB, w = n => n === 1 ? 'tarea pendiente' : 'tareas pendientes'; return `<a class="t-more ${n7 > 0 ? '' : 'mob-only'}" href="#tareas"><b class="num"><span class="tm-d">+${n7}</span><span class="tm-m">+${n5}</span></b><span class="tm-t"><span class="tm-d">${w(n7)}</span><span class="tm-m">${w(n5)}</span></span><small>Ver todas ${icon('right')}</small></a>`; })() : ''}</div>`
     : `<div class="t-clear ${UI.justCleared ? 'go' : ''}" role="status"><span class="t-check">${TCHECK}</span><div class="t-clear-txt"><b>No hay tareas pendientes para lo que queda de la semana.</b><span>Bien hecho.</span></div></div>`;
   if (done.length) h += `<button class="t-foot" data-act="done-toggle" aria-expanded="${!!UI.showDone}"><span>${icon('check')}${done.length} ${done.length === 1 ? 'completada' : 'completadas'} esta semana${icon('right')}</span></button>${UI.showDone ? `<div class="list dash-done">${done.slice(0, DONE_MAX).map(taskRow).join('')}</div>${done.length > DONE_MAX ? `<a class="done-more" href="#tareas">y ${done.length - DONE_MAX} ${done.length - DONE_MAX === 1 ? 'completada más' : 'completadas más'} · ver en Tareas${icon('right')}</a>` : ''}` : ''}`;
   return h;
@@ -5695,6 +5714,39 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.g
 document.addEventListener('click', e => { const el = e.target.closest('[data-act]'); if (!el) return; const a = el.dataset.act; if (ACT[a]) { if (a !== 'overlay') e.preventDefault(); ACT[a](el.dataset, el, e); } });
 document.addEventListener('input', e => { const i = e.target; if (!i.matches || !i.matches('[data-pwmeter]')) return; const v = i.value; let k = 0; if (v.length >= 8) k++; if (v.length >= 12) k++; if (/[A-Z]/.test(v) && /[a-z]/.test(v)) k++; if (/\d/.test(v) && /[^A-Za-z0-9]/.test(v)) k++;
   document.querySelectorAll('.pw-meter i').forEach((x, n) => x.className = n < k ? 'on s' + k : ''); const h = $('#pw-hint'); if (h) h.textContent = !v ? 'Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.' : ['Muy corta', 'Aceptable', 'Buena', 'Muy buena', 'Excelente'][k]; });
+/* ---------- Aviso de campo (sustituye el globo nativo del navegador) ---------- */
+function fieldMsg(el) {
+  const v = el.validity, n = el.type === 'number';
+  if (v.valueMissing) return el.type === 'checkbox' ? 'Marca esta casilla para seguir' : el.tagName === 'SELECT' ? 'Elige una opción' : el.type === 'password' ? 'Escribe tu contraseña' : el.type === 'email' ? 'Escribe tu correo' : n ? 'Escribe un número' : 'Escribe algo aquí primero';
+  if (v.typeMismatch && el.type === 'email') return 'Ese correo no se ve completo';
+  if (v.tooShort) return `Mínimo ${el.minLength} caracteres (llevas ${el.value.length})`;
+  if (v.tooLong) return `Máximo ${el.maxLength} caracteres`;
+  if (v.rangeUnderflow) return `El mínimo es ${el.min}`;
+  if (v.rangeOverflow) return `El máximo es ${el.max}`;
+  if (v.badInput || v.stepMismatch) return 'Escribe un número válido';
+  return el.validationMessage || 'Revisa este campo';
+}
+let fieldTip = null;
+function hideFieldTip() { if (!fieldTip) return; const { tip, el, off } = fieldTip; fieldTip = null; el.classList.remove('f-bad'); el.removeAttribute('aria-invalid'); off(); tip.classList.add('out'); setTimeout(() => tip.remove(), 180); }
+function showFieldTip(el) {
+  hideFieldTip();
+  const tip = document.createElement('div'); tip.className = 'f-tip'; tip.setAttribute('role', 'alert');
+  tip.innerHTML = `<i aria-hidden="true">!</i><span>${esc(fieldMsg(el))}</span>`;
+  document.body.appendChild(tip);
+  const place = () => { const r = el.getBoundingClientRect(), tw = tip.offsetWidth, x = Math.max(12, Math.min(innerWidth - tw - 12, r.left + 14)); const below = r.bottom + tip.offsetHeight + 14 < innerHeight; tip.style.left = x + 'px'; tip.style.top = (below ? r.bottom + 10 : r.top - tip.offsetHeight - 10) + 'px'; tip.classList.toggle('up', !below); tip.style.setProperty('--ax', Math.max(14, Math.min(tw - 14, r.left + 28 - x)) + 'px'); };
+  place();
+  el.classList.remove('f-bad'); void el.offsetWidth; el.classList.add('f-bad'); el.setAttribute('aria-invalid', 'true');
+  const onIn = () => { if (el.checkValidity()) hideFieldTip(); }, onMove = () => place(), t = setTimeout(hideFieldTip, 4200);
+  el.addEventListener('input', onIn); el.addEventListener('change', onIn); addEventListener('scroll', onMove, true); addEventListener('resize', onMove);
+  fieldTip = { tip, el, off: () => { clearTimeout(t); el.removeEventListener('input', onIn); el.removeEventListener('change', onIn); removeEventListener('scroll', onMove, true); removeEventListener('resize', onMove); } };
+}
+document.addEventListener('invalid', e => {
+  e.preventDefault(); const el = e.target, f = el.form;
+  if (f && f.querySelector(':invalid') !== el) return; // solo el primer campo con problema
+  if (document.activeElement !== el) el.focus({ preventScroll: true });
+  el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  showFieldTip(el);
+}, true);
 document.addEventListener('submit', e => { const f = e.target.closest('form[data-form]'); if (!f) return; e.preventDefault(); const fd = new FormData(f); FORM[f.dataset.form](Object.fromEntries(fd), f, fd); });
 document.addEventListener('change', e => { const el = e.target.closest('[data-change]'); if (el && CHG[el.dataset.change]) CHG[el.dataset.change](el, e); });
 document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.bind === 'name') UI.ob.name = e.target.value;
