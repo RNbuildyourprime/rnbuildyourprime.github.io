@@ -48,7 +48,13 @@
     try { if (localStorage.getItem('rn-uid') !== uid) { ['sos-real', 'sos-mode', 'sos-demo'].forEach(k => localStorage.removeItem(k)); localStorage.setItem('rn-uid', uid); } } catch (e) { }
     const caps = { db: makeDB(uid), user: { id: async () => uid }, downloads };
     window.claude = { use: async n => caps[n] || null };
-    window.RN_WEB = { email: session.user.email, logout };
+    window.RN_WEB = { email: session.user.email, logout, changePassword: async (cur, nw) => {
+      try {
+        const v = await sb.auth.signInWithPassword({ email: session.user.email, password: cur });   // confirma que eres tú
+        if (v.error) return { error: /invalid/i.test(v.error.message) ? 'La contraseña actual no es correcta.' : ERR(v.error.message) };
+        const u = await sb.auth.updateUser({ password: nw }); if (u.error) return { error: ERR(u.error.message) };
+        return {};
+      } catch (e) { return { error: ERR(e && e.message) }; } } };
     if (typeof window.__rnBoot === 'function') window.__rnBoot();
   }
   async function logout() {

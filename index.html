@@ -1738,7 +1738,7 @@ button.fs-i{cursor:pointer;transition:border-color .2s,transform .2s}button.fs-i
 .dgc.main{background:radial-gradient(110% 90% at 0 0,color-mix(in srgb,var(--c) 22%,transparent),transparent 60%),var(--s2);border-color:color-mix(in srgb,var(--c) 45%,transparent)}
 .dgc-h{display:flex;gap:12px;align-items:center}
 .dgc .gring,.dgc .gring.big{width:58px;height:58px}.dgc.main .gring.big{width:70px;height:70px}
-.card:has(> .dgc-row){display:flex;flex-direction:column}.card > .dgc-row{flex:1}
+.card:has(> .dgc-row){align-self:start}
 @media (max-width:860px){.dgc{flex-basis:84%}}
 .dgc-tt{min-width:0;display:flex;flex-direction:column;gap:2px}
 .dgc-a{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:6px}.dgc-a i{width:7px;height:7px;border-radius:50%;background:var(--c)}
@@ -1952,6 +1952,23 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 @media (max-width:620px){.yd-act{width:100%}.yd-act .btn{flex:1}}
 .day-btn{padding-inline:8px;color:var(--muted)}.day-btn:hover{color:var(--fg)}.day-btn svg{margin:0}
 .ob-import{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:14px;border:1px dashed var(--line);font-size:.88rem;color:var(--muted);max-width:520px}
+
+/* Semana del Inicio: alto máximo, el resto se desliza adentro */
+.dash-scroll{max-height:min(430px,58vh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#2A322C transparent;margin-right:-6px;padding-right:6px}
+.dash-scroll.over:not(.end){-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 56px),transparent)}
+.dash-scroll.over:not(.end):not(.top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 28px,#000 calc(100% - 56px),transparent)}
+.dash-scroll.over.end:not(.top){-webkit-mask-image:linear-gradient(to bottom,transparent,#000 28px);mask-image:linear-gradient(to bottom,transparent,#000 28px)}
+.dash-all{display:inline-flex;align-items:center;gap:4px;margin-top:8px;color:var(--lime);font-size:.86rem;text-decoration:none}.dash-all:hover{text-decoration:underline}
+@media (max-width:860px){.dash-scroll{max-height:none;overflow:visible;-webkit-mask-image:none!important;mask-image:none!important}.dash-tasks>*:nth-child(n+6){display:none}}
+
+/* Tarjetas con su alto natural: ninguna se estira para igualar a su vecina (evita huecos vacíos) */
+.main .grid,.ev-two{align-items:start}
+
+.pwd{display:flex;flex-direction:column;gap:10px}
+.pw-meter{display:flex;gap:5px;margin-top:-4px}.pw-meter i{flex:1;height:4px;border-radius:9px;background:#232A25;transition:background-color .25s}
+.pw-meter i.on.s1{background:#FF8A7A}.pw-meter i.on.s2{background:#E6B65C}.pw-meter i.on.s3,.pw-meter i.on.s4{background:#B7F36B}
+.pw-hint{color:var(--muted);font-size:.78rem;margin-top:-4px}
+.pw-err{margin:0;padding:10px 12px;border-radius:12px;background:#FF6B5A14;border:1px solid #FF6B5A44;color:#FFB4A9;font-size:.85rem}
 /* ===== Acceso (solo versión web) ===== */
 #rn-auth{position:fixed;inset:0;z-index:9500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px 16px;background:#080A09;overflow:auto;opacity:0;transition:opacity .45s cubic-bezier(.2,.8,.2,1)}
 #rn-auth.in{opacity:1}#rn-auth.out{opacity:0;pointer-events:none}
@@ -3156,7 +3173,7 @@ function render() {
     els.forEach((e, i) => e.style.setProperty('--ei', i));
     if (w && els.length) { w.classList.add('assemble'); clearTimeout(UI.asmT); UI.asmT = setTimeout(() => { const ww = document.querySelector('.main .wrap.assemble'); if (ww) ww.classList.remove('assemble'); }, 1300); }
   }
-  afterDone(root); xpBarTween(root);
+  afterDone(root); xpBarTween(root); fadeLists(root);
   UI.odoFresh = UI.lastView !== r.v; odoInit(root); UI.odoFresh = false;
   root.querySelectorAll('.quote.enter .qtext, .wh-bubble, .ev-say').forEach(x => kinetic(x));
   UI.lastView = r.v;
@@ -3630,11 +3647,17 @@ function countUp(el) { const n = +el.dataset.n; let i = 0; const step = () => { 
 /* ---------- Tareas del dashboard: solo pendientes ---------- */
 const TCHECK = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="tc-bg" cx="24" cy="24" r="21"/><circle class="tc-ring" cx="24" cy="24" r="21"/><path class="tc-tick" d="M14.5 24.8l6.4 6.4 12.8-13.6"/></svg>`;
 const DONE_MAX = 5;
+function fadeLists(root) {
+  root.querySelectorAll('[data-fade]').forEach(el => {
+    const upd = () => { const over = el.scrollHeight > el.clientHeight + 2; el.classList.toggle('over', over); el.classList.toggle('end', !over || el.scrollTop + el.clientHeight >= el.scrollHeight - 4); el.classList.toggle('top', el.scrollTop <= 2); };
+    upd(); el.addEventListener('scroll', upd, { passive: true });
+  });
+}
 function dashTasks(tasks) {
   const st0 = S(), pend = tasks.filter(x => !x.done).sort((a, b) => isPrio(st0, b) - isPrio(st0, a)), done = tasks.filter(x => x.done);
   if (!tasks.length) return `<button type="button" class="t-empty" data-act="tq-focus"><span class="t-empty-ic">${icon('back')}</span><div class="t-empty-txt"><b>Tu semana empieza aquí</b><span>¿Tienes algo pendiente? Escríbelo arriba, dale un día y sácalo de tu cabeza. Con tres prioridades basta.</span></div></button>`;
   let h = pend.length
-    ? `<div class="list dash-tasks">${pend.slice(0, 7).map(taskRow).join('')}</div>${pend.length > 7 ? `<a class="link" href="#tareas">${pend.length - 7} más</a>` : ''}`
+    ? `<div class="dash-scroll" data-fade><div class="list dash-tasks">${pend.map(taskRow).join('')}</div></div>${pend.length > 5 ? `<a class="dash-all" href="#tareas">Ver las ${pend.length} tareas ${icon('right')}</a>` : ''}`
     : `<div class="t-clear ${UI.justCleared ? 'go' : ''}" role="status"><span class="t-check">${TCHECK}</span><div class="t-clear-txt"><b>No hay tareas pendientes para lo que queda de la semana.</b><span>Bien hecho.</span></div></div>`;
   if (done.length) h += `<button class="t-foot" data-act="done-toggle" aria-expanded="${!!UI.showDone}"><span>${icon('check')}${done.length} ${done.length === 1 ? 'completada' : 'completadas'} esta semana${icon('right')}</span></button>${UI.showDone ? `<div class="list dash-done">${done.slice(0, DONE_MAX).map(taskRow).join('')}</div>${done.length > DONE_MAX ? `<a class="done-more" href="#tareas">y ${done.length - DONE_MAX} ${done.length - DONE_MAX === 1 ? 'completada más' : 'completadas más'} · ver en Tareas${icon('right')}</a>` : ''}` : ''}`;
   return h;
@@ -4956,7 +4979,7 @@ VIEWS.ajustes = () => {
   <section class="set-guides" id="set-guias" aria-label="Guías rápidas"><div class="set-gh"><h2>Guías rápidas</h2><span class="sub">cómo funciona cada parte, en menos de un minuto</span></div>
     <div class="set-gl">${guides.map(([h, t, ic, d]) => `<a class="set-g" href="#${h}"><span class="set-gi">${icon(ic)}</span><b>${t}</b><small>${d}</small></a>`).join('')}</div></section>
   <div class="set-cols"><div class="set-col">
-    ${sec('user', 'Perfil', '', (window.RN_WEB ? `<div class="set-row"><span class="set-txt"><b>Sesión</b><small>${esc(window.RN_WEB.email || '')}</small></span><span class="set-ctl"><button class="btn sm" data-act="logout">Cerrar sesión</button></span></div>` : '') + `<form data-form="profile" class="set-row"><span class="set-txt"><b>Nombre</b><small>Así te saluda RN.</small></span><span class="set-ctl row" style="flex-wrap:nowrap;gap:8px"><input type="text" name="name" id="pf-name" value="${esc(m.name)}" aria-label="Nombre" placeholder="Tu nombre" maxlength="30"><button class="btn sm">Guardar</button></span></form>`)}
+    ${sec('user', 'Perfil', '', (window.RN_WEB ? `<div class="set-row"><span class="set-txt"><b>Sesión</b><small>${esc(window.RN_WEB.email || '')}</small></span><span class="set-ctl"><button class="btn sm" data-act="logout">Cerrar sesión</button></span></div><div class="set-row"><span class="set-txt"><b>Contraseña</b><small>Cámbiala cuando quieras; te pediremos la actual</small></span><span class="set-ctl"><button class="btn sm" data-act="pwd-open">Cambiar contraseña</button></span></div>` : '') + `<form data-form="profile" class="set-row"><span class="set-txt"><b>Nombre</b><small>Así te saluda RN.</small></span><span class="set-ctl row" style="flex-wrap:nowrap;gap:8px"><input type="text" name="name" id="pf-name" value="${esc(m.name)}" aria-label="Nombre" placeholder="Tu nombre" maxlength="30"><button class="btn sm">Guardar</button></span></form>`)}
     ${sec('home', 'Inicio y menú', '', sw('auto-hoy', m.autoHoy === true, 'Abrir en Hoy', 'La app arranca en tu foco del día en lugar de Inicio')
       + (MODE === 'real' ? sw('nav-all', navAll(st), 'Mostrar todas las secciones', 'Apagado, las secciones avanzadas aparecen conforme avanzas') : ''))}
     ${sec('skill', 'Personalidades', '', personasBody)}
@@ -5362,6 +5385,12 @@ const ACT = {
     if (h.measure === 'amount') { UI.hDay = y; return habitLogSheet(h); }
     let lid; mut(() => { lid = addHabitLog(h, { date: y }).id; }); toast(`${h.title}: registrado ayer`, () => mut(() => removeHabitLog(h, lid))); },
   'yd-close': () => { LS.set('rn-yd-done', D.today()); render(); },
+  'pwd-open': () => openSheet('Cambiar contraseña', `<div class="pwd">
+      <div class="field full"><label for="pw-cur">Contraseña actual</label><input type="password" id="pw-cur" name="cur" autocomplete="current-password" required></div>
+      <div class="field full"><label for="pw-new">Contraseña nueva</label><input type="password" id="pw-new" name="nw" autocomplete="new-password" minlength="8" required data-pwmeter></div>
+      <div class="pw-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="pw-hint" id="pw-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
+      <div class="field full"><label for="pw-new2">Repítela</label><input type="password" id="pw-new2" name="nw2" autocomplete="new-password" minlength="8" required></div>
+      <p class="pw-err" role="alert" hidden></p><div class="row" style="justify-content:flex-end;gap:8px"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></div>`, 'pwd'),
   'logout': () => { if (window.RN_WEB) window.RN_WEB.logout(); },
   'toast-alt': () => { const f = UI.toastAlt; UI.toastAlt = null; document.querySelectorAll('.toast').forEach(t => t.remove()); if (f) f(); },
   'hab-day': d => { const h = findH(d.id); if (!h) return; UI.hDay = D.add(D.today(), -1); habitLogSheet(h); },
@@ -5593,6 +5622,14 @@ const FORM = {
     if (ok) return doWipe();
     if (btn) { btn.disabled = false; btn.textContent = 'Respaldar y borrar todo'; }
     const box = $('.wipe-safe'); if (box) box.outerHTML = `<div class="wipe-safe warn">${icon('alert')}<span>No se pudo descargar el respaldo (quizá cancelaste la descarga). Por seguridad no se borró nada. Puedes intentarlo otra vez, o <button type="button" class="link" data-act="wipe-anyway">borrar sin respaldo</button>.</span></div>`; },
+  pwd: async f => {
+    const err = m => { const e = $('.pw-err'); if (e) { e.textContent = m; e.hidden = !m; } };
+    if (f.nw !== f.nw2) return err('Las contraseñas nuevas no coinciden.');
+    if (f.nw === f.cur) return err('La nueva debe ser distinta a la actual.');
+    const btn = $('#layer form button[type=submit], #layer form .btn.primary'); if (btn) { btn.disabled = true; btn.textContent = 'Guardando…'; }
+    const r = window.RN_WEB ? await window.RN_WEB.changePassword(f.cur, f.nw) : { error: 'No disponible aquí' };
+    if (r.error) { if (btn) { btn.disabled = false; btn.textContent = 'Guardar'; } return err(r.error); }
+    closeSheet(); toast('Contraseña actualizada'); },
   profile: f => { mut(st => { st.meta.name = (f.name || '').trim().slice(0, 30); }); closeSheet(); toast('Guardado'); },
   ob3: f => {
     const out = [], today = D.today();
@@ -5656,6 +5693,8 @@ document.addEventListener('click', e => { const el = e.target.closest('a[data-pe
 window.addEventListener('resize', () => ptIndicator());
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('tut')) ACT['tut-close'](); });
 document.addEventListener('click', e => { const el = e.target.closest('[data-act]'); if (!el) return; const a = el.dataset.act; if (ACT[a]) { if (a !== 'overlay') e.preventDefault(); ACT[a](el.dataset, el, e); } });
+document.addEventListener('input', e => { const i = e.target; if (!i.matches || !i.matches('[data-pwmeter]')) return; const v = i.value; let k = 0; if (v.length >= 8) k++; if (v.length >= 12) k++; if (/[A-Z]/.test(v) && /[a-z]/.test(v)) k++; if (/\d/.test(v) && /[^A-Za-z0-9]/.test(v)) k++;
+  document.querySelectorAll('.pw-meter i').forEach((x, n) => x.className = n < k ? 'on s' + k : ''); const h = $('#pw-hint'); if (h) h.textContent = !v ? 'Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.' : ['Muy corta', 'Aceptable', 'Buena', 'Muy buena', 'Excelente'][k]; });
 document.addEventListener('submit', e => { const f = e.target.closest('form[data-form]'); if (!f) return; e.preventDefault(); const fd = new FormData(f); FORM[f.dataset.form](Object.fromEntries(fd), f, fd); });
 document.addEventListener('change', e => { const el = e.target.closest('[data-change]'); if (el && CHG[el.dataset.change]) CHG[el.dataset.change](el, e); });
 document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.bind === 'name') UI.ob.name = e.target.value;
