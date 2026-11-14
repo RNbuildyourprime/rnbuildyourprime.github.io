@@ -1991,6 +1991,105 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .pw-meter i.on.s1{background:#FF8A7A}.pw-meter i.on.s2{background:#E6B65C}.pw-meter i.on.s3,.pw-meter i.on.s4{background:#B7F36B}
 .pw-hint{color:var(--muted);font-size:.78rem;margin-top:-4px}
 .pw-err{margin:0;padding:10px 12px;border-radius:12px;background:#FF6B5A14;border:1px solid #FF6B5A44;color:#FFB4A9;font-size:.85rem}
+/* ===== Pausas y semanas especiales ===== */
+.pz-band{border-radius:18px;padding:12px 14px;margin:0 0 14px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 16%,var(--s1)),color-mix(in srgb,var(--c) 5%,var(--s1)));border:1px solid color-mix(in srgb,var(--c) 38%,transparent);animation:pzIn .5s cubic-bezier(.2,.8,.2,1)}
+.pz-band.next{background:var(--s1);border-style:dashed}
+.pz-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pz-row .sp{flex:1}
+.pz-ic{font-size:1.25rem;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 22%,transparent);flex:none;color:var(--c);font-weight:700}
+.pz-tx{min-width:0;flex:1 1 220px}.pz-tx b{display:block;font-weight:600}.pz-tx small{color:var(--fg2);font-size:.82rem}
+.pz-tx p{margin:0 0 10px;font-size:.92rem;color:var(--fg2)}.pz-tx p b{display:inline;color:var(--fg)}
+.pz-chk{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--c) 22%,transparent);font-size:.88rem;color:var(--fg2)}
+.pz-chk b{color:var(--fg)}.pz-chk .sp{flex:1}
+.pz-ask,.pz-new{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;padding:14px;border-radius:18px;margin:0 0 14px;background:var(--s1);border:1px solid #B7F36B33;animation:pzIn .5s cubic-bezier(.2,.8,.2,1)}
+.pz-new{align-items:center}.pz-new .sp{flex:1}.pz-new .pz-tx p{margin:0}
+.pz-chips{display:flex;gap:6px;flex-wrap:wrap}
+.pz-chip{padding:8px 12px;border-radius:11px;border:1px solid var(--line2);background:var(--bg);color:var(--fg2);font:500 .84rem var(--body);cursor:pointer;transition:.2s}
+.pz-chip:hover{border-color:#B7F36B88;color:var(--fg)}.pz-chip.ghost{border-style:dashed;background:none}
+.pz-plan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:12px}
+.pz-plan div{padding:9px 10px;border-radius:12px;background:var(--bg);border:1px solid var(--line);font-size:.76rem;color:var(--muted);min-width:0}
+.pz-plan div b{display:block;color:var(--fg);font:600 .86rem var(--display);margin:2px 0;overflow-wrap:anywhere}
+.pz-plan div.cur{border-color:#B7F36B88;background:#B7F36B10}.pz-plan div.past{opacity:.55}
+@media (max-width:600px){.pz-plan{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pz-link{display:block;width:100%;margin-top:10px;padding:9px 12px;border-radius:11px;border:1px dashed var(--line2);background:none;color:var(--muted);font:500 .82rem var(--body);text-align:left;cursor:pointer;transition:.2s}
+.pz-link:hover{color:var(--fg);border-color:#B7F36B66;background:#B7F36B08}
+.pz-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:99px;font-size:.72rem;color:var(--fg2);background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 32%,transparent);white-space:nowrap}
+.wh-chip.pz{border-color:#B7F36B55}
+@keyframes pzIn{from{opacity:0;transform:translateY(-6px)}}
+/* hoja */
+.pz-wolf{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:#B7F36B0a;border:1px solid #B7F36B22;margin-bottom:14px;font-size:.92rem;color:var(--fg2)}
+.pz-sit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.pz-sit{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pz-si{text-align:left;padding:14px 12px;border-radius:14px;border:1px solid var(--line2);background:var(--s1);color:var(--fg);cursor:pointer;transition:.2s;font:inherit}
+.pz-si:hover{border-color:color-mix(in srgb,var(--c) 60%,transparent);transform:translateY(-2px)}
+.pz-si .e{font-size:1.4rem;display:block;margin-bottom:6px}.pz-si b{display:block;font-size:.92rem}.pz-si small{display:block;color:var(--muted);font-size:.76rem;line-height:1.35;margin-top:3px}
+.pz-lbl{display:block;font:600 .72rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+.pz-cs{display:flex;gap:6px;flex-wrap:wrap}
+.pz-c{padding:8px 12px;border-radius:10px;border:1px solid var(--line2);background:none;color:var(--fg2);font:500 .84rem var(--body);cursor:pointer;transition:.2s}
+.pz-c:hover{color:var(--fg);border-color:var(--line3)}.pz-c.on{border-color:var(--lime);background:#B7F36B14;color:var(--fg)}
+.pz-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-top:8px}
+.pz-dy{padding:6px 0 5px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg2);font:500 .7rem var(--body);cursor:pointer;text-align:center;transition:.15s}
+.pz-dy b{display:block;font:700 .95rem var(--display);color:var(--fg)}
+.pz-dy:hover:not([disabled]){border-color:var(--line3)}
+.pz-dy.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 22%,transparent)}
+.pz-dy.in{background:color-mix(in srgb,var(--c) 9%,transparent);border-color:color-mix(in srgb,var(--c) 30%,transparent)}
+.pz-dy.td{outline:1px solid var(--fg2);outline-offset:1px}.pz-dy[disabled]{opacity:.3;cursor:not-allowed}
+.pz-other{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:.8rem;color:var(--muted)}.pz-other .dp{flex:1;max-width:260px}
+.pz-note{margin:8px 0 0;font-size:.84rem;color:var(--muted)}.pz-note b{color:var(--fg)}
+.pz-hbs{display:grid;gap:6px}
+.pz-hb{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);cursor:pointer;color:var(--fg);font:inherit;text-align:left}
+.pz-hb small{color:var(--muted);font-size:.74rem}
+.pz-hb .sw2{width:38px;height:22px;border-radius:99px;background:var(--line2);position:relative;transition:.2s;flex:none}
+.pz-hb .sw2::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.pz-hb.on .sw2{background:var(--lime)}.pz-hb.on .sw2::after{left:19px;background:#0B1505}
+.pz-sum{margin-top:16px;padding:14px;border-radius:14px;background:var(--s1);border:1px solid var(--line);font-size:.88rem;color:var(--fg2)}
+.pz-sum b{color:var(--fg)}.pz-sum ul{margin:8px 0 0;padding-left:18px}.pz-sum li{margin:3px 0}
+.pz-backs{text-align:center}
+.pz-backs h3{font:700 1.45rem var(--display);letter-spacing:-.03em;margin:10px 0 4px}.pz-backs h3 b{color:var(--lime)}
+.pz-cmp{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:16px 0 6px}
+.pz-cmp div{padding:10px 14px;border-radius:14px;background:var(--bg);border:1px solid var(--line);min-width:104px}
+.pz-cmp small{display:block;color:var(--muted);font-size:.72rem}.pz-cmp b{font:700 1.45rem var(--display);color:var(--c)}.pz-cmp b.now{color:var(--fg)}
+.pz-backs .pz-lbl,.pz-backs .pz-plan,.pz-backs .pz-note{text-align:left}
+/* constancia */
+.ev-heat i.pz{background:color-mix(in srgb,var(--pc) 22%,transparent);border-color:color-mix(in srgb,var(--pc) 50%,transparent);display:grid;place-items:center;font-size:.58rem;line-height:1;position:relative;font-style:normal}
+.ev-heat i.pz.fut{border-style:dashed;background:color-mix(in srgb,var(--pc) 9%,transparent)}
+.ev-heat i.pz.lg::after{content:"";position:absolute;right:2px;bottom:2px;width:4px;height:4px;border-radius:50%;background:var(--lime);box-shadow:0 0 5px var(--lime)}
+.ev-pzl{margin:10px 0 0;font-size:.76rem;color:var(--muted);text-align:center}
+/* guía */
+.gpz{position:relative;width:100%;max-width:420px;min-height:330px}
+.gpz-p{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1),visibility .5s;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.gpz-p.on{opacity:1;visibility:visible;transform:none}
+.gpz-sit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gpz-si{padding:14px 10px;border-radius:14px;border:1px solid var(--line2);background:var(--s1);transition:.35s;text-align:center}
+.gpz-si em{display:block;font-style:normal;font-size:1.5rem;margin-bottom:4px}.gpz-si b{font-size:.78rem;font-weight:600}
+.gpz-si.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);transform:scale(1.06);box-shadow:0 0 24px color-mix(in srgb,var(--c) 30%,transparent)}
+.gpz-lbl{font:600 .72rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.gpz-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.gpz-days span{padding:7px 0;border-radius:10px;border:1px solid var(--line);background:var(--s1);text-align:center;font-size:.7rem;color:var(--fg2);transition:.3s}
+.gpz-days b{display:block;font:700 1rem var(--display);color:var(--fg)}
+.gpz-days span.on{border-color:#E8835E;background:#E8835E33}.gpz-days span.in{background:#E8835E14;border-color:#E8835E44}.gpz-days span.td{outline:1px solid var(--fg2);outline-offset:1px}
+.gpz-cs{display:flex;gap:6px}.gpz-cs span{padding:7px 11px;border-radius:10px;border:1px solid var(--line2);font-size:.8rem;color:var(--fg2)}.gpz-cs span.on{border-color:var(--lime);background:#B7F36B14;color:var(--fg)}
+.gpz-cap{margin:0;font-size:.82rem;color:var(--lime);min-height:1.2em}
+.gpz-h{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;background:var(--s1);border:1px solid var(--line);transition:opacity .5s,filter .5s}
+.gpz-h .e{font-size:1.15rem}.gpz-h b{flex:1;font-weight:600}
+.gpz-tag{font-size:.72rem;padding:3px 9px;border-radius:99px;background:#E8835E22;border:1px solid #E8835E55;opacity:0;transform:scale(.7);transition:.4s cubic-bezier(.3,1.6,.5,1)}
+.gpz-pips{display:flex;gap:3px}.gpz-pips i{width:12px;height:4px;border-radius:2px;background:var(--lime)}
+.gpz-h.off{opacity:.55}.gpz-h.off .gpz-tag{opacity:1;transform:none}.gpz-h.off .gpz-pips i{background:var(--muted)}
+.gpz-ar{position:relative;width:170px;height:170px;margin:0 auto}
+.gpz-ar svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}.gpz-ar circle{fill:none;stroke-width:10}.gpz-ar .b{stroke:var(--line2)}.gpz-ar .f{stroke:#E8835E;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 8px #E8835E88)}
+.gpz-ar b{position:absolute;inset:0;display:grid;place-items:center;font:700 2rem var(--display)}
+.gpz-ar small{position:absolute;left:0;right:0;bottom:44px;text-align:center;color:var(--muted);font-size:.78rem}
+.gpz-vs{display:flex;justify-content:center;gap:12px;font-size:.82rem;color:var(--muted)}.gpz-vs .ok{color:var(--lime)}.gpz-vs s{color:#E5605E}
+.gpz-plan{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gpz-plan div{padding:12px 8px;border-radius:12px;background:var(--s1);border:1px solid var(--line);text-align:center;transition:.35s}
+.gpz-plan small{display:block;color:var(--muted);font-size:.7rem}.gpz-plan b{font:700 1rem var(--display)}
+.gpz-plan div.cur{border-color:var(--lime);background:#B7F36B14;transform:translateY(-4px)}
+.gpz-heat{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:6px}
+.gpz-heat i{aspect-ratio:1;border-radius:5px;background:rgba(183,243,107,var(--o));display:grid;place-items:center;font-style:normal;font-size:.62rem}
+.gpz-heat i.z{background:#ffffff08}.gpz-heat i.pz{background:#E8835E2a;border:1px solid #E8835E55}
+@media (max-width:860px){.gpz{min-height:290px;scale:.9;transform-origin:top center}}
+@media (prefers-reduced-motion:reduce){.pz-band,.pz-ask,.pz-new{animation:none}.gpz-p{transition:none}}
+.pz-hb .grow{flex:1;min-width:0}
 /* ===== Acceso (solo versión web) ===== */
 #rn-auth{position:fixed;inset:0;z-index:9500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px 16px;background:#080A09;overflow:auto;opacity:0;transition:opacity .45s cubic-bezier(.2,.8,.2,1)}
 #rn-auth.in{opacity:1}#rn-auth.out{opacity:0;pointer-events:none}
@@ -2100,6 +2199,7 @@ function applyAreas(st) {
   AREAS.length = 0; next.forEach(a => AREAS.push(a));
   Object.keys(AREA).forEach(k => delete AREA[k]); AREAS.forEach(a => { AREA[a.id] = a; });
   if (typeof applyPersonas === 'function') applyPersonas(st);
+  if (typeof applyPauses === 'function') applyPauses(st);
   return AREAS;
 }
 
@@ -2282,24 +2382,84 @@ function areaProgress(st, areaId, asOf = D.today()) {
   if (ts.length) vals.push(ts.filter(t => t.done && (!t.doneAt || t.doneAt <= asOf)).length / ts.length);
   return { pct: vals.length ? avg(vals) : null, measured: vals.length, goals: gs.length };
 }
+/* ============ Pausas y semanas especiales ============
+   Una pausa = { id, type, name, start, end (null = abierta), habits: [ids], mode ('pause'|'low', solo en «otra») }.
+   - Pausa: esos días el hábito no se espera; la meta semanal baja en proporción (0 = semana en pausa, no cuenta como fallada).
+   - Metas bajas (poco tiempo, exámenes): la meta de todos los hábitos baja como en una semana exigente.
+   - Al terminar una lesión: 2 semanas de regreso (50 % y 75 % de la meta). Al volver de viaje: 1 semana al 75 %. */
+const PAUSE_TYPES = {
+  viaje: { e: '✈️', n: 'Viaje o vacaciones', c: '#7FB8FF', all: true, area: 'decay', d: 'Pausa todo. Si quieres registrar algo, suma igual.' },
+  enfermo: { e: '🤒', n: 'Enfermo', c: '#E87DB0', area: 'freeze', sugg: 'fisico', d: 'Pausas solo lo que no puedes hacer.' },
+  lesion: { e: '🩹', n: 'Lesión', c: '#E8835E', area: 'real', sugg: 'fisico', plan: true, d: 'Como enfermo, con plan de regreso.' },
+  tiempo: { e: '⏳', n: 'Poco tiempo', c: '#E6B65C', low: true, area: 'normal', d: 'Salidas, comidas, partidos. Metas más bajas.' },
+  pesada: { e: '📚', n: 'Proyecto o exámenes', c: '#B08CFF', low: true, week: true, area: 'normal', d: 'Metas bajas; pesan más las tareas difíciles.' },
+  otra: { e: '✏️', n: 'Otra', c: '#3FD49A', custom: true, area: 'decay', d: 'Le pones nombre y decides qué se pausa.' }
+};
+let PZ = {};
+const pauseType = p => PAUSE_TYPES[p && p.type] || PAUSE_TYPES.otra;
+const pauseLow = p => !!(p && (pauseType(p).low || (p.type === 'otra' && p.mode === 'low')));
+const pauseAreaMode = p => (p ? pauseType(p).area : 'freeze');
+const pauseName = p => (p && p.name) || pauseType(p).n;
+function pauseHabit(p, h) { return !pauseLow(p) && (pauseType(p).all || (p.habits || []).includes(h.id)); }
+function pauseEnd(p, asOf = D.today()) { return p.end || D.add(D.weekStart(asOf), 13); }   // abierta: sigue hasta que digas «Ya regresé»
+function pausesOn(st, date) { return ((st.meta && st.meta.pauses) || []).filter(p => p.start <= date && (!p.end || p.end >= date)); }
+function pauseActive(st, asOf = D.today()) { return pausesOn(st, asOf)[0] || null; }
+function pauseNext(st, asOf = D.today()) { return ((st.meta && st.meta.pauses) || []).filter(p => p.start > asOf && D.diff(p.start, asOf) <= 45).sort((a, b) => (a.start < b.start ? -1 : 1))[0] || null; }
+function applyPauses(st) {
+  PZ = {}; const ps = ((st && st.meta && st.meta.pauses) || []).filter(p => p && p.start); if (!ps.length) return;
+  const today = D.today();
+  (st.habits || []).forEach(h => {
+    const m = {};
+    ps.forEach(p => {
+      const T = pauseType(p), low = pauseLow(p), on = low || pauseHabit(p, h); if (!on) return;
+      const end = pauseEnd(p, today);
+      for (let wk = D.weekStart(p.start); wk <= D.weekStart(end); wk = D.add(wk, 7)) {
+        let n = 0; for (let i = 0; i < 7; i++) { const d = D.add(wk, i); if (d >= p.start && d <= end) n++; }
+        const z = m[wk] = m[wk] || { p };
+        if (low) { if (n >= 2) z.low = true; } else { z.off = (z.off || 0) + n; z.p = p; }
+      }
+      if (p.end && !low) {   // regreso gradual
+        const ramp = T.plan ? [0.5, 0.75] : T.all ? [0.75] : [];
+        let w0 = D.weekStart(D.add(p.end, 1)); if (m[w0] && m[w0].off) w0 = D.add(w0, 7);
+        ramp.forEach((f, i) => { const wk = D.add(w0, 7 * i), z = m[wk] = m[wk] || { p }; if (!z.off && !z.low) { z.ramp = f; z.p = p; } });
+      }
+    });
+    PZ[h.id] = m;
+  });
+}
+
 /* ---------- Flexibilidad de hábitos ----------
    hTarget: meta de la semana (puede bajarse en semanas exigentes: h.adj[semana]).
    weekStatus: 'full' si llegaste a la meta; 'tol' si al cerrar la semana (desde el domingo) llegaste al 75 %. */
 const TOL = 0.75;
-function hTarget(h, wk) { return (h.adj && +h.adj[wk]) || +h.target || 1; }
+function hTarget(h, wk) {
+  const base = (h.adj && +h.adj[wk]) || +h.target || 1, z = PZ[h.id] && PZ[h.id][wk]; if (!z) return base;
+  if (z.off) return Math.round(base * Math.max(0, 7 - Math.min(7, z.off)) / 7);   // 0 = semana en pausa para este hábito
+  if (z.low) return Math.min(base, reducedTarget(+h.target || 1));
+  if (z.ramp) return Math.max(1, Math.round(base * z.ramp));
+  return base;
+}
 function tolNeed(t) { return Math.ceil(t * TOL - 1e-9); }
-function weekStatus(c, t, wk, asOf = D.today()) { if (c >= t) return 'full'; if (t >= 2 && D.add(wk, 6) <= asOf && c >= tolNeed(t) && tolNeed(t) < t) return 'tol'; return null; }
+function weekStatus(c, t, wk, asOf = D.today()) { if (!t) return null; if (c >= t) return 'full'; if (t >= 2 && D.add(wk, 6) <= asOf && c >= tolNeed(t) && tolNeed(t) < t) return 'tol'; return null; }
 function reducedTarget(t) { return Math.max(1, Math.round(t * 0.6)); }
 function habitAreaPct(h, asOf = D.today()) {
   const L = (h.logs || []).filter(l => l.date <= asOf); if (!L.length) return null;
   const first = D.weekStart(L.map(l => l.date).sort()[0]), c = countByWeek(L);
-  const weeks = D.lastWeeks(asOf, 4).filter(w => w >= first);
-  return avg(weeks.map(w => weekStatus(c[w] || 0, hTarget(h, w), w, asOf) ? 1 : Math.min(1, (c[w] || 0) / hTarget(h, w))));
+  // Semanas en pausa: no cuentan como falladas. Según la situación el área se congela, baja despacio (−10 % por semana) o muestra el estado real.
+  const weeks = [], zero = new Set(); let off = 0, decay = false;
+  for (let w = D.weekStart(asOf), k = 0; weeks.length < 4 && w >= first && k < 30; w = D.add(w, -7), k++) {
+    if (hTarget(h, w) > 0) { weeks.push(w); continue; }
+    const md = pauseAreaMode((PZ[h.id][w] || {}).p);
+    if (md === 'real') { weeks.push(w); zero.add(w); } else { off++; if (md === 'decay') decay = true; }
+  }
+  if (!weeks.length) return null;
+  const v = avg(weeks.map(w => zero.has(w) ? 0 : weekStatus(c[w] || 0, hTarget(h, w), w, asOf) ? 1 : Math.min(1, (c[w] || 0) / hTarget(h, w))));
+  return decay ? v * Math.pow(0.9, off) : v;
 }
 function habitConsistency(h, asOf = D.today()) {
   const L = (h.logs || []).filter(l => l.date <= asOf); if (!L.length) return { evaluated: 0, met: 0, pct: null };
   const first = D.weekStart(L.map(l => l.date).sort()[0]), c = countByWeek(L);
-  const weeks = D.lastWeeks(asOf, 5).slice(0, 4).filter(w => w >= first);
+  const weeks = D.lastWeeks(asOf, 5).slice(0, 4).filter(w => w >= first && hTarget(h, w) > 0);
   const met = weeks.filter(w => weekStatus(c[w] || 0, hTarget(h, w), w, asOf)).length;
   return { evaluated: weeks.length, met, pct: weeks.length ? met / weeks.length : null };
 }
@@ -2555,7 +2715,7 @@ function missions(st, asOf = D.today()) {
   goalsActive(st).filter(g => g.type === 'practice').sort((a, b) => a.priority - b.priority).slice(0, 2).forEach(g => {
     const c = computeGoal(g, asOf); out.push({ id: 'pr-' + g.id, title: `${g.title}: ${g.freq}× esta semana`, cur: c.thisWeek, goal: +g.freq, xp: CFG.XP.practiceWeekMet, area: g.area, link: 'objetivo-' + g.id });
   });
-  st.habits.filter(h => !h.archived).slice(0, 2).forEach(h => {
+  st.habits.filter(h => !h.archived && hTarget(h, wk) > 0).slice(0, 2).forEach(h => {
     const n = (h.logs || []).filter(l => D.weekStart(l.date) === wk).length; out.push({ id: 'h-' + h.id, title: `${h.title}: ${hTarget(h, wk)}× esta semana`, cur: n, goal: hTarget(h, wk), xp: CFG.XP.habitWeekMet, area: h.area, link: 'habitos' });
   });
   const top = goalsActive(st).filter(g => !['practice'].includes(g.type)).sort((a, b) => a.priority - b.priority || ((a.due || '9') < (b.due || '9') ? -1 : 1))[0];
@@ -2639,7 +2799,7 @@ function coach(st, asOf = D.today()) {
   });
 
   // Hábitos/prácticas en riesgo
-  const riskItems = st.habits.filter(h => !h.archived).map(h => ({ id: 'h' + h.id, title: h.title, target: +h.target || 1, c: (() => { const c = countByWeek(h.logs || []); Object.keys(c).forEach(w => { if (weekStatus(c[w], hTarget(h, w), w, asOf)) c[w] = +h.target || 1; }); return c; })(), area: h.area }))
+  const riskItems = st.habits.filter(h => !h.archived && !D.lastWeeks(asOf, 6).some(w => hTarget(h, w) === 0 || (PZ[h.id] && PZ[h.id][w]))).map(h => ({ id: 'h' + h.id, title: h.title, target: +h.target || 1, c: (() => { const c = countByWeek(h.logs || []); Object.keys(c).forEach(w => { if (weekStatus(c[w], hTarget(h, w), w, asOf)) c[w] = +h.target || 1; }); return c; })(), area: h.area }))
     .concat(goalsActive(st).filter(g => g.type === 'practice').map(g => ({ id: 'g' + g.id, title: g.title, target: +g.freq || 1, c: countByWeek(g.logs || []), goalId: g.id })));
   riskItems.forEach(it => {
     const w = D.lastWeeks(asOf, 6).slice(0, 5); // 5 semanas cerradas
@@ -2650,7 +2810,7 @@ function coach(st, asOf = D.today()) {
   });
 
   // Meta realista: 3+ semanas cerradas sin cumplir pero con un ritmo estable → proponer meta = ritmo real
-  st.habits.filter(h => !h.archived && (+h.target || 1) >= 2).forEach(h => {
+  st.habits.filter(h => !h.archived && (+h.target || 1) >= 2 && !D.lastWeeks(asOf, 4).some(w => PZ[h.id] && PZ[h.id][w])).forEach(h => {
     const c = countByWeek((h.logs || []).filter(l => l.date <= asOf)), first = (h.logs || []).map(l => l.date).sort()[0]; if (!first) return;
     const ws = D.lastWeeks(asOf, 4).slice(0, 3).filter(w => w >= D.weekStart(first)); if (ws.length < 3) return;
     const n = ws.map(w => c[w] || 0), T = +h.target || 1;
@@ -2676,7 +2836,7 @@ function weekReview(st, wk) {
   const end = D.add(wk, 6), inW = d => d && d >= wk && d <= end;
   const advanced = st.goals.map(g => ({ g, n: (g.logs || []).filter(l => inW(l.date)).length + (g.milestones || []).filter(m => inW(m.doneAt)).length })).filter(x => x.n);
   const practices = st.goals.filter(g => g.type === 'practice' && g.status !== 'dropped').map(g => ({ title: g.title, n: (g.logs || []).filter(l => inW(l.date)).length, target: +g.freq }))
-    .concat(st.habits.filter(h => !h.archived).map(h => { const n = (h.logs || []).filter(l => inW(l.date)).length, T = hTarget(h, wk), s = weekStatus(n, T, wk); return { title: h.title, n: s ? Math.max(n, T) : n, target: T, tol: s === 'tol' }; }));
+    .concat(st.habits.filter(h => !h.archived && hTarget(h, wk) > 0).map(h => { const n = (h.logs || []).filter(l => inW(l.date)).length, T = hTarget(h, wk), s = weekStatus(n, T, wk); return { title: h.title, n: s ? Math.max(n, T) : n, target: T, tol: s === 'tol' }; }));
   const tasks = st.tasks.filter(t => t.week === wk);
   const xp = sum(xpEvents(st, end).filter(e => inW(e.date)).map(e => e.xp));
   return { wk, end, advanced, practices, done: tasks.filter(t => t.done), pending: tasks.filter(t => !t.done), xp, load: (st.meta.weekLoad || {})[wk] || 'normal', review: st.reviews.find(r => r.period === wk) };
@@ -2804,7 +2964,7 @@ function buildDemo(today = D.today(), name = 'Demo') {
 const RHYTHM = 0.75;
 function habitSpan(h) { const f = (h.logs || []).map(l => l.date).sort()[0], c = h.created; const s = [f, c].filter(Boolean).sort()[0]; return { from: s ? D.weekStart(s) : null, to: h.archived ? (h.archivedAt ? D.weekStart(h.archivedAt) : null) : null }; }
 function rhythmWeek(st, wk, asOf = D.today()) {
-  const hs = st.habits.filter(h => { const sp = habitSpan(h); if (h.archived && !sp.to) return false; return sp.from && sp.from <= wk && (!sp.to || wk < sp.to); });
+  const hs = st.habits.filter(h => { const sp = habitSpan(h); if (h.archived && !sp.to) return false; return sp.from && sp.from <= wk && (!sp.to || wk < sp.to) && hTarget(h, wk) > 0; });
   if (!hs.length) return null;
   const end = D.add(wk, 6), met = hs.filter(h => weekStatus((h.logs || []).filter(l => l.date >= wk && l.date <= end && l.date <= asOf).length, hTarget(h, wk), wk, asOf)).length;
   return { n: hs.length, met, need: Math.ceil(hs.length * RHYTHM - 1e-9), ok: met / hs.length >= RHYTHM - 1e-9 };
@@ -2826,7 +2986,7 @@ function streakInfo(st, asOf = D.today()) {
   return { count, curOk, cur: rc, best, broken, brokenWeek: broken ? last : null, prev, jokerLeft, jokerUsedFor: Object.keys(jok) };
 }
 function flameTier(n) { return n >= 12 ? 4 : n >= 6 ? 3 : n >= 3 ? 2 : n >= 1 ? 1 : 0; }
-if (false) module.exports = { goalAreaScore, applyAreas, applyPersonas, buildPersonas, PERSONA_CATALOG, PERSONAS, LEGACY_PERSONAS, BASE_AREAS, rhythmWeek, streakInfo, flameTier, hTarget, weekStatus, reducedTarget, evolution, periods, D, AREAS, TYPES, CFG, computeGoal, areaProgress, xpEvents, xpSummary, levelInfo, autoBranch, branchFits, personaTree, xpBank, PERSONAS, NODE_STEPS, branchState, achievements, missions, coach, weekReview, monthReview, buildDemo, emptyState, uid };
+if (false) module.exports = { PAUSE_TYPES, applyPauses, pauseActive, pausesOn, pauseNext, habitAreaPct, rhythmWeek, goalAreaScore, applyAreas, applyPersonas, buildPersonas, PERSONA_CATALOG, PERSONAS, LEGACY_PERSONAS, BASE_AREAS, rhythmWeek, streakInfo, flameTier, hTarget, weekStatus, reducedTarget, evolution, periods, D, AREAS, TYPES, CFG, computeGoal, areaProgress, xpEvents, xpSummary, levelInfo, autoBranch, branchFits, personaTree, xpBank, PERSONAS, NODE_STEPS, branchState, achievements, missions, coach, weekReview, monthReview, buildDemo, emptyState, uid };
 
 </script>
 <script>
@@ -2993,7 +3153,7 @@ const UI = { weekEdit: null, snap: null, pulse: null, qOff: 0, quoteSeen: false,
 function activeAreas(st = S()) { return AREAS.filter(a => (st.meta.areas || []).includes(a.id)); }
 /* Color del nivel: de un lima oliva sobrio (Nv 1) a un lima claro (Nv 10+), sin llegar a neón */
 function lvlColor(n) { const t = Math.min(1, Math.max(0, (n - 1) / 9)), e = t * (2 - t); return `hsl(${Math.round(84 + 4 * e)} ${Math.round(46 + 38 * e)}% ${Math.round(46 + 30 * e)}%)`; }
-function snapshot(st) { const xs = xpSummary(st), wk = D.weekStart(D.today()), sk = streakInfo(st) || {}; const qs = {}; st.goals.filter(g => g.status === 'active' && g.type !== 'qualitative').forEach(g => { const p = computeGoal(g).pct; if (p != null) qs[g.id] = Math.min(3, Math.floor(p * 4 + 1e-9)); }); return { qs, streak: sk.count || 0, curOk: !!sk.curOk, mode: MODE, total: xs.total, level: xs.level.level, done: st.goals.filter(g => g.status === 'done').map(g => g.id), weekMet: st.habits.filter(h => !h.archived && (h.logs || []).filter(l => D.weekStart(l.date) === wk).length >= hTarget(h, wk)).map(h => h.id) }; }
+function snapshot(st) { const xs = xpSummary(st), wk = D.weekStart(D.today()), sk = streakInfo(st) || {}; const qs = {}; st.goals.filter(g => g.status === 'active' && g.type !== 'qualitative').forEach(g => { const p = computeGoal(g).pct; if (p != null) qs[g.id] = Math.min(3, Math.floor(p * 4 + 1e-9)); }); return { qs, streak: sk.count || 0, curOk: !!sk.curOk, mode: MODE, total: xs.total, level: xs.level.level, done: st.goals.filter(g => g.status === 'done').map(g => g.id), weekMet: st.habits.filter(h => !h.archived && hTarget(h, wk) > 0 && (h.logs || []).filter(l => D.weekStart(l.date) === wk).length >= hTarget(h, wk)).map(h => h.id) }; }
 function commit(opts = {}) {
   const st = S(); if (!st) return; applyAreas(st);
   const prev = UI.snap && UI.snap.mode === MODE ? UI.snap : null;
@@ -3188,7 +3348,7 @@ function render() {
   root.innerHTML = layout(r.v, body); document.body.classList.toggle('glass-more', SIMP.glass); ['cTiles', 'cAch', 'cRec', 'cToday', 'cDone'].forEach(k => document.body.classList.toggle('c-' + k.slice(1).toLowerCase(), !!SIMP[k])); document.body.classList.toggle('wolf-lime', st.meta.wolfColor === 'lime'); initWolf(r.v); wolfLight();
   if (r.v === 'rueda') initStory();
   if (r.v === 'evolucion') initEvo();
-  if (r.v === 'guia') { UI.guideStop = null; if (r.p === 'personas') initGuiaPer(); else if (r.p === 'objetivos') initGuiaObj(); else if (r.p === 'xp') initGuiaXp(); else initGuiaHab(); }
+  if (r.v === 'guia') { UI.guideStop = null; if (r.p === 'personas') initGuiaPer(); else if (r.p === 'objetivos') initGuiaObj(); else if (r.p === 'xp') initGuiaXp(); else if (r.p === 'pausas') initGuiaPz(); else initGuiaHab(); }
   if (r.v === 'hoy') initHoy();
   if (UI.lastView !== r.v && !UI.introPending && !dayEntrance(r, root) && !UI.noAsm && !RM()) {
     const w = root.querySelector('.main .wrap'), els = w ? [...w.querySelectorAll('.ghero, .gc2, .hcard, .grid > .card, .ac2, .gcgrid + .pin-note')].slice(0, 12) : [];
@@ -3207,11 +3367,11 @@ function render() {
   paintStatus();
 }
 function layout(cur, body) {
-  const curN = { objetivo: 'objetivos', area: 'areas', rueda: 'dashboard' }[cur] || (cur === 'guia' ? ({ personas: 'habilidades', objetivos: 'objetivos', xp: 'dashboard' }[route().p] || 'habitos') : cur);
+  const curN = { objetivo: 'objetivos', area: 'areas', rueda: 'dashboard' }[cur] || (cur === 'guia' ? ({ personas: 'habilidades', objetivos: 'objetivos', xp: 'dashboard', pausas: 'dashboard' }[route().p] || 'habitos') : cur);
   const st = S(), t = D.today(), wk = D.weekStart(t), badges = {};
   try {
     badges.tareas = st.tasks.filter(x => x.week === wk && !x.done && x.day && x.day <= t).length;
-    badges.habitos = st.habits.filter(h => !h.archived && !(h.logs || []).some(l => l.date === t) && !weekStatus((h.logs || []).filter(l => D.weekStart(l.date) === wk).length, hTarget(h, wk), wk, t)).length;
+    badges.habitos = st.habits.filter(h => !h.archived && hTarget(h, wk) > 0 && !(h.logs || []).some(l => l.date === t) && !weekStatus((h.logs || []).filter(l => D.weekStart(l.date) === wk).length, hTarget(h, wk), wk, t)).length;
     badges.coach = coach(st, t).recs.length;
   } catch (e) { }
   const uSeen = st.meta.unlockSeen || {}, uNew = id => !navAll(st) && (st.meta.unlocked || {})[id] && !uSeen[id];
@@ -3456,7 +3616,7 @@ VIEWS.dashboard = () => {
   const Q = QUOTES[((D.diff(t, '2026-01-01') + 0) % QUOTES.length + QUOTES.length) % QUOTES.length], qEnter = !UI.quoteSeen; UI.quoteSeen = true;
   const hasData = areas.some(a => a.pct != null);
   const adv = areas.filter(a => a.recent > 0).sort((a, b) => b.recent - a.recent).slice(0, 2);
-  const cc = coach(st, t);
+  const cc = coach(st, t); { const pa = pauseActive(st, t); if (pa) cc.headline = PZ_WOLF[pa.type] || PZ_WOLF.otra; }
   const attn = areas.filter(a => (a.recent === 0 && st.goals.some(g => g.area === a.id && g.status === 'active' && D.diff(t, g.start) >= 14)) || cc.recs.some(r => r.tone === 'warn' && r.goalId && (st.goals.find(g => g.id === r.goalId) || {}).area === a.id)).slice(0, 3);
   const doneAll = st.goals.filter(g => g.status === 'done'), doneMonth = doneAll.filter(g => D.month(g.doneAt || '') === D.month(t));
   const load = (st.meta.weekLoad || {})[wk] || 'normal';
@@ -3464,7 +3624,7 @@ VIEWS.dashboard = () => {
   const legend = areas.map(a => `<button data-act="go" data-to="area-${a.id}"><span class="dot" style="background:${a.color}"></span><span><span class="nm-l">${a.name}</span><span class="nm-s">${a.short}</span></span>${a.pct == null ? '<span class="dim" style="font-size:.74rem">sin datos</span>' : `<div class="bar thin"><i style="width:${Math.round(a.pct * 100)}%;background:${a.color}"></i></div>`}<span class="pct">${a.pct == null ? '—' : Math.round(a.pct * 100) + '%'}</span><span class="lvp" style="--lc:${lvlColor(a.lvl.level)}" title="Nivel ${a.lvl.level} en ${a.short}">Nv ${a.lvl.level}</span></button>`).join('');
 
   const DG = dashGoals(st), goals = DG.list, moreGoals = DG.total - goals.length;
-  const tdTasks = st.tasks.filter(x => x.week === wk && !x.done && x.day && x.day <= t), tdHab = st.habits.filter(h => !h.archived && !(h.logs || []).some(l => l.date === t) && !weekStatus((h.logs || []).filter(l => D.weekStart(l.date) === wk).length, hTarget(h, wk), wk, t)), tdPr = ((st.meta.prios || {})[wk] || []).length;
+  const tdTasks = st.tasks.filter(x => x.week === wk && !x.done && x.day && x.day <= t), tdHab = st.habits.filter(h => !h.archived && hTarget(h, wk) > 0 && !(h.logs || []).some(l => l.date === t) && !weekStatus((h.logs || []).filter(l => D.weekStart(l.date) === wk).length, hTarget(h, wk), wk, t)), tdPr = ((st.meta.prios || {})[wk] || []).length;
   const todayStrip = SIMP.todayStrip ? `<a class="tstrip" href="#hoy"><span class="ts-ic">${icon('sun')}</span><span class="ts-t"><b>Hoy te toca</b><span>${[tdTasks.length ? `${tdTasks.length} ${tdTasks.length === 1 ? 'tarea' : 'tareas'}` : '', tdHab.length ? `${tdHab.length} ${tdHab.length === 1 ? 'hábito' : 'hábitos'}` : '', tdPr ? `${tdPr} ${tdPr === 1 ? 'prioridad' : 'prioridades'} de la semana` : ''].filter(Boolean).join(' · ') || 'Nada pendiente: día libre o adelanta algo de la semana'}</span></span><span class="ts-go">Enfocarme ${icon('right')}</span></a>` : '';
   const tasks = st.tasks.filter(x => x.week === wk).sort(taskOrder);
   const habits = st.habits.filter(h => !h.archived);
@@ -3498,7 +3658,7 @@ VIEWS.dashboard = () => {
       <form data-form="taskquick" class="stack" style="gap:8px;margin-bottom:8px"><input type="text" name="title" id="tq-title" placeholder="Nueva tarea de la semana" aria-label="Nueva tarea" required><div class="row tq-row" style="gap:8px">${datePick('tq-day', t, { name: 'day', optional: true, none: 'Sin día específico', cls: 'inrow' })}<select name="priority" id="tq-prio" aria-label="Prioridad" style="width:auto"><option value="1">Alta</option><option value="2" selected>Media</option><option value="3">Baja</option></select><button class="btn" aria-label="Agregar tarea">${icon('plus')}</button></div></form>
       ${carryStrip(st, wk)}
       ${dashTasks(tasks)}
-      <div class="row sub" style="margin-top:14px;justify-content:space-between"><span>Carga de la semana</span>${loadSeg(wk, load)}</div></section>`;
+      <div class="row sub" style="margin-top:14px;justify-content:space-between"><span>Carga de la semana</span>${loadSeg(wk, load)}</div><button class="pz-link" data-act="pz-open">${pauseActive(st, t) ? `${pauseType(pauseActive(st, t)).e} ${esc(pauseName(pauseActive(st, t)))} · editar` : '¿Pasó algo esta semana? Viaje, salud, poco tiempo…'}</button></section>`;
   const S_hab = `    <section class="card c7"><div class="card-h"><h2>Hábitos</h2><span class="sub">${(() => { const n = habits.filter(h => (h.logs || []).some(l => l.date === t)).length; return n ? `<span class="num good">${n}</span> ${n === 1 ? 'registrado' : 'registrados'} hoy` : 'Lo que llevas hoy y esta semana'; })()}</span><span class="sp"></span><a class="link" href="#habitos">Gestionar ${icon('right')}</a></div>
       ${adjStrip(st, wk)}${habits.length ? `<div class="list hcards2">${habits.map(h => habitRow(h, t)).join('')}</div><p class="hab-foot"><span>La constancia se mide en <b>semanas</b>, no en días.</span></p>` : ''}${goalsActive(st).some(g => g.type === 'practice') ? `<div class="wk-goals"><div class="wk-goals-h">${icon('goal')}<span>Objetivos con meta semanal</span><span class="dim"><i class="wk-sep">· </i>cuentan para su objetivo</span></div><div class="list hcards2 prac">${goalsActive(st).filter(g => g.type === 'practice').map(g => practiceRow(g, t)).join('')}</div></div>` : ''}${habits.length || goalsActive(st).some(g => g.type === 'practice') ? '' : emptyBox('Diarios, tres por semana o flexibles: perder un día no rompe nada.', '<button class="btn primary sm" data-act="hab-new">Nuevo hábito</button>', 'Sin hábitos todavía')}</section>`;
   const S_mis = `    <section class="card c5 hud"><div class="card-h"><h2>Misiones</h2>${ms.heavy ? '<span class="chip info">Reducidas por semana exigente</span>' : ''}<span class="sp"></span>${isOpen('misiones', st) ? `<a class="link" href="#misiones">Logros ${icon('right')}</a>` : ''}</div>
@@ -3513,7 +3673,7 @@ VIEWS.dashboard = () => {
       <div class="stack">${cc.recs.slice(0, 2).map(r => recCard(r, true)).join('') || '<p class="sub">Sin recomendaciones pendientes.</p>'}</div></section>` : ''}`;
   const S_unl = `    ${(() => { const lk = Object.keys(UNLOCKS).filter(id => !isOpen(id, st)); if (!lk.length) return ''; const c = unlockCtx(st), prog = { areas: [c.logs, 1], misiones: [c.logs, 3], coach: [c.logs, 5], revisiones: [c.days, 5], habilidades: [c.xp, 150], evolucion: [c.weeks, 2] };
       return `<section class="card c12 unl-card"><div class="card-h"><h2>Por desbloquear</h2><span class="sub">RN. se abre conforme avanzas</span></div><div class="unl-grid">${lk.map(id => { const n = NAV.find(x => x[0] === id), [a, b] = prog[id]; return `<div class="unl" style="--sc:${secC(id)}"><span class="unl-ic">${icon(n[2])}</span><div class="grow"><b>${n[1]}</b><small>${UNLOCKS[id][0]}</small>${bar(Math.min(1, a / b), secC(id))}</div><span class="sub num">${fmt(Math.min(a, b))}/${fmt(b)}</span></div>`; }).join('')}</div></section>`; })()}`;
-  const S_coachM = isOpen('coach', st) ? `<section class="card c12 raised coachm"><div class="card-h"><span class="wolf-slot">${wolfOrb(52, wolfMood(st))}</span><h2>Wolf <span class="sub" style="font-family:var(--body)">tu coach</span></h2><span class="sub">recomendaciones e insights</span><span class="sp"></span><a class="link" href="#coach">Abrir coach ${icon('right')}</a></div>
+  const S_coachM = isOpen('coach', st) ? `<section class="card c12 raised coachm"><div class="card-h"><span class="wolf-slot">${wolfOrb(52, wolfMood(st))}</span><h2>Wolf <span class="sub" style="font-family:var(--body)">tu coach</span></h2><span class="sub">recomendaciones e insights</span><span class="sp"></span><button class="btn sm ghost" data-act="pz-open">¿Pasó algo?</button><a class="link" href="#coach">Abrir coach ${icon('right')}</a></div>
       <p style="margin-bottom:14px;font-family:var(--display);font-size:1.02rem;letter-spacing:-.01em">${esc(cc.headline)}</p>
       <div class="coachm-g"><div class="stack">${cc.recs.slice(0, 2).map(r => recCard(r, true)).join('') || '<p class="sub">Sin recomendaciones pendientes.</p>'}</div>
       <div>${ins.length ? `<p class="eyebrow" style="margin-bottom:10px">Lo que veo en tus registros</p><ul class="marks">${ins.map(i => `<li><span>${i}</span></li>`).join('')}</ul>` : '<p class="sub">Los insights aparecen cuando hay al menos una semana de registros.</p>'}</div></div></section>` : S_ins;
@@ -3523,6 +3683,7 @@ VIEWS.dashboard = () => {
   return pageTop(st.meta.name ? `Hola, <button class="name-edit" data-act="name-edit" title="Cambiar nombre o apodo">${esc(st.meta.name)}</button>` : `Hola <button class="btn sm" data-act="name-edit" style="vertical-align:middle;margin-left:6px">${icon('plus')}Añadir tu nombre</button>`, `Semana del ${D.weekLabel(wk)} · hoy ${D.short(t)}${(() => { const k = kickState(st, wk); return k.done ? ` <a class="kick-chip done" href="#hoy-arranque">${icon('check')}Semana arrancada</a>` : ` <a class="kick-chip ${D.dow(t) <= 1 ? 'hot' : ''}" href="#hoy-arranque">${icon('star')}Arrancar semana</a>`; })()}`) + `
   <div class="quote-row"><div class="quote ${qEnter ? 'enter' : ''}"><span class="qmark" aria-hidden="true">“</span><p class="qtext">${esc(Q)}</p></div>${streakBox(st, t)}</div>
   ${todayStrip}
+  ${pzBand(st)}
   ${ydayCard(st)}
   ${backupStrip(st)}
   <div class="grid">
@@ -3574,7 +3735,7 @@ VIEWS.evolucion = () => {
   const tiles = T6.map(([e, a, b, l], i) => { const [dt, eq] = c.prs && l.startsWith('récords') && a > b ? ['¡nuevo!', 0] : c.p.partial && a < b ? ['en curso', 1] : evDelta(a, b); return `<div class="ev-t" style="animation-delay:${i * .07}s"><span class="e">${e}</span><b class="num odo-n" data-n="${a}" data-k="ev${i}${mode}">${fmt(a)}</b><span>${l}</span><em class="${eq ? 'eq' : ''}">${dt}</em></div>`; }).join('');
   // constancia: últimas 8 semanas × 7 días
   const cnt = {}; dates.forEach(d => { cnt[d] = (cnt[d] || 0) + 1; }); const w0 = D.add(wk, -49), mxc = Math.max(1, ...Object.values(cnt));
-  let heat = ''; for (let dd = 0; dd < 7; dd++) { heat += `<span>${'LMXJVSD'[dd]}</span>`; for (let w = 0; w < 8; w++) { const day = D.add(w0, w * 7 + dd), n = cnt[day] || 0, fut = day > t, o = n ? Math.min(.95, .22 + .73 * n / mxc) : 0; heat += `<i class="${fut ? 'fut' : n ? '' : 'z'}" style="--o:${o.toFixed(2)};animation-delay:${((w * 7 + dd) * .012).toFixed(3)}s" title="${D.short(day)}${n ? ' · ' + n + ' registro(s)' : ''}"></i>`; } }
+  let heat = ''; for (let dd = 0; dd < 7; dd++) { heat += `<span>${'LMXJVSD'[dd]}</span>`; for (let w = 0; w < 8; w++) { const day = D.add(w0, w * 7 + dd), n = cnt[day] || 0, fut = day > t, o = n ? Math.min(.95, .22 + .73 * n / mxc) : 0, pz = pausesOn(st, day)[0], PT = pz && pauseType(pz); heat += `<i class="${pz ? 'pz ' + (n ? 'lg ' : '') + (fut ? 'fut' : '') : fut ? 'fut' : n ? '' : 'z'}" style="--o:${o.toFixed(2)};animation-delay:${((w * 7 + dd) * .012).toFixed(3)}s${pz ? ';--pc:' + PT.c : ''}" title="${D.short(day)}${pz ? ' · ' + esc(pauseName(pz)) : ''}${n ? ' · ' + n + ' registro(s)' : ''}">${pz ? PT.e : ''}</i>`; } }
   const areas = E.areas.filter(x => x.has).map(x => { const L = x.series, a = L[L.length - 1], b = L[L.length - 2]; return { x, a, d: a != null && b != null ? Math.round((a - b) * 100) : null }; });
   const areaHtml = areas.length ? areas.map((y, i) => `<div class="ev-a" style="--c:${y.x.a.color}"><b><i></i>${esc(y.x.a.short)}</b><div class="tr"><i style="--w:${Math.round((y.a || 0) * 100)}%;animation-delay:${i * .08}s"></i></div><small class="${!y.d || y.d < 0 ? 'eq' : ''}">${y.d ? (y.d > 0 ? '+' : '−') + Math.abs(y.d) + ' pts' : 'igual'}</small></div>`).join('') : '<p class="sub">Aún sin datos por área.</p>';
   // momentos
@@ -3594,7 +3755,7 @@ VIEWS.evolucion = () => {
   <div class="ev-tiles">${tiles}</div>
   <div class="ev-two">
     <div class="card"><div class="card-h"><h2>Constancia</h2><span class="sub">cada cuadrito es un día con registros · 8 semanas</span></div><div class="ev-heat">${heat}</div>
-      <div class="ev-hl"><span>menos</span><i style="--o:.22"></i><i style="--o:.45"></i><i style="--o:.7"></i><i style="--o:.95"></i><span>más</span></div></div>
+      <div class="ev-hl"><span>menos</span><i style="--o:.22"></i><i style="--o:.45"></i><i style="--o:.7"></i><i style="--o:.95"></i><span>más</span></div>${(st.meta.pauses || []).some(p => p.start <= t && pauseEnd(p, t) >= w0) ? '<p class="ev-pzl">Los días con ícono fueron pausas o semanas especiales: no cuentan como fallados. El punto verde: registraste algo igual.</p>' : ''}</div>
     <div class="card"><div class="card-h"><h2>Tus áreas</h2><span class="sub">ritmo actual y cuánto se movió</span></div><div class="ev-areas">${areaHtml}</div></div>
   </div>
   ${moments ? `<p class="hab-foot"><span>Momentos que valen la pena</span></p><div class="ev-moments">${moments}</div>` : ''}
@@ -3758,7 +3919,7 @@ function hEmo(h, cls = '') { const e = hEmoji(h); return e ? `<span class="hemo 
 function habitRow(h, t) {
   const W = habitWeeks(h, t), cur = W[W.length - 1], ti = todayInfo(h.logs, t, h.measure === 'amount' ? h.unit : '');
   return `<div class="li hrow ${ti.n ? 'done-today' : ''} ${UI.pulse === h.id ? 'pulse' : ''}">${hStat(ti, (AREA[h.area] || {}).color || '#5F6860', { c: cur.c, target: cur.T, status: cur.status })}<div class="grow"><div class="row" style="gap:8px;row-gap:4px"><span class="ttl">${hEmo(h)}${esc(h.title)}</span>${todayBadge(ti)}</div>
-    <div class="row sub" style="gap:10px;margin-top:6px">${cur.c || cur.status ? weekPips(cur.c, cur.T, cur.status, true) : ''}<span class="hn">${cur.c ? cur.c + ' esta semana' : 'Sin registros esta semana'}</span>${cur.status === 'full' ? '<span class="lime-t">· semana cumplida</span>' : cur.status === 'tol' ? '<span class="amber-t">· cumplida con margen</span>' : ''}</div></div>
+    <div class="row sub" style="gap:10px;margin-top:6px">${cur.c || cur.status ? weekPips(cur.c, cur.T, cur.status, true) : ''}<span class="hn">${cur.c ? cur.c + ' esta semana' : 'Sin registros esta semana'}</span>${pzTag(h, D.weekStart(t))}${cur.status === 'full' ? '<span class="lime-t">· semana cumplida</span>' : cur.status === 'tol' ? '<span class="amber-t">· cumplida con margen</span>' : ''}</div></div>
     <button class="btn sm ${ti.n ? 'again' : 'primary'}" data-act="hab-log" data-id="${h.id}" aria-label="${ti.n ? 'Registrar otra vez' : 'Registrar'} ${esc(h.title)}">${icon('plus')}${ti.n ? 'Otra vez' : h.measure === 'amount' ? 'Registrar' : 'Hecho'}</button>${dayBtn(h)}</div>`;
 }
 function adjStrip(st, wk) {
@@ -3840,6 +4001,7 @@ VIEWS.guia = id => {
   if (id === 'personas') return gPersonaView(st);
   if (id === 'objetivos') return gObjView(st);
   if (id === 'xp') return gXpView(st);
+  if (id === 'pausas') return gPzView(st);
   const hs = st.habits.filter(h => !h.archived), si = streakInfo(st) || {};
   return guideHead('habitos', 'Hábitos') + `<div class="story gstory">
     <div class="story-stage"><div class="stage-inner">${gHabStage()}<p class="stage-cap num" id="stcap"></p></div></div>
@@ -3873,6 +4035,47 @@ function initGuiaHab() {
     4: () => { reset(); stk.classList.add('in'); setDays([5]); setWeeks(6, 5); flame(5, flameTier(5)); cap.textContent = 'Semana 6 sin cumplir…'; jok.classList.add('in');
       later(() => { jok.classList.add('use'); }, 900); later(() => { setWeeks(6, 5, true); flame(6, flameTier(6)); cap.textContent = 'Comodín usado · la racha sigue en 6'; }, 1500); },
     5: () => { reset(); setDays([1]); stk.classList.add('in'); setWeeks(0); flame(0, 0); lbl.textContent = '2 minutos cuentan'; cap.textContent = 'Tu primer paso'; }
+  };
+  guideScroll(S);
+}
+
+/* ---------- E · Pausas y semanas especiales ---------- */
+function gPzView(st) {
+  const sit = Object.values(PAUSE_TYPES), dd = ['lun', 'mar', 'mié', 'jue', 'vie', 'sáb', 'dom'];
+  return guideHead('dashboard', 'Inicio') + `<div class="story gstory">
+    <div class="story-stage"><div class="stage-inner"><div class="gpz">
+      <div class="gpz-p" data-p="1"><div class="gpz-sit">${sit.map((x, i) => `<span class="gpz-si" data-i="${i}" style="--c:${x.c}"><em>${x.e}</em><b>${x.n}</b></span>`).join('')}</div></div>
+      <div class="gpz-p" data-p="2"><div class="gpz-lbl">¿Desde cuándo?</div><div class="gpz-days">${dd.map((d, i) => `<span data-i="${i}">${d}<b>${9 + i}</b></span>`).join('')}</div><div class="gpz-lbl">¿Hasta cuándo?</div><div class="gpz-cs"><span class="on" id="gpz-nose">Aún no sé</span><span>Este domingo</span><span>Elegir fecha</span></div><p class="gpz-cap" id="gpz-cap2">&nbsp;</p></div>
+      <div class="gpz-p" data-p="3">${[['🏃', 'Cardio', 1], ['🏋️', 'Gym', 1], ['📖', 'Leer', 0], ['🧘', 'Meditar', 0]].map(([e, n, pz], i) => `<div class="gpz-h" data-pz="${pz}" data-i="${i}"><span class="e">${e}</span><b>${n}</b><span class="gpz-tag">🩹 en pausa</span><span class="gpz-pips"><i></i><i></i><i></i></span></div>`).join('')}</div>
+      <div class="gpz-p" data-p="4"><div class="gpz-ar"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="b"/><circle cx="60" cy="60" r="50" class="f" id="gpz-f"/></svg><b id="gpz-n">82%</b><small>Físico</small></div><div class="gpz-vs"><span><s>0%</s> de golpe</span><span class="ok">−10% por semana</span></div></div>
+      <div class="gpz-p" data-p="5"><div class="gpz-plan">${[['Semana 1', '50 %'], ['Semana 2', '75 %'], ['Semana 3', '100 %'], ['', '¡De vuelta!']].map(([a, b], i) => `<div data-i="${i}"><small>${a}</small><b>${b}</b></div>`).join('')}</div><div class="gpz-heat">${Array.from({ length: 21 }, (_, i) => `<i class="${i >= 8 && i <= 13 ? 'pz' : i % 4 === 3 ? 'z' : ''}" style="--o:${(.3 + (i * 37 % 60) / 100).toFixed(2)}">${i >= 8 && i <= 13 ? '🩹' : ''}</i>`).join('')}</div></div>
+    </div><p class="stage-cap num" id="stcap"></p></div></div>
+    <div class="story-steps">
+      <section class="step" data-s="0"><p class="eyebrow">Cómo funciona</p><h1 class="story-h">Cuando la vida pasa, <span style="color:var(--lime)">RN. lo entiende.</span></h1><p class="story-p">Viajes, lesiones, exámenes o semanas sin tiempo. Desliza hacia abajo.</p></section>
+      <section class="step" data-s="1"><span class="step-n num">01</span><h2>Dile a Wolf qué pasó.</h2><p class="story-p">Toca <b>¿Pasó algo?</b> en la tarjeta de Semana, en Wolf o al arrancar tu semana. Si llevas días sin registrar, Wolf te lo pregunta solo.</p></section>
+      <section class="step" data-s="2"><span class="step-n num">02</span><h2>Marca cuándo empezó, aunque ya haya pasado.</h2><p class="story-p">Si empezó el martes y entras el jueves, eliges martes. ¿No sabes cuándo termina? Déjalo abierto y tocas <b>Ya regresé</b> cuando vuelvas. También puedes planearlo a futuro.</p></section>
+      <section class="step" data-s="3"><span class="step-n num">03</span><h2>Tus hábitos se pausan, no se fallan.</h2><p class="story-p">Eliges qué se pausa: en una lesión, Cardio y Gym; leer y meditar siguen. En un viaje, todo. Si te dan ganas de registrar algo, suma igual.</p></section>
+      <section class="step" data-s="4"><span class="step-n num">04</span><h2>Tus áreas no mienten, pero tampoco caen a cero.</h2><p class="story-p">En pausas largas bajan despacio. Si fue una lesión, ves tu estado real, sin drama: es tu punto de partida.</p></section>
+      <section class="step" data-s="5"><span class="step-n num">05</span><h2>Al regresar, un plan para volver.</h2><p class="story-p">Tus metas suben solas: 50 %, 75 % y luego las normales. En tu constancia, esos días se ven con su ícono, no como huecos.</p>
+        <p class="story-motto">No somos robots. Lo que importa es volver.</p><button class="btn primary" data-act="pz-open">Probar ahora</button></section>
+    </div></div>`;
+}
+function initGuiaPz() {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, $$ = q => [...document.querySelectorAll(q)], cap = document.getElementById('stcap');
+  let timers = []; const later = (fn, ms) => { if (reduce) return fn(); timers.push(setTimeout(fn, ms)); };
+  UI.guideStop = () => { timers.forEach(clearTimeout); timers = []; };
+  const show = n => $$('.gpz-p').forEach(p => p.classList.toggle('on', +p.dataset.p === n));
+  const C = 2 * Math.PI * 50, f = document.getElementById('gpz-f'), num = document.getElementById('gpz-n'); if (f) f.style.strokeDasharray = C.toFixed(1);
+  const ring = v => { if (f) f.style.strokeDashoffset = (C * (1 - v / 100)).toFixed(1); if (num) num.textContent = v + '%'; };
+  const S = {
+    0: () => { show(1); $$('.gpz-si').forEach(x => x.classList.remove('on')); cap.textContent = ''; },
+    1: () => { show(1); const tiles = $$('.gpz-si'); tiles.forEach(x => x.classList.remove('on')); [0, 1, 3, 2].forEach((k, j) => later(() => { tiles.forEach(x => x.classList.remove('on')); tiles[k].classList.add('on'); cap.textContent = tiles[k].querySelector('b').textContent; }, 250 + j * 600)); },
+    2: () => { show(2); const ds = $$('.gpz-days span'); ds.forEach(x => x.className = ''); cap.textContent = ''; document.getElementById('gpz-cap2').textContent = ' ';
+      later(() => { ds[1].className = 'on'; cap.textContent = 'Empezó el martes'; }, 400); [2, 3, 4].forEach((k, j) => later(() => { ds[k].className = k === 4 ? 'on td' : 'in'; }, 900 + j * 280));
+      later(() => { document.getElementById('gpz-cap2').textContent = 'Queda abierta hasta que toques «Ya regresé»'; }, 1900); },
+    3: () => { show(3); const hs = $$('.gpz-h'); hs.forEach(x => x.classList.remove('off')); cap.textContent = ''; hs.filter(x => x.dataset.pz === '1').forEach((x, j) => later(() => { x.classList.add('off'); }, 400 + j * 500)); later(() => { cap.textContent = '2 en pausa · los demás siguen'; }, 1500); },
+    4: () => { show(4); ring(82); cap.textContent = 'Antes de la pausa'; [74, 66].forEach((v, j) => later(() => { ring(v); cap.textContent = `Semana ${j + 1} en pausa`; }, 900 + j * 900)); },
+    5: () => { show(5); const pl = $$('.gpz-plan div'); pl.forEach(x => x.className = ''); pl.forEach((x, j) => later(() => { pl.forEach(y => y.classList.remove('cur')); x.className = 'cur'; cap.textContent = x.querySelector('b').textContent; }, 300 + j * 650)); }
   };
   guideScroll(S);
 }
@@ -4422,12 +4625,12 @@ VIEWS.habitos = () => {
   const st = S(), t = D.today(), hs = st.habits.filter(h => !h.archived), arch = st.habits.filter(h => h.archived);
   const pr = goalsActive(st).filter(g => g.type === 'practice');
   const card = h => {
-    const W = habitWeeks(h, t), cur = W[W.length - 1], cons = habitConsistency(h, t), g = h.goalId && st.goals.find(x => x.id === h.goalId), open = UI.openHabit === h.id, adjd = cur.T !== (+h.target || 1);
+    const W = habitWeeks(h, t), cur = W[W.length - 1], cons = habitConsistency(h, t), g = h.goalId && st.goals.find(x => x.id === h.goalId), open = UI.openHabit === h.id, pzT = pzTag(h, D.weekStart(t)), adjd = !pzT && cur.T !== (+h.target || 1);
     const logs = (h.logs || []).slice().sort(byDate).reverse();
     const wkAmt = sum((h.logs || []).filter(l => D.weekStart(l.date) === D.weekStart(t)).map(l => l.value)), ti = todayInfo(h.logs, t, h.measure === 'amount' ? h.unit : '');
     return `<section class="card stack hcard tilt ${ti.n ? 'done-today' : ''} ${UI.pulse === h.id ? 'pulse' : ''}" style="gap:12px"><div class="row">${hStat(ti, (AREA[h.area] || {}).color || '#5F6860', { c: cur.c, target: cur.T, status: cur.status })}<h2 style="flex:1">${hEmo(h)}${esc(h.title)}</h2><button class="btn ${ti.n ? '' : 'primary'} sm" data-act="hab-log" data-id="${h.id}">${icon('plus')}${ti.n ? 'Registrar otra vez' : 'Registrar hoy'}</button>${dayBtn(h)}</div>
       <div class="today-strip ${ti.n ? 'on' : ''}"><span class="eyebrow">Hoy</span>${ti.n ? `<b>Hecho hoy</b>${ti.n > 1 ? `<span class="chip good">${ti.n} veces</span>` : ''}${ti.unit && ti.amt ? `<span class="sub num">${fmt(ti.amt, 1)} ${esc(ti.unit)}</span>` : ''}` : '<span class="sub">Aún no lo registras hoy</span>'}</div>
-      <div class="row sub" style="gap:8px">${areaChip(h.area)}<span class="chip">${h.target}× por semana</span>${adjd ? `<span class="chip warn">esta semana ${cur.T}× (ajustada)</span>` : ''}${h.measure === 'amount' ? `<span class="chip">mide ${esc(h.unit)}</span>` : ''}${g ? `<a class="chip" href="#objetivo-${g.id}">→ ${esc(g.title)}</a>` : ''}</div>
+      <div class="row sub" style="gap:8px">${areaChip(h.area)}<span class="chip">${h.target}× por semana</span>${adjd ? `<span class="chip warn">esta semana ${cur.T}× (ajustada)</span>` : ''}${pzT}${h.measure === 'amount' ? `<span class="chip">mide ${esc(h.unit)}</span>` : ''}${g ? `<a class="chip" href="#objetivo-${g.id}">→ ${esc(g.title)}</a>` : ''}</div>
       <div class="row" style="gap:16px"><div><div class="eyebrow">Esta semana</div><b class="num" style="font-size:1.2rem">${cur.c}/${cur.T}</b>${cur.status === 'tol' ? ' <span class="amber-t sub">cumplida con margen</span>' : cur.status === 'full' ? ' <span class="lime-t sub">cumplida</span>' : ''}${h.measure === 'amount' ? ` <span class="sub">· ${fmt(wkAmt)} ${esc(h.unit)}</span>` : ''}<div style="margin-top:7px">${weekPips(cur.c, cur.T, cur.status)}</div></div>
         <div><div class="eyebrow">Últimas 8 semanas</div>${weekCells(W)}</div><div><div class="eyebrow">Consistencia</div><span class="sub">${cons.evaluated ? `${cons.met} de ${cons.evaluated} semanas cerradas` : 'se mide al cerrar la primera semana'}</span></div></div>
       ${h.note ? `<p class="sub">Regla de flexibilidad: ${esc(h.note)}</p>` : ''}
@@ -4436,7 +4639,7 @@ VIEWS.habitos = () => {
     </section>`;
   };
   return pageTop('Hábitos y prácticas', 'Consistencia semanal', `<a class="btn" href="#guia-habitos">${icon('review')}¿Cómo funciona?</a><button class="btn" data-act="hab-new">${icon('plus')}Nuevo hábito</button>`) + `
-    ${ydayCard(st)}${adjStrip(st, D.weekStart(t))}<p class="sub" style="margin-bottom:16px;max-width:70ch">Cada hábito tiene una meta semanal, no diaria. Perder un día no rompe nada. Al cerrar la semana (desde el domingo), llegar al 75 % de tu meta cuenta como semana cumplida con margen.</p>
+    ${pzBand(st)}${ydayCard(st)}${adjStrip(st, D.weekStart(t))}<p class="sub" style="margin-bottom:16px;max-width:70ch">Cada hábito tiene una meta semanal, no diaria. Perder un día no rompe nada. Al cerrar la semana (desde el domingo), llegar al 75 % de tu meta cuenta como semana cumplida con margen.</p>
     <div class="grid">${hs.map(h => `<div class="c6">${card(h)}</div>`).join('') || `<div class="c12">${emptyBox('Sin hábitos todavía.', '<button class="btn primary sm" data-act="hab-new">Crear hábito</button>')}</div>`}</div>
     ${pr.length ? `<h2 style="margin:28px 0 4px">Objetivos con meta semanal</h2><p class="sub" style="margin-bottom:12px">No son hábitos: son objetivos que se cumplen X veces por semana. Están aquí para registrarlos rápido; su avance cuenta en Objetivos.</p><div class="card"><div class="list">${pr.map(g => practiceRow(g, t)).join('')}</div></div>` : ''}
     ${arch.length ? `<h2 style="margin:24px 0 10px">Archivados</h2><div class="card"><div class="list">${arch.map(h => `<div class="li"><span class="grow ttl">${esc(h.title)}</span><button class="btn sm" data-act="hab-unarchive" data-id="${h.id}">Restaurar</button><button class="btn ghost sm" data-act="hab-del" data-id="${h.id}" data-arm="1">Eliminar</button></div>`).join('')}</div></div>` : ''}`;
@@ -4772,7 +4975,7 @@ function wolfAnswer(k, st = S()) {
     return `${lead} Llevas <b>${fmt(xs.week)} XP</b> (${dTxt}) y <b>${met} de ${habits.length}</b> hábitos con la meta semanal cumplida.${si.count ? ` Racha: <b>${si.count} ${si.count === 1 ? 'semana' : 'semanas'}</b>.` : ''}${si.curOk ? ' Así se construye.' : ' Una sesión hoy cambia el cierre.'}`;
   }
   if (k === 'hoy') {
-    const tasks = st.tasks.filter(x => x.week === wk && !x.done && x.day && x.day <= t), hp = habits.filter(h => !(h.logs || []).some(l => l.date === t) && !weekStatus(cntW(h), hTarget(h, wk), wk, t));
+    const tasks = st.tasks.filter(x => x.week === wk && !x.done && x.day && x.day <= t), hp = habits.filter(h => hTarget(h, wk) > 0 && !(h.logs || []).some(l => l.date === t) && !weekStatus(cntW(h), hTarget(h, wk), wk, t));
     if (!tasks.length && !hp.length) return 'Hoy no tienes nada pendiente. Día libre o adelanta algo de la semana; tú decides.';
     const L = tasks.slice(0, 3).map(x => esc(x.title)).concat(hp.slice(0, 3).map(h => (hEmoji(h) ? hEmoji(h) + ' ' : '') + esc(h.title)));
     return `Te toca: ${L.map(x => `<b>${x}</b>`).join(', ')}${tasks.length + hp.length > L.length ? ' y algo más' : ''}. Empieza por lo más corto y agarra impulso. <a class="link" href="#hoy">Abrir Hoy →</a>`;
@@ -4805,7 +5008,7 @@ function wolfHero(st, cc) {
   const mood = wolfMood(st), asked = UI.wolfAsk || [];
   return `<section class="card wolf-hero c12"><div class="wh-top">${wolfOrb(112, mood, 'big')}<div class="wh-say"><span class="wh-name">Wolf <small>tu coach</small></span><p class="wh-bubble">${esc(WOLF_HELLO[mood])} <b>${esc(cc.headline)}</b></p>${wolfToneTip(st) ? `<p class="wh-tone">${esc(wolfToneTip(st))}</p>` : ''}</div></div>
     ${asked.length ? `<div class="wh-chat">${asked.map(k => `<div class="wh-q">${esc((WOLF_Q.find(q => q[0] === k) || [])[1] || '')}</div><div class="wh-a">${wolfOrb(26, mood)}<p>${wolfAnswer(k, st)}</p></div>`).join('')}</div>` : ''}
-    <div class="wh-chips">${WOLF_Q.map(([k, l]) => `<button class="wh-chip" data-act="wolf-ask" data-k="${k}">${esc(l)}</button>`).join('')}${asked.length ? `<button class="wh-chip ghost" data-act="wolf-clear">Limpiar</button>` : ''}</div></section>`;
+    <div class="wh-chips"><button class="wh-chip pz" data-act="pz-open">💬 ¿Pasó algo esta semana?</button>${WOLF_Q.map(([k, l]) => `<button class="wh-chip" data-act="wolf-ask" data-k="${k}">${esc(l)}</button>`).join('')}${asked.length ? `<button class="wh-chip ghost" data-act="wolf-clear">Limpiar</button>` : ''}</div></section>`;
 }
 /* Ojos que siguen el cursor + vuelo del botón a la tarjeta del coach en el Inicio */
 document.addEventListener('pointermove', e => {
@@ -4989,7 +5192,7 @@ VIEWS.ajustes = () => {
   const row = (label, sub, ctl) => `<div class="set-row"><span class="set-txt"><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span><span class="set-ctl">${ctl}</span></div>`;
   const sec = (ic, title, sub, body, cls = '') => `<section class="card set-sec ${cls}"><div class="set-h"><span class="set-ic">${icon(ic)}</span><div><h2>${title}</h2>${sub ? `<p class="sub">${sub}</p>` : ''}</div></div><div class="set-body">${body}</div></section>`;
   const lv = levelInfo(xpSummary(st).total), age = backupAge(st);
-  const guides = [['rueda', 'Tu rueda de la vida', 'area', 'Cómo leer tus áreas'], ['guia-habitos', 'Hábitos y racha', 'habit', 'Metas semanales y comodines'], ['guia-objetivos', 'Tipos de objetivo', 'goal', 'Cuál usar para cada meta'], ['guia-personas', 'Personalidades', 'skill', 'Ramas, nodos y banco de XP'], ['guia-xp', 'XP y niveles', 'trend', 'Cómo se gana y se calcula']];
+  const guides = [['rueda', 'Tu rueda de la vida', 'area', 'Cómo leer tus áreas'], ['guia-habitos', 'Hábitos y racha', 'habit', 'Metas semanales y comodines'], ['guia-objetivos', 'Tipos de objetivo', 'goal', 'Cuál usar para cada meta'], ['guia-personas', 'Personalidades', 'skill', 'Ramas, nodos y banco de XP'], ['guia-xp', 'XP y niveles', 'trend', 'Cómo se gana y se calcula'], ['guia-pausas', 'Pausas y semanas especiales', 'cal', 'Viajes, salud y semanas sin tiempo']];
   const pcfg = m.personaCfg, STAGES = [['estudio', 'Estudio'], ['trabajo', 'Trabajo'], ['ambos', 'Estudio y trabajo'], ['emprendo', 'Emprendo'], ['otro', 'Otra cosa']];
   const personasBody = pcfg ? row('Tu semana', 'Adapta la rama de El Constructor', `<select class="set-sel" data-change="pcfg-stage" aria-label="Qué ocupa tu semana">${STAGES.map(([v, l]) => `<option value="${v}" ${pcfg.stage === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`)
       + row('Fe o sentido', 'Activa Sentido y su tercera rama', `<span class="seg" role="group" aria-label="Fe o sentido">${[['fe', 'Con fe'], ['sentido', 'Sin religión'], ['no', 'No']].map(([v, l]) => `<button data-act="pcfg-faith" data-v="${v}" aria-pressed="${pcfg.faith === v}">${l}</button>`).join('')}</span>`)
@@ -5012,6 +5215,9 @@ VIEWS.ajustes = () => {
       + sw('rm-force', LS.get('rn-rm') === '1', 'Reducir animaciones', 'Quita movimientos y transiciones; los colores siguen indicando el estado'))}
     ${sec('flame', 'Ritmo y Wolf', 'Cómo te acompaña RN.', row('Ritmo base', 'Exigencia de cada semana nueva', `<span class="seg" role="group" aria-label="Ritmo base">${[['ligera', 'Ligera'], ['normal', 'Normal'], ['exigente', 'Exigente']].map(([v, l]) => `<button data-act="pace-set" data-v="${v}" aria-pressed="${(m.pace || 'normal') === v}">${l}</button>`).join('')}</span>`)
       + `<div class="set-row col"><span class="set-txt"><b>Qué quiero que Wolf cuide</b><small>Hasta 2. Wolf te deja un recordatorio corto según esto.</small></span><div class="set-chips">${tones.map(([v, l]) => `<button class="set-chip" data-act="tone-toggle" data-v="${v}" aria-pressed="${(m.wolfTone || []).includes(v)}">${l}</button>`).join('')}</div></div>`)}
+    ${sec('cal', 'Pausas y semanas especiales', 'Viajes, salud o semanas sin tiempo: no cuentan como fallados', (() => { const ps = (m.pauses || []).slice().sort((a, b) => (a.start < b.start ? 1 : -1)), t = D.today();
+      return (ps.length ? ps.slice(0, 8).map(p => { const T = pauseType(p), on = p.start <= t && (!p.end || p.end >= t), fut = p.start > t; return `<div class="set-row"><span class="set-txt"><b>${T.e} ${esc(pauseName(p))}${on ? ' <span class="chip good">activa</span>' : fut ? ' <span class="chip info">próxima</span>' : ''}</b><small>${pzRange(p)}</small></span><span class="set-ctl"><button class="btn sm ghost" data-act="pz-open" data-id="${p.id}">Editar</button></span></div>`; }).join('') : '<p class="sub" style="margin:0 0 6px">Aún no has usado ninguna.</p>')
+        + `<div class="set-row"><span class="set-txt"><b>¿Pasó algo?</b><small>Marca un viaje, una lesión o una semana pesada, también a futuro</small></span><span class="set-ctl"><a class="btn sm ghost" href="#guia-pausas">Cómo funciona</a><button class="btn sm primary" data-act="pz-open">Nueva</button></span></div>`; })())}
     ${sec('area', 'Áreas activas', 'Cada una tiene su página, nivel y evolución', `<div class="set-chips">${AREAS.map(a => `<label class="set-chip area ${(m.areas || []).includes(a.id) ? 'on' : ''}" style="--c:${a.color}"><input type="checkbox" data-change="area-toggle" value="${a.id}" ${(m.areas || []).includes(a.id) ? 'checked' : ''}><i></i>${esc(a.short || a.name)}</label>`).join('')}</div>`)}
   </div></div>
   <div class="set-grid">
@@ -5317,6 +5523,125 @@ function ydayCard(st) {
     <div class="yd-chips">${s.hs.map(h => `<button class="yd-chip ${did(h) ? 'on' : ''}" data-act="yd-log" data-id="${h.id}" aria-pressed="${did(h)}" ${did(h) ? 'disabled' : ''}>${did(h) ? icon('check') : `<span>${hEmoji(h) || '•'}</span>`}${esc(h.title)}</button>`).join('')}</div></div>
     <div class="yd-act"><button class="btn sm ghost" data-act="yd-close">Ayer no hice nada más</button><button class="btn sm primary" data-act="yd-close">Listo</button></div></div>`;
 }
+/* ============ Pausas y semanas especiales (viaje, salud, poco tiempo…) ============ */
+const pzDay = d => `${D.DOW[D.dow(d)].toLowerCase()} ${D.short(d)}`;
+function pzRange(p) { return p.end ? (p.start === p.end ? pzDay(p.start) : `${pzDay(p.start)} – ${pzDay(p.end)}`) : `desde el ${pzDay(p.start)} · sin fecha de fin`; }
+function pzTag(h, wk) {
+  const z = PZ[h.id] && PZ[h.id][wk]; if (!z) return ''; const T = pauseType(z.p), n = hTarget(h, wk);
+  if (!n) return `<span class="pz-tag" style="--c:${T.c}">${T.e} en pausa</span>`;
+  if (z.ramp) return `<span class="pz-tag" style="--c:#B7F36B">↗ regreso · ${n}×</span>`;
+  return `<span class="pz-tag" style="--c:${T.c}">${T.e} meta ${n}× esta semana</span>`;
+}
+function pzLastLog(st) {
+  let last = null; const up = d => { if (d && (!last || d > last)) last = d; };
+  st.habits.forEach(h => (h.logs || []).forEach(l => { if (!l.mirror) up(l.date); })); st.goals.forEach(g => (g.logs || []).forEach(l => up(l.date))); st.tasks.forEach(t => { if (t.done) up(t.doneAt); });
+  return last;
+}
+function pzAbsent(st) {
+  const t = D.today(); if (MODE === 'demo' || !st.meta.onboarded || pauseActive(st, t) || LS.get('rn-pz-ask') === t) return null;
+  if (!st.habits.some(h => !h.archived)) return null;
+  const last = pzLastLog(st); if (!last || D.diff(t, last) < 3) return null;
+  return { last, since: D.add(last, 1), days: D.diff(t, last) };
+}
+function pzBand(st) {
+  const t = D.today(), p = pauseActive(st, t);
+  if (p) {
+    const T = pauseType(p), days = D.diff(t, p.start) + 1, chk = !p.end && !T.low && D.diff(t, p.chk || p.created || p.start) >= 3;
+    const what = pauseLow(p) ? 'metas de hábitos más bajas' : T.all ? 'todos tus hábitos en pausa' : `${(p.habits || []).length} ${(p.habits || []).length === 1 ? 'hábito' : 'hábitos'} en pausa`;
+    return `<div class="pz-band" style="--c:${T.c}" role="region" aria-label="${esc(pauseName(p))}"><div class="pz-row"><span class="pz-ic">${T.e}</span><div class="pz-tx"><b>${esc(pauseName(p))}</b><small>${pzRange(p)} · ${what}</small></div><span class="sp"></span><button class="btn sm ghost" data-act="pz-open" data-id="${p.id}">Editar</button><button class="btn sm primary" data-act="pz-back" data-id="${p.id}">${T.low ? 'Terminar' : 'Ya regresé'}</button></div>
+      ${chk ? `<div class="pz-chk">${wolfOrb(28, 'calm')}<span><b>¿Cómo vas?</b> Llevas ${days} ${days === 1 ? 'día' : 'días'}. Sin prisa: cuando estés listo, regresamos juntos.</span><span class="sp"></span><button class="btn sm ghost" data-act="pz-keep" data-id="${p.id}">Sigo igual</button><button class="btn sm" data-act="pz-back" data-id="${p.id}">Ya regresé</button></div>` : ''}</div>`;
+  }
+  const nx = pauseNext(st, t);
+  if (nx) { const T = pauseType(nx); return `<div class="pz-band next" style="--c:${T.c}"><div class="pz-row"><span class="pz-ic">${T.e}</span><div class="pz-tx"><b>Próximo: ${esc(pauseName(nx))}</b><small>${pzRange(nx)} · RN. lo activa solo ese día</small></div><span class="sp"></span><button class="btn sm ghost" data-act="pz-open" data-id="${nx.id}">Editar</button><button class="btn sm ghost" data-act="pz-del" data-id="${nx.id}">Quitar</button></div></div>`; }
+  const ab = pzAbsent(st);
+  if (ab) return `<div class="pz-ask" role="region" aria-label="Wolf pregunta">${wolfOrb(38, 'worry')}<div class="pz-tx"><p><b>Te noto ausente desde el ${pzDay(ab.since)}. ¿Todo bien?</b> Si pasó algo, dime y no cuenta como fallado.</p>
+    <div class="pz-chips">${[['lesion', '🩹 Me lesioné'], ['enfermo', '🤒 Estoy enfermo'], ['tiempo', '⏳ Poco tiempo'], ['viaje', '✈️ Estoy de viaje']].map(([k, l]) => `<button class="pz-chip" data-act="pz-open" data-type="${k}" data-start="${ab.since}">${l}</button>`).join('')}<button class="pz-chip" data-act="pz-open" data-start="${ab.since}">Otra cosa…</button><button class="pz-chip ghost" data-act="pz-ok">Todo bien</button></div></div></div>`;
+  return pzComeback(st) + pzNew(st);
+}
+/* Plan de regreso tras una lesión (y bienvenida suave tras un viaje): dura mientras haya semanas de regreso */
+function pzComeback(st) {
+  const t = D.today(), wk = D.weekStart(t), ps = (st.meta.pauses || []).filter(p => p.end && p.end < t && pauseType(p).plan && D.diff(t, p.end) <= 21);
+  const p = ps.sort((a, b) => (a.end < b.end ? 1 : -1))[0]; if (!p) return '';
+  const hs = st.habits.filter(h => !h.archived && (p.habits || []).includes(h.id)), wks = [];
+  for (let w = D.weekStart(D.add(p.end, 1)), i = 0; i < 4; w = D.add(w, 7), i++) wks.push(w);
+  const cur = wks.indexOf(wk); if (cur < 0) return '';
+  const T = pauseType(p);
+  return `<div class="pz-band back" style="--c:#B7F36B"><div class="pz-row"><span class="pz-ic">↗</span><div class="pz-tx"><b>Tu plan de regreso · semana ${cur + 1} de ${wks.length}</b><small>Después de tu ${esc(pauseName(p).toLowerCase())}, tus metas suben poco a poco. No empiezas de cero: empiezas desde aquí.</small></div></div>
+    <div class="pz-plan">${wks.map((w, i) => `<div class="${i === cur ? 'cur' : i < cur ? 'past' : ''}"><small>Semana ${i + 1}</small><b>${hs.map(h => `${hEmoji(h) || '•'} ${hTarget(h, w)}×`).join(' · ') || '—'}</b><span>${i === wks.length - 1 ? 'metas normales' : D.weekLabel(w)}</span></div>`).join('')}</div></div>`;
+}
+function pzNew(st) {
+  if (MODE === 'demo' || !st.meta.onboarded || LS.get('rn-new-pz') || (st.meta.pauses || []).length) return '';
+  return `<div class="pz-new">${wolfOrb(34, 'happy')}<div class="pz-tx"><p><b>Nuevo: cuando la vida pasa, RN. lo entiende.</b> Si te vas de viaje, te enfermas o tienes una semana sin tiempo, avísame y tus hábitos se pausan o bajan sin contar como fallados.</p></div><span class="sp"></span><a class="btn sm primary" href="#guia-pausas" data-act="pz-new-ok">Ver cómo funciona</a><button class="btn sm ghost" data-act="pz-new-ok">Entendido</button></div>`;
+}
+/* ---------- Hoja: elegir situación, fechas y hábitos ---------- */
+function pzDraft(p, preset = {}) {
+  const t = D.today();
+  if (p) return { id: p.id, type: p.type, name: p.name || '', start: p.start, end: p.end, endMode: p.end ? 'fecha' : 'nose', habits: (p.habits || []).slice(), mode: p.mode || 'pause' };
+  const d = { id: null, type: null, name: '', start: preset.start || t, end: null, endMode: 'nose', habits: [], mode: 'pause' };
+  if (preset.type) pzPick(d, preset.type, !!preset.start);
+  return d;
+}
+function pzPick(d, type, keepStart) {
+  const t = D.today(), T = PAUSE_TYPES[type], st = S(); d.type = type;
+  d.habits = T.sugg ? st.habits.filter(h => !h.archived && h.area === T.sugg).map(h => h.id) : [];
+  if (keepStart) { d.endMode = T.low ? 'dom' : T.all ? 'fecha' : 'nose'; }
+  else if (T.week) { d.start = D.weekStart(t); }
+  else if (type === 'viaje') { d.start = D.add(t, 1); }
+  else d.start = t;
+  if (!keepStart) d.endMode = T.low ? 'dom' : type === 'viaje' ? 'fecha' : 'nose';
+  d.end = d.endMode === 'dom' ? pzSun(d) : d.endMode === 'fecha' ? D.add(d.start, type === 'viaje' ? 6 : 3) : null;
+}
+function pzStrip(d, which) {
+  const t = D.today(), base = which === 'start' ? D.add(D.weekStart(t), -7) : D.weekStart(d.start > t ? d.start : t), T = PAUSE_TYPES[d.type];
+  return `<div class="pz-days" style="--c:${T.c}">${Array.from({ length: 14 }, (_, i) => { const x = D.add(base, i), on = x === (which === 'start' ? d.start : d.end), inr = d.end && x > d.start && x < d.end, dis = which === 'end' && x < d.start;
+    return `<button type="button" class="pz-dy ${on ? 'on' : ''} ${inr ? 'in' : ''} ${x === t ? 'td' : ''}" data-act="pz-day" data-k="${which}" data-v="${x}" ${dis ? 'disabled' : ''}>${D.DOW[D.dow(x)].toLowerCase()}<b>${D.parse(x).getDate()}</b></button>`; }).join('')}</div>`;
+}
+function pzBody() {
+  const d = UI.pz, st = S(), t = D.today(); if (!d) return '';
+  if (!d.type) return `<div class="pz-wolf">${wolfOrb(34, 'calm')}<span>Cuéntame qué pasa y ajusto tus metas para que no cuente como fallado lo que no puedes controlar.</span></div>
+    <div class="pz-sit">${Object.entries(PAUSE_TYPES).map(([k, x]) => `<button type="button" class="pz-si" style="--c:${x.c}" data-act="pz-sit" data-v="${k}"><span class="e">${x.e}</span><b>${x.n}</b><small>${x.d}</small></button>`).join('')}</div>`;
+  const T = PAUSE_TYPES[d.type], low = T.low || (d.type === 'otra' && d.mode === 'low'), hs = st.habits.filter(h => !h.archived);
+  const chip = (act, v, l, on) => `<button type="button" class="pz-c ${on ? 'on' : ''}" data-act="${act}" data-v="${v}">${l}</button>`;
+  let h = '';
+  if (T.custom) h += `<div class="field"><label for="pz-name">¿Cómo le llamamos?</label><input id="pz-name" name="name" data-pzname="1" maxlength="40" placeholder="Ej. Mudanza, cenas, torneo, boda…" value="${esc(d.name)}"></div>
+    <span class="pz-lbl">¿Cómo cuenta?</span><div class="pz-cs">${chip('pz-mode', 'pause', 'Pausar algunos hábitos', d.mode !== 'low')}${chip('pz-mode', 'low', 'Bajar las metas de todos', d.mode === 'low')}</div>`;
+  h += `<span class="pz-lbl">¿Desde cuándo?</span><div class="pz-cs">${[[0, 'Hoy'], [-1, 'Ayer'], [-2, 'Antier'], [1, 'Mañana']].map(([n, l]) => chip('pz-start', D.add(t, n), l, d.start === D.add(t, n))).join('')}</div>${pzStrip(d, 'start')}
+    <div class="pz-other"><span>Otra fecha</span>${datePick('pz-ds', d.start, { name: 'pzs' })}</div>`;
+  h += `<span class="pz-lbl">¿Hasta cuándo?</span><div class="pz-cs">${chip('pz-endm', 'nose', 'Aún no sé', d.endMode === 'nose')}${chip('pz-endm', 'dom', 'Este domingo', d.endMode === 'dom')}${chip('pz-endm', 'fecha', 'Elegir fecha', d.endMode === 'fecha')}</div>`;
+  if (d.endMode === 'fecha') h += pzStrip(d, 'end') + `<div class="pz-other"><span>Otra fecha</span>${datePick('pz-de', d.end || d.start, { name: 'pze' })}</div>`;
+  if (d.endMode === 'nose') h += `<p class="pz-note">Queda abierta. Cuando termine, tocas <b>Ya regresé</b> en Inicio. Mientras, cada pocos días te pregunto cómo vas.</p>`;
+  if (!T.all && !low) h += `<span class="pz-lbl">¿Qué hábitos se pausan?</span><div class="pz-hbs">${hs.map(x => { const on = d.habits.includes(x.id), sg = T.sugg && x.area === T.sugg; return `<button type="button" class="pz-hb ${on ? 'on' : ''}" data-act="pz-hb" data-v="${x.id}" aria-pressed="${on}"><span>${hEmoji(x) || '•'}</span><span class="grow">${esc(x.title)}${sg ? ' <small>· sugerido</small>' : ''}</span><i class="sw2"></i></button>`; }).join('') || '<p class="pz-note">Aún no tienes hábitos.</p>'}</div>`;
+  const days = d.end ? D.diff(d.end, d.start) + 1 : null, nP = d.habits.length;
+  const area = { decay: 'Las áreas de los hábitos pausados bajan despacio (−10 % por semana), nunca de golpe a cero.', freeze: 'Las áreas de los hábitos pausados se congelan mientras te recuperas.', real: 'Tus áreas muestran tu estado real. Al regresar armamos un plan para volver a subir.', normal: 'Tus áreas se calculan normal, con las metas reducidas.' }[low ? 'normal' : T.area];
+  h += `<div class="pz-sum"><b>Así lo voy a tomar en cuenta</b><ul>
+    <li>${d.end ? (days === 1 ? `El ${pzDay(d.start)}.` : `Del ${pzDay(d.start)} al ${pzDay(d.end)} (${days} días).`) : `Desde el ${pzDay(d.start)}, sin fecha de fin.`}${d.start < t ? ' Los días de atrás también se marcan.' : d.start > t ? ' Se activa solo ese día.' : ''}</li>
+    <li>${T.all ? 'Todos tus hábitos en pausa. Si registras algo, suma XP normal.' : low ? `Metas de hábitos más bajas (como una semana exigente).${d.type === 'pesada' ? ' Las tareas de prioridad alta valen 15 XP.' : ''}` : nP ? `${nP} ${nP === 1 ? 'hábito' : 'hábitos'} en pausa; los demás siguen igual.` : 'Elige al menos un hábito para pausar.'}</li>
+    <li>${area}</li>${T.plan ? '<li>Al regresar: 2 semanas con metas al 50 % y 75 %, y luego las normales.</li>' : T.all ? '<li>Al volver: tu primera semana arranca con metas un poco más bajas.</li>' : ''}
+    <li>No cuenta como semana fallada ni rompe tu racha.</li></ul></div>
+    <div class="row" style="justify-content:flex-end;gap:8px;margin-top:16px">${d.id ? `<button type="button" class="btn ghost" data-act="pz-del" data-id="${d.id}" data-arm="1">Borrar</button><span class="sp"></span>` : `<button type="button" class="btn ghost" data-act="pz-sit" data-v="">← Cambiar situación</button>`}<button class="btn primary" type="submit">${d.id ? 'Guardar' : 'Listo'}</button></div>`;
+  return h;
+}
+function pzSun(x) { const t = D.today(); return D.add(D.weekStart(x.start > t ? x.start : t), 6); }
+const PZ_WOLF = { viaje: 'Disfruta tu viaje. Tus hábitos te esperan; si te dan ganas de leer o moverte, regístralo y suma.', enfermo: 'Primero recupérate. Pausé lo que no puedes hacer; lo demás va a tu ritmo.', lesion: 'Lo importante ahora es sanar. Cuando regreses armamos tu plan de regreso juntos.', tiempo: 'Semana apretada. Bajé tus metas: con lo mínimo bien hecho es suficiente.', pesada: 'Semana de entregas. Enfócate en lo importante; tus tareas difíciles valen más.', otra: 'Entendido. Lo tomo en cuenta como me dijiste.' };
+function pzTitle() { const d = UI.pz, T = d && d.type && PAUSE_TYPES[d.type]; return T ? `${T.e} ${T.n}` : '¿Pasó algo?'; }
+function pzSheet() {
+  const f = $('#layer form[data-form="pz"]');
+  if (f) { f.querySelector('.sheet-h h2').textContent = pzTitle(); f.querySelector('.pz-body').innerHTML = pzBody(); return; }
+  openSheet(pzTitle(), `<div class="pz-body">${pzBody()}</div>`, 'pz');
+}
+function pzBackSheet(p) {
+  const st = S(), t = D.today(), T = pauseType(p), hs = st.habits.filter(h => !h.archived && (p.habits || []).includes(h.id));
+  const areas = [...new Set(hs.map(h => h.area))].map(a => AREA[a]).filter(Boolean);
+  const before = a => areaProgress(st, a.id, D.add(p.start, -1)).pct, now = a => areaProgress(st, a.id, t).pct, pc = v => v == null ? '—' : Math.round(v * 100) + '%';
+  const wks = []; for (let w = D.weekStart(D.add(p.end, 1)), i = 0; i < 4; w = D.add(w, 7), i++) wks.push(w);
+  const n = D.diff(p.end, p.start) + 1;
+  openSheet(`${T.e} Terminó: ${esc(pauseName(p))}`, `<div class="pz-backs">${wolfOrb(64, 'happy')}
+    <h3>Tu regreso <b>empieza hoy.</b></h3><p class="sub">Fueron ${n} ${n === 1 ? 'día' : 'días'}. No empiezas de cero: empiezas desde aquí.</p>
+    ${areas.length ? `<div class="pz-cmp">${areas.map(a => `<div style="--c:${a.color}"><small>${esc(a.short)} antes</small><b>${pc(before(a))}</b></div><span>→</span><div style="--c:${a.color}"><small>${esc(a.short)} hoy</small><b class="now">${pc(now(a))}</b></div>`).join('')}</div>` : ''}
+    <span class="pz-lbl">Tu plan de regreso</span><div class="pz-plan">${wks.map((w, i) => `<div class="${i === 0 ? 'cur' : ''}"><small>Semana ${i + 1}</small><b>${hs.map(h => `${hEmoji(h) || '•'} ${hTarget(h, w)}×`).join(' · ') || '—'}</b><span>${i === wks.length - 1 ? 'metas normales' : D.weekLabel(w)}</span></div>`).join('')}</div>
+    <p class="pz-note">Las metas suben solas cada semana. Lo verás en Inicio mientras dure el plan.</p></div>
+    <div class="row" style="justify-content:flex-end;margin-top:14px"><button type="button" class="btn primary" data-act="close">Vamos</button></div>`, 'none');
+}
 /* ---------- Respaldo semanal: recordatorio suave de Wolf (solo datos reales) ---------- */
 function backupAge(st) { const lb = st && st.meta && st.meta.lastBackup; return lb ? D.diff(D.today(), lb) : null; }
 function backupDue(st) {
@@ -5514,6 +5839,23 @@ const ACT = {
   'week-unname': d => { UI.weekEdit = null; mut(st => { if (st.meta.weekNames) delete st.meta.weekNames[d.wk]; }); },
   'week-shift': d => { UI.week = D.add(UI.week || D.weekStart(D.today()), +d.n); render(); },
   'week-today': () => { UI.week = null; render(); },
+  'pz-open': d => { const st = S(), p = d.id && (st.meta.pauses || []).find(x => x.id === d.id); UI.pz = pzDraft(p, { type: d.type, start: d.start }); pzSheet(); },
+  'pz-sit': d => { const x = UI.pz; if (!x) return; if (!d.v) { x.type = null; return pzSheet(); } pzPick(x, d.v, x.start !== D.today() && x.start < D.today()); pzSheet(); },
+  'pz-mode': d => { UI.pz.mode = d.v; pzSheet(); },
+  'pz-start': d => { const x = UI.pz; x.start = d.v; if (x.endMode === 'dom') x.end = pzSun(x); if (x.end && x.end < x.start) x.end = x.start; pzSheet(); },
+  'pz-day': d => { const x = UI.pz; if (d.k === 'start') { x.start = d.v; if (x.endMode === 'dom') x.end = pzSun(x); if (x.end && x.end < x.start) x.end = x.start; } else { x.end = d.v; x.endMode = 'fecha'; } pzSheet(); },
+  'pz-endm': d => { const x = UI.pz; x.endMode = d.v; x.end = d.v === 'nose' ? null : d.v === 'dom' ? pzSun(x) : (x.end && x.end >= x.start ? x.end : D.add(x.start, 3)); pzSheet(); },
+  'pz-hb': d => { const x = UI.pz, i = x.habits.indexOf(d.v); if (i >= 0) x.habits.splice(i, 1); else x.habits.push(d.v); pzSheet(); },
+  'pz-del': (d, el) => { if (!armed(el)) return; mut(st => { st.meta.pauses = (st.meta.pauses || []).filter(p => p.id !== d.id); }); UI.pz = null; closeSheet(); toast('Pausa borrada'); },
+  'pz-keep': d => { mut(st => { const p = (st.meta.pauses || []).find(x => x.id === d.id); if (p) p.chk = D.today(); }); toast('Va. Te vuelvo a preguntar en unos días.'); },
+  'pz-ok': () => { LS.set('rn-pz-ask', D.today()); render(); },
+  'pz-new-ok': () => { LS.set('rn-new-pz', '1'); render(); },
+  'pz-back': d => {
+    const st = S(), t = D.today(), p = (st.meta.pauses || []).find(x => x.id === d.id); if (!p) return; const T = pauseType(p);
+    let gone = false; mut(s2 => { const q = s2.meta.pauses.find(x => x.id === d.id); if (q.start >= t) { s2.meta.pauses = s2.meta.pauses.filter(x => x.id !== d.id); gone = true; } else q.end = D.add(t, -1); });
+    if (!gone && T.plan && (p.habits || []).length) return pzBackSheet(st.meta.pauses.find(x => x.id === d.id));
+    toast(T.low ? 'Listo. Tus metas vuelven a la normalidad.' : T.all ? '¡Bienvenido de vuelta! Esta semana arrancas con metas un poco más bajas.' : '¡Qué bueno que regresaste! Tus hábitos ya están activos.');
+  },
   'load-set': d => mut(st => { st.meta.weekLoad = st.meta.weekLoad || {}; if (d.v === 'normal') delete st.meta.weekLoad[d.wk]; else st.meta.weekLoad[d.wk] = d.v; }),
   'hab-new': d => habitSheet(null, d.area ? { area: d.area } : {}),
   'hab-edit': d => habitSheet(findH(d.id)),
@@ -5578,6 +5920,14 @@ const num = v => v === '' || v == null ? null : +v;
 
 const FORM = {
   none: () => { },
+  pz: () => {
+    const x = UI.pz; if (!x || !x.type) return; const T = PAUSE_TYPES[x.type], low = T.low || (x.type === 'otra' && x.mode === 'low');
+    if (!T.all && !low && !x.habits.length) return toast('Elige al menos un hábito para pausar');
+    if (x.end && x.end < x.start) return toast('La fecha de fin va después del inicio');
+    const rec = { id: x.id || uid(), type: x.type, name: T.custom ? (x.name || '').trim().slice(0, 40) : '', start: x.start, end: x.end || null, habits: T.all || low ? [] : x.habits.slice(), mode: x.type === 'otra' ? x.mode : undefined, created: D.today() };
+    mut(st => { st.meta.pauses = (st.meta.pauses || []).filter(p => p.id !== rec.id).concat(rec); });
+    UI.pz = null; closeSheet(); toast(`${T.e} Listo. RN. ya lo toma en cuenta.`);
+  },
   weekname: (f, el) => { const n = (f.name || '').trim().slice(0, 30), wk = el.dataset.wk; UI.weekEdit = null; mut(st => { st.meta.weekNames = st.meta.weekNames || {}; if (n) st.meta.weekNames[wk] = n; else delete st.meta.weekNames[wk]; }); },
   taskquick: (f, el) => { const title = f.title.trim(); if (!title) return; mut(st => st.tasks.push({ id: uid(), title, priority: +f.priority, week: D.weekStart(f.day || D.today()), day: f.day || null, area: null, goalId: null, done: false, doneAt: null })); setTimeout(() => { const i = $('#tq-title'); if (i) i.focus(); }, 0); },
   goal: (f, el, fd) => {
@@ -5751,6 +6101,8 @@ document.addEventListener('invalid', e => {
   el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   showFieldTip(el);
 }, true);
+document.addEventListener('change', e => { const id = e.target && e.target.id; if ((id === 'pz-ds' || id === 'pz-de') && UI.pz && e.target.value) { ACT['pz-day']({ k: id === 'pz-ds' ? 'start' : 'end', v: e.target.value }); } });
+document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.pzname && UI.pz) UI.pz.name = e.target.value; });
 document.addEventListener('submit', e => { const f = e.target.closest('form[data-form]'); if (!f) return; e.preventDefault(); const fd = new FormData(f); FORM[f.dataset.form](Object.fromEntries(fd), f, fd); });
 document.addEventListener('change', e => { const el = e.target.closest('[data-change]'); if (el && CHG[el.dataset.change]) CHG[el.dataset.change](el, e); });
 document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.bind === 'name') UI.ob.name = e.target.value;
@@ -5885,6 +6237,7 @@ function kickCards(st, t, wk) {
       <form class="hz-add rv" data-form="kick-add" data-wk="${wk}"><input type="text" name="title" placeholder="Otra prioridad para esta semana" aria-label="Nueva prioridad" required><button class="btn" aria-label="Agregar prioridad">${icon('plus')}</button></form>` },
     { hue: load === 'heavy' ? 'coral' : load === 'light' ? 'emerald' : 'blue', next: 'Listo, arrancar semana', last: 'kick', html: `<p class="eyebrow rv"><span class="num">04</span> · Carga de la semana</p><h2 class="hz-h2 rv">¿Cómo viene esta semana?</h2>
       <div class="hz-load rv">${[['light', '🌿', 'Ligera', 'Hay espacio. Buen momento para avanzar objetivos.'], ['normal', '⚖️', 'Normal', 'Ritmo de siempre: tareas, hábitos y algo de avance.'], ['heavy', '🔥', 'Exigente', 'Entregas, viajes o exámenes. Protege lo esencial.']].map(([v, e, l, dsc], i) => `<button class="hz-opt ${load === v ? 'on' : ''}" data-act="load-set" data-wk="${wk}" data-v="${v}" style="--d:${i * 70}ms"><span class="hz-emo">${e}</span><span class="grow"><b>${l}</b><small>${dsc}</small></span></button>`).join('')}</div>
+      <button class="pz-link rv" data-act="pz-open" style="--d:220ms">${pauseActive(st) ? `${pauseType(pauseActive(st)).e} ${esc(pauseName(pauseActive(st)))} · editar` : '¿Algo especial esta semana? Viaje, exámenes, salud, poco tiempo…'}</button>
       ${load === 'heavy' && reducible ? (adjusted ? `<div class="hz-note rv">${icon('check')}Metas de hábitos ajustadas para esta semana.</div>` : `<div class="hz-note warn rv"><span>Semana exigente: ¿bajamos tus metas de hábitos solo esta semana?</span><button class="btn sm" data-act="hab-reduce" data-wk="${wk}">Bajar metas</button></div>`) : ''}` }
   ];
 }
@@ -5894,7 +6247,7 @@ function dayCards(st, t, wk) {
   const ft = firstThing(st, t), pr = prioList(st, wk), ks = kickState(st, wk);
   const tasks = st.tasks.filter(x => x.week === wk && x.day === t), late = st.tasks.filter(x => x.week === wk && !x.done && x.day && x.day < t);
   const tdone = tasks.filter(x => x.done).length, tall = tasks.length;
-  const habits = st.habits.filter(h => !h.archived).map(h => { const c = (h.logs || []).filter(l => D.weekStart(l.date) === wk).length, T = hTarget(h, wk); return { h, c, T, met: !!weekStatus(c, T, wk, t), today: (h.logs || []).some(l => l.date === t) }; });
+  const habits = st.habits.filter(h => !h.archived && hTarget(h, wk) > 0).map(h => { const c = (h.logs || []).filter(l => D.weekStart(l.date) === wk).length, T = hTarget(h, wk); return { h, c, T, met: !!weekStatus(c, T, wk, t), today: (h.logs || []).some(l => l.date === t) }; });
   const hPend = habits.filter(x => !x.met), hMet = habits.filter(x => x.met);
   const xpToday = xpEvents(st, t).filter(e => e.date === t).reduce((a, e) => a + e.xp, 0), hToday = habits.filter(x => x.today).length, s = streakInfo(st, t) || { count: 0 };
   const ring = (a, b) => { const p = b ? a / b : 0, C = 2 * Math.PI * 26; return `<svg class="hz-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" class="bg"/><circle cx="32" cy="32" r="26" class="fg" style="stroke-dasharray:${C};--off:${C * (1 - p)}"/></svg>`; };
