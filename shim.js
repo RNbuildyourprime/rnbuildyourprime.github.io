@@ -60,7 +60,7 @@
   async function logout() {
     try { await sb.auth.signOut(); } catch (e) { }
     try { ['sos-real', 'sos-mode', 'sos-demo', 'rn-uid'].forEach(k => localStorage.removeItem(k)); } catch (e) { }
-    location.replace(location.pathname);
+    location.replace(location.pathname.replace(/app\.html$/, ''));
   }
 
   /* ---------- Pantalla de acceso ---------- */
@@ -106,7 +106,7 @@
         if (error) throw error; return enter(data.session);
       }
       if (mode === 'reset') {
-        const { error } = await sb.auth.resetPasswordForEmail($('#au-email').value.trim(), { redirectTo: location.origin + location.pathname });
+        const { error } = await sb.auth.resetPasswordForEmail($('#au-email').value.trim(), { redirectTo: location.origin + location.pathname.replace(/app\.html$/, '') });
         if (error) throw error; busy(false); return screen('sent');
       }
       if (mode === 'newpass') {
