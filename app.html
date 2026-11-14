@@ -2135,8 +2135,8 @@ const CFG = {
     goalDonePrio: 20,     // …+20 por nivel de prioridad (Alta = +60)
     habitLog: 6,          // registro de hábito (máx. 1 por día y hábito)
     habitWeekMet: 20,     // cumplir el objetivo semanal de un hábito
-    task: 10, taskHigh: 10, // tarea completada (la mitad de cumplir la meta semanal de un hábito)
-    taskWeeklyCap: 12,    // máximo de tareas que suman XP por semana
+    taskHigh: 15, task: 8, taskLow: 4, // tarea completada según su prioridad: alta, media (o sin prioridad), baja
+    taskWeeklyCap: 10,    // máximo de tareas que suman XP por semana
     review: 25            // revisión semanal o mensual completada
   },
   // Nivel N requiere base·N·(N+1)/2 XP acumulada
@@ -2339,7 +2339,7 @@ function xpEvents(st, asOf = D.today()) {
   const perWeek = {};
   st.tasks.filter(t => t.done && t.doneAt).sort((a, b) => (a.doneAt < b.doneAt ? -1 : 1)).forEach(t => {
     const w = D.weekStart(t.doneAt); perWeek[w] = (perWeek[w] || 0) + 1;
-    SRC = t.goalId || null; if (perWeek[w] <= X.taskWeeklyCap) push(t.doneAt, +t.priority === 1 ? X.taskHigh : X.task, t.area || null, `Tarea · ${t.title}`, 'task');
+    SRC = t.goalId || null; if (perWeek[w] <= X.taskWeeklyCap) push(t.doneAt, +t.priority === 1 ? X.taskHigh : +t.priority === 3 ? X.taskLow : X.task, t.area || null, `Tarea · ${t.title}`, 'task');
   });
   SRC = null; st.reviews.filter(r => r.done).forEach(r => push(r.doneAt || r.created, X.review, null, r.period.length === 7 ? 'Revisión mensual' : 'Revisión semanal', 'review'));
   return ev.sort(byDate);
@@ -5029,7 +5029,7 @@ VIEWS.ajustes = () => {
   function storage_html() { return storage; }
   function usage_html() { return usage; }
 };
-const XP_DOC = [['outcomeLog', 'Avance en objetivo de resultado (1 por día)'], ['perfSession', 'Sesión de rendimiento'], ['perfPR', 'Marca personal'], ['practiceSession', 'Sesión de práctica'], ['practiceWeekMet', 'Meta semanal de práctica cumplida'], ['qualReflection', 'Reflexión cualitativa (1 por día)'], ['finDeposit', 'Aportación financiera'], ['finSnapshot', 'Registro de valor del portafolio (1 por semana)'], ['academicResult', 'Resultado de ciclo académico'], ['projectLog', 'Avance de proyecto (1 por día)'], ['milestone', 'Hito completado'], ['goalDoneBase', 'Objetivo cumplido (base)'], ['goalDonePrio', 'Objetivo cumplido: extra por nivel de prioridad'], ['habitLog', 'Registro de hábito (1 por día)'], ['habitWeekMet', 'Meta semanal de hábito cumplida'], ['task', 'Tarea completada'], ['taskHigh', 'Tarea de prioridad alta'], ['taskWeeklyCap', 'Tope de tareas con XP por semana'], ['review', 'Revisión completada']];
+const XP_DOC = [['outcomeLog', 'Avance en objetivo de resultado (1 por día)'], ['perfSession', 'Sesión de rendimiento'], ['perfPR', 'Marca personal'], ['practiceSession', 'Sesión de práctica'], ['practiceWeekMet', 'Meta semanal de práctica cumplida'], ['qualReflection', 'Reflexión cualitativa (1 por día)'], ['finDeposit', 'Aportación financiera'], ['finSnapshot', 'Registro de valor del portafolio (1 por semana)'], ['academicResult', 'Resultado de ciclo académico'], ['projectLog', 'Avance de proyecto (1 por día)'], ['milestone', 'Hito completado'], ['goalDoneBase', 'Objetivo cumplido (base)'], ['goalDonePrio', 'Objetivo cumplido: extra por nivel de prioridad'], ['habitLog', 'Registro de hábito (1 por día)'], ['habitWeekMet', 'Meta semanal de hábito cumplida'], ['taskHigh', 'Tarea de prioridad alta'], ['task', 'Tarea de prioridad media'], ['taskLow', 'Tarea de prioridad baja'], ['taskWeeklyCap', 'Tope de tareas con XP por semana'], ['review', 'Revisión completada']];
 
 /* ---------- Onboarding ---------- */
 function vOnboarding() {
