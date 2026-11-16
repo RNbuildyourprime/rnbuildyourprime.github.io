@@ -2316,6 +2316,17 @@ main,.lp-foot{overflow-x:clip}
   .lp-heat i{transform:none;transition:none}
   #lp-intro{display:none}
 }
+
+/* ===== Rendimiento en celular: sin desenfoques pesados ni animaciones fuera de pantalla ===== */
+@media (hover:none),(max-width:760px){
+  #lp-bg i{filter:none!important;will-change:auto;animation:none!important;translate:none}
+  #lp-bg{transition:none}
+  .lp-glow,.lp-wolf-stage::before{filter:none!important}
+  .lp-float,.lp-pill,.lp-links,.lp-modal{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .lp-float{background:rgba(20,25,22,.96)}
+  .lp-nav{-webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important}
+}
+.lp-off,.lp-off *{animation-play-state:paused!important}
 </style>
 </head>
 <body class="lp glass-more">
@@ -2896,8 +2907,10 @@ main,.lp-foot{overflow-x:clip}
   function setCols(a, b){ bgEl.style.setProperty('--c1', a); bgEl.style.setProperty('--c2', b); bgEl.style.setProperty('--k', .55); }
   var ho = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ var el = e.target; setHue(el.dataset.hue, el.classList.contains('lp-hero') ? 1 : .6); bgEl.classList.toggle('hero', el.classList.contains('lp-hero')); } }); }, {rootMargin:'-48% 0px -48% 0px'});
   $$('section[data-hue]').forEach(function(s){ ho.observe(s); });
-  if (!RM){ var bmx = 0, bmy = 0, tmx = 0, tmy = 0; addEventListener('pointermove', function(e){ tmx = e.clientX/innerWidth - .5; tmy = e.clientY/innerHeight - .5; }, {passive:true});
-    (function lp(){ bmx += (tmx - bmx)*.04; bmy += (tmy - bmy)*.04; bgEl.style.setProperty('--mx', (bmx*60).toFixed(1) + 'px'); bgEl.style.setProperty('--my', (bmy*40).toFixed(1) + 'px'); requestAnimationFrame(lp); })(); }
+  if ('IntersectionObserver' in window){ var po = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('lp-off', !e.isIntersecting); }); }, {rootMargin:'200px 0px'}); $$('section').forEach(function(s){ po.observe(s); }); }
+  if (!RM && matchMedia('(pointer: fine)').matches){ var bmx = 0, bmy = 0, tmx = 0, tmy = 0, bRaf = 0;
+    function lp(){ bmx += (tmx - bmx)*.04; bmy += (tmy - bmy)*.04; bgEl.style.setProperty('--mx', (bmx*60).toFixed(1) + 'px'); bgEl.style.setProperty('--my', (bmy*40).toFixed(1) + 'px'); bRaf = (Math.abs(tmx - bmx) + Math.abs(tmy - bmy) > .002) ? requestAnimationFrame(lp) : 0; }
+    addEventListener('pointermove', function(e){ tmx = e.clientX/innerWidth - .5; tmy = e.clientY/innerHeight - .5; if (!bRaf) bRaf = requestAnimationFrame(lp); }, {passive:true}); }
 
   /* intro */
   var intro = $('#lp-intro');

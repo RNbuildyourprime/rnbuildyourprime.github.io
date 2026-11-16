@@ -81,18 +81,18 @@
       confirm: ['Confirma tu correo', 'Te mandamos un enlace para activar tu cuenta. Ábrelo en este mismo dispositivo.'],
       sent: ['Revisa tu correo', 'Si ese correo tiene cuenta, te llegará un enlace en un minuto. Ábrelo en este mismo dispositivo.']
     }[mode];
-    const field = (id, type, label, ac, extra = '') => `<label class="au-f"><span>${label}</span><span class="au-in"><input id="${id}" type="${type}" autocomplete="${ac}" required ${extra}>${type === 'password' ? `<button type="button" class="au-eye" data-eye="${id}" aria-label="Mostrar contraseña">${eye}</button>` : ''}</span></label>`;
+    const field = (id, type, label, ac, extra = '') => `<label class="au-f"><span>${label}</span><span class="au-in"><input id="${id}" name="${id === 'au-email' ? 'email' : id === 'au-pass' ? 'password' : id}" type="${type}" autocomplete="${ac}" autocapitalize="off" spellcheck="false" required ${extra}>${type === 'password' ? `<button type="button" class="au-eye" data-eye="${id}" aria-label="Mostrar contraseña">${eye}</button>` : ''}</span></label>`;
     let body = '';
-    if (mode === 'login') body = `<form id="au-form">${field('au-email', 'email', 'Correo', 'email', 'inputmode="email"')}${field('au-pass', 'password', 'Contraseña', 'current-password', 'minlength="6"')}
+    if (mode === 'login') body = `<form id="au-form" method="post" action="#" autocomplete="on">${field('au-email', 'email', 'Correo', 'username', 'inputmode="email"')}${field('au-pass', 'password', 'Contraseña', 'current-password', 'minlength="6"')}
       <button class="au-btn" type="submit"><span>Entrar</span><i class="au-spin"></i></button></form>
       <button class="au-link" data-go="reset">¿Olvidaste tu contraseña?</button>
       <button class="au-link" data-go="signup">¿Te invitaron? <b>Crea tu cuenta</b></button>
       <p class="au-note">RN. está en acceso por invitación. <a href="./#acceso">¿Quieres entrar? Apúntate en la lista de espera</a></p>`;
-    if (mode === 'signup') body = `<form id="au-form">${field('au-email', 'email', 'Correo con el que te invitaron', 'email', 'inputmode="email"')}${field('au-pass', 'password', 'Contraseña', 'new-password', 'minlength="8"')}<div class="au-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="au-hint" id="au-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
+    if (mode === 'signup') body = `<form id="au-form" method="post" action="#" autocomplete="on">${field('au-email', 'email', 'Correo con el que te invitaron', 'username', 'inputmode="email"')}${field('au-pass', 'password', 'Contraseña', 'new-password', 'minlength="8"')}<div class="au-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="au-hint" id="au-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
       ${field('au-pass2', 'password', 'Repítela', 'new-password', 'minlength="8"')}<button class="au-btn" type="submit"><span>Crear cuenta</span><i class="au-spin"></i></button></form><button class="au-link" data-go="login">Ya tengo cuenta · <b>Entrar</b></button>`;
     if (mode === 'confirm') body = `<div class="au-sent"><div class="au-check">✓</div></div><button class="au-link" data-go="login">← Volver a entrar</button>`;
-    if (mode === 'reset') body = `<form id="au-form">${field('au-email', 'email', 'Correo', 'email', 'inputmode="email"')}<button class="au-btn" type="submit"><span>Mandar enlace</span><i class="au-spin"></i></button></form><button class="au-link" data-go="login">← Volver a entrar</button>`;
-    if (mode === 'newpass') body = `<form id="au-form">${field('au-pass', 'password', 'Contraseña nueva', 'new-password', 'minlength="8"')}<div class="au-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="au-hint" id="au-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
+    if (mode === 'reset') body = `<form id="au-form" method="post" action="#" autocomplete="on">${field('au-email', 'email', 'Correo', 'email', 'inputmode="email"')}<button class="au-btn" type="submit"><span>Mandar enlace</span><i class="au-spin"></i></button></form><button class="au-link" data-go="login">← Volver a entrar</button>`;
+    if (mode === 'newpass') body = `<form id="au-form" method="post" action="#" autocomplete="on">${field('au-pass', 'password', 'Contraseña nueva', 'new-password', 'minlength="8"')}<div class="au-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="au-hint" id="au-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
       ${field('au-pass2', 'password', 'Repítela', 'new-password', 'minlength="8"')}<button class="au-btn" type="submit"><span>Guardar y entrar</span><i class="au-spin"></i></button></form>`;
     if (mode === 'sent') body = `<div class="au-sent"><div class="au-check">✓</div></div><button class="au-link" data-go="login">← Volver a entrar</button>`;
     w.innerHTML = `<div class="au-bg" aria-hidden="true"><i></i><i></i><i></i></div><main class="au-card" role="main"><div class="au-mark">${LOGO}</div><h1>${T[0]}</h1><p class="au-sub">${T[1]}</p>
@@ -100,6 +100,7 @@
     w.classList.remove('out'); requestAnimationFrame(() => w.classList.add('in'));
     const f = $('#au-form'); if (f) { const first = f.querySelector('input'); if (first && matchMedia('(pointer:fine)').matches) first.focus(); f.addEventListener('submit', e => { e.preventDefault(); submit(mode, f); }); }
     const p = $('#au-pass'); if (p && (mode === 'newpass' || mode === 'signup')) p.addEventListener('input', () => meter(p.value));
+    if (mode === 'login' || mode === 'reset') { try { const le = localStorage.getItem('rn-last-email'), e = $('#au-email'); if (le && e && !e.value) e.value = le; } catch (x) { } }
     // brillo que sigue al cursor sobre la tarjeta
     const card = w.querySelector('.au-card'); card.addEventListener('pointermove', e => { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', (e.clientX - r.left) + 'px'); card.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
   }
@@ -109,13 +110,17 @@
     const h = $('#au-hint'); if (h) h.textContent = !v ? 'Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.' : ['Muy corta', 'Aceptable', 'Buena', 'Muy buena', 'Excelente'][s];
   }
   function setErr(m) { const e = $('.au-err'); if (!e) return; e.textContent = m; e.hidden = !m; const c = $('.au-card'); if (m && c && !RM()) { c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake'); } }
+  function saveCred() {
+    try { const e = $('#au-email'), p = $('#au-pass'); if (window.PasswordCredential && e && p && e.value && p.value) navigator.credentials.store(new PasswordCredential({ id: e.value.trim(), password: p.value, name: e.value.trim() })).catch(() => { }); } catch (x) { }
+    try { const e = $('#au-email'); if (e && e.value) localStorage.setItem('rn-last-email', e.value.trim()); } catch (x) { }
+  }
   function busy(on) { const b = $('.au-btn'); if (b) { b.classList.toggle('busy', on); b.disabled = on; } }
   async function submit(mode, f) {
     setErr(''); busy(true);
     try {
       if (mode === 'login') {
         const { data, error } = await sb.auth.signInWithPassword({ email: $('#au-email').value.trim(), password: $('#au-pass').value });
-        if (error) throw error; return enter(data.session);
+        if (error) throw error; saveCred(); return enter(data.session);
       }
       if (mode === 'reset') {
         const { error } = await sb.auth.resetPasswordForEmail($('#au-email').value.trim(), { redirectTo: location.origin + location.pathname.replace(/app\.html$/, '') });
@@ -127,7 +132,7 @@
         const { data, error } = await sb.auth.signUp({ email: em, password: a, options: { emailRedirectTo: location.origin + location.pathname.replace(/app\.html$/, '') } });
         if (error) throw error;
         if (data && data.user && Array.isArray(data.user.identities) && !data.user.identities.length) throw { message: 'already registered' };
-        if (data && data.session) return enter(data.session);
+        if (data && data.session) { saveCred(); return enter(data.session); }
         busy(false); return screen('confirm');
       }
       if (mode === 'newpass') {

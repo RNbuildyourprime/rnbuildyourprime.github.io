@@ -1,6 +1,6 @@
 /* RN. · funciona sin internet: guarda la app en el dispositivo y la actualiza cuando hay conexión.
    Los datos NO pasan por aquí: viven en tu cuenta (Supabase) y en la copia local de la app. */
-const V = 'rn-v2';
+const V = 'rn-v3';
 const CORE = ['./app.html', './shim.js', './config.js', './vendor/supabase.js', './manifest.webmanifest', './icon-192.png', './apple-touch-icon.png', './icon.svg'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
