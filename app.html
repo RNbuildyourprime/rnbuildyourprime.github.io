@@ -2137,6 +2137,65 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .hist-list{display:grid;gap:6px;max-height:55vh;overflow:auto;margin-top:12px}
 .hist-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
 .hist-row b{display:block;font-weight:600;font-size:.92rem}.hist-row small{color:var(--muted);font-size:.78rem}
+/* ===== Resumen del mes ===== */
+#wrap{position:fixed;inset:0;z-index:9500;background:#070908;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;overflow:hidden}
+#wrap.on{opacity:1}
+.wr-bg i{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.wr-bg i:nth-child(1){width:70vmax;height:70vmax;left:-25vmax;top:-30vmax;background:radial-gradient(closest-side,#B7F36B2e,transparent);animation:wrDrift 18s ease-in-out infinite alternate}
+.wr-bg i:nth-child(2){width:60vmax;height:60vmax;right:-25vmax;bottom:-25vmax;background:radial-gradient(closest-side,#3FD49A22,transparent);animation:wrDrift 22s ease-in-out infinite alternate-reverse}
+@keyframes wrDrift{to{transform:translate(10vw,8vh) scale(1.1)}}
+.wr-prog{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 32px));display:flex;gap:5px;z-index:3}
+.wr-prog i{flex:1;height:3px;border-radius:3px;background:#ffffff22;overflow:hidden}
+.wr-prog i b{display:block;height:100%;width:0;background:#E7ECE5}
+.wr-prog i.done b{width:100%}.wr-prog i.run b{animation:wrBar 6.5s linear forwards}
+@keyframes wrBar{to{width:100%}}
+.wr-x{position:absolute;top:calc(28px + env(safe-area-inset-top,0px));right:max(16px,calc(50% - 220px));z-index:4;width:38px;height:38px;border-radius:12px;border:1px solid #ffffff1f;background:#0B0D0Caa;color:var(--fg);cursor:pointer}
+.wr-stage{position:relative;width:min(440px,100%);height:min(780px,100%);z-index:1}
+.wr-nav{position:absolute;top:80px;bottom:0;width:38%;background:none;border:0;z-index:2;cursor:pointer}
+.wr-nav.prev{left:0;width:28%}.wr-nav.next{right:0;width:72%}
+.wr-s{position:absolute;inset:0;padding:96px 28px 40px;display:flex;flex-direction:column;justify-content:center;gap:12px;opacity:0;visibility:hidden;transform:translateY(18px) scale(.98);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1),visibility .45s}
+.wr-s.on{opacity:1;visibility:visible;transform:none}
+.wr-s>*{position:relative;z-index:3}
+.wr-s .btn,.wr-s .wr-btns{position:relative;z-index:5}
+.wr-k{margin:0;font:600 .78rem var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--lime)}
+.wr-big{margin:0;font:700 clamp(2.6rem,11vw,4rem)/1 var(--display);letter-spacing:-.045em}
+.wr-big span{display:block;font-size:.42em;color:var(--muted);letter-spacing:-.02em;margin-top:8px}
+.wr-big.sm{font-size:clamp(1.7rem,7vw,2.4rem);line-height:1.1}.wr-big b{color:var(--lime)}
+.wr-num{margin:0;font:800 clamp(3.4rem,15vw,5.4rem)/1 var(--display);letter-spacing:-.05em;color:var(--lime);text-shadow:0 0 50px #B7F36B55}
+.wr-p{margin:0;color:var(--fg2);font-size:1.02rem;line-height:1.5}.wr-p b{color:var(--fg)}
+.wr-note{margin:4px 0 0;color:var(--muted);font-size:.84rem}
+.wr-intro .wr-mark{color:var(--fg);margin-bottom:24px}.wr-intro .wr-mark .rn-mark{filter:drop-shadow(0 0 30px #B7F36B55)}
+.wr-s.on .wr-big,.wr-s.on .wr-num,.wr-s.on .wr-emo{animation:wrUp .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes wrUp{from{opacity:0;transform:translateY(20px)}}
+.wr-bars{display:flex;align-items:flex-end;gap:8px;height:170px;margin-top:22px}
+.wr-bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.wr-bars i{width:100%;height:var(--h);min-height:6px;border-radius:9px;background:#B7F36B44;transform-origin:bottom;transform:scaleY(0);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.wr-s.on .wr-bars i{transform:none}.wr-bars div:nth-child(2) i{transition-delay:.08s}.wr-bars div:nth-child(3) i{transition-delay:.16s}.wr-bars div:nth-child(4) i{transition-delay:.24s}.wr-bars div:nth-child(5) i{transition-delay:.32s}.wr-bars div:nth-child(6) i{transition-delay:.4s}
+.wr-bars .best i{background:var(--lime);box-shadow:0 0 22px #B7F36B88}
+.wr-bars small{font-size:.7rem;color:var(--muted)}
+.wr-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:16px}
+.wr-cal span{font-size:.68rem;color:var(--muted);text-align:center}
+.wr-cal i{aspect-ratio:1;border-radius:7px;background:rgba(183,243,107,var(--o));display:grid;place-items:center;font-style:normal;font-size:.62rem;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.5,.5,1) var(--d)}
+.wr-cal i.z{background:#ffffff0a}.wr-cal i.f{background:none;border:1px dashed #ffffff14}.wr-cal i.e{background:none}
+.wr-cal i.pz{background:color-mix(in srgb,var(--pc) 24%,transparent)}
+.wr-s.on .wr-cal i{transform:none}
+.wr-emo{font-size:4.2rem;line-height:1;margin:6px 0}
+.wr-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}.wr-list span{padding:10px 12px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff0f;color:var(--fg2);display:flex;gap:8px}.wr-list b{margin-left:auto;color:var(--fg)}
+.wr-tiles{display:grid;gap:10px;margin:10px 0}
+.wr-tiles div{padding:18px;border-radius:18px;background:#ffffff08;border:1px solid #ffffff10;display:flex;align-items:baseline;gap:12px}
+.wr-tiles .wr-num{font-size:2.8rem;text-shadow:none}.wr-tiles small{color:var(--fg2);font-size:1rem}
+.wr-ring{position:relative;width:180px;height:180px;margin:8px 0}
+.wr-ring svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}.wr-ring circle{fill:none;stroke-width:10}.wr-ring .b{stroke:#ffffff12}.wr-ring .f{stroke:var(--ac);stroke-linecap:round;stroke-dasharray:314;stroke-dashoffset:314;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 10px var(--ac))}
+.wr-ring span{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font:800 1.8rem var(--display)}.wr-ring small{font:500 .8rem var(--body);color:var(--muted)}
+.wr-end{align-items:flex-start}.wr-wolf{margin-bottom:6px}
+.wr-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.wr-card{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;margin:0 0 14px;cursor:pointer;background:radial-gradient(80% 140% at 0 50%,#B7F36B1f,transparent 60%),var(--s1);border:1px solid #B7F36B44;animation:pzIn .5s cubic-bezier(.2,.8,.2,1);transition:transform .2s,border-color .2s}
+.wr-card:hover{transform:translateY(-2px);border-color:#B7F36B88}
+.wr-card-i{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--lime);color:#0B1505;font-size:1.2rem;box-shadow:0 0 22px #B7F36B66;flex:none}
+.wr-card b{display:block;font-weight:600}.wr-card small{color:var(--fg2);font-size:.84rem}
+.ev-wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.ev-wrap select{padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--bg);color:var(--fg);font:500 .84rem var(--body)}
+@media (prefers-reduced-motion:reduce){.wr-bg i{animation:none}.wr-s{transition:opacity .2s}.wr-s.on .wr-big,.wr-s.on .wr-num,.wr-s.on .wr-emo{animation:none}.wr-bars i,.wr-cal i{transform:none;transition:none}.wr-prog i.run b{animation:none;width:100%}}
 </style>
 <div id="root"><div class="ob"><div class="ob-card"><svg height="72" viewBox="270 318 900 432" fill="#E7ECE5" aria-label="RN."><path fill-rule="evenodd" d="M278 326H469C552 326 594 382 594 452C594 510 560 552 512 572L624 731H508L386 575V731H278ZM386 410H458C472 410 481 432 481 461C481 490 472 512 458 512H386Z"/><path d="M618 326H729L896 579V326H1005V731H888L725 497V731H618Z"/><circle cx="1092.5" cy="679" r="64.5"/></svg><p class="tagline" style="font:600 .82rem var(--display);letter-spacing:.22em;text-transform:uppercase;color:#B7F36B">It's time to unlock your prime.</p><p class="muted">Conectando con el almacenamiento de tu cuenta.</p></div></div></div>
 <div id="layer"></div>
@@ -3722,7 +3781,7 @@ VIEWS.dashboard = () => {
   return pageTop(st.meta.name ? `Hola, <button class="name-edit" data-act="name-edit" title="Cambiar nombre o apodo">${esc(st.meta.name)}</button>` : `Hola <button class="btn sm" data-act="name-edit" style="vertical-align:middle;margin-left:6px">${icon('plus')}Añadir tu nombre</button>`, `Semana del ${D.weekLabel(wk)} · hoy ${D.short(t)}${(() => { const k = kickState(st, wk); return k.done ? ` <a class="kick-chip done" href="#hoy-arranque">${icon('check')}Semana arrancada</a>` : ` <a class="kick-chip ${D.dow(t) <= 1 ? 'hot' : ''}" href="#hoy-arranque">${icon('star')}Arrancar semana</a>`; })()}`) + `
   <div class="quote-row"><div class="quote ${qEnter ? 'enter' : ''}"><span class="qmark" aria-hidden="true">“</span><p class="qtext">${esc(Q)}</p></div>${streakBox(st, t)}</div>
   ${todayStrip}
-  ${pzBand(st)}
+  ${pzBand(st)}${wrapCard(st)}
   ${ydayCard(st)}
   ${backupStrip(st)}
   <div class="grid">
@@ -3786,7 +3845,7 @@ VIEWS.evolucion = () => {
   M.sort((a, b) => (a[0] < b[0] ? 1 : -1));
   const moments = M.slice(0, 12).map(([d, e, k, ti, col], i) => `<div class="ev-m" style="--c:${col};animation-delay:${i * .06}s"><span class="e">${e}</span><small>${k}</small><b>${esc(ti)}</b><span>${D.short(d)}</span></div>`).join('');
   return head + `
-  <div class="ev-hero card"><div class="ev-hw">${wolfOrb(64, wolfMood(st))}</div><div class="ev-ht"><span class="ev-eb">${esc(longs[longs.length - 1])}${c.p.partial ? ' · en curso' : ''}</span><p class="ev-say">${say}</p>${chips ? `<div class="ev-chips">${chips}</div>` : ''}</div></div>
+  <div class="ev-hero card"><div class="ev-hw">${wolfOrb(64, wolfMood(st))}</div><div class="ev-ht"><span class="ev-eb">${esc(longs[longs.length - 1])}${c.p.partial ? ' · en curso' : ''}</span><p class="ev-say">${say}</p>${chips ? `<div class="ev-chips">${chips}</div>` : ''}${(() => { const ms = wrapMonths(st), cm = D.today().slice(0, 7), m0 = ms.find(m => m < cm) || ms[0]; return ms.length ? `<div class="ev-wrap"><button class="btn sm primary" data-act="wrap-open" data-ym="${m0}">✦ Resumen de ${MES[+m0.slice(5, 7) - 1]}</button>${ms.length > 1 ? `<select id="ev-wrap-m" aria-label="Elegir mes" data-change="wrap-month">${ms.map(m => `<option value="${m}"${m === m0 ? ' selected' : ''}>${MES[+m.slice(5, 7) - 1]} ${m.slice(0, 4)}</option>`).join('')}</select>` : ''}</div>` : ''; })()}</div></div>
   <p class="hab-foot"><span>El camino</span></p>
   <div class="card ev-path"><div class="card-h"><h2>XP por ${pl}</h2><span class="sub">solo suma; ${mode === 'week' ? 'las semanas ligeras también cuentan' : 'cada mes construye sobre el anterior'}</span></div>${evChart(E, light)}
     <div class="ev-legend"><span><i class="lg-star">★</i>Tu mejor ${pl}</span>${mode === 'week' ? '<span><i>🌙</i>Semana ligera</span>' : ''}<span><i class="lg-you"></i>Estás aquí</span></div></div>
@@ -5662,6 +5721,103 @@ function pzBody() {
   return h;
 }
 function pzSun(x) { const t = D.today(); return D.add(D.weekStart(x.start > t ? x.start : t), 6); }
+/* ============ Resumen del mes (estilo historias) ============ */
+function wrapData(st, ym) {
+  const [y, m] = ym.split('-').map(Number), start = `${ym}-01`, last = new Date(y, m, 0).getDate(), endM = `${ym}-${String(last).padStart(2, '0')}`, t = D.today(), end = endM < t ? endM : t, inM = d => d && d >= start && d <= end;
+  const ev = xpEvents(st, end).filter(e => inM(e.date)), xp = ev.reduce((a, e) => a + e.xp, 0);
+  const wk = {}; ev.forEach(e => { const w = D.weekStart(e.date); wk[w] = (wk[w] || 0) + e.xp; });
+  const weeks = []; for (let w = D.weekStart(start); w <= end; w = D.add(w, 7)) weeks.push({ w, xp: wk[w] || 0 });
+  const best = weeks.reduce((a, b) => (b.xp > a.xp ? b : a), { xp: -1 });
+  const days = new Set(), perDay = {}; const mark = d => { if (inM(d)) { days.add(d); perDay[d] = (perDay[d] || 0) + 1; } };
+  st.habits.forEach(h => (h.logs || []).forEach(l => { if (!l.mirror) mark(l.date); })); st.goals.forEach(g => (g.logs || []).forEach(l => mark(l.date))); st.tasks.forEach(x => { if (x.done) mark(x.doneAt); });
+  const nDays = D.diff(end, start) + 1;
+  const hs = st.habits.filter(h => !h.archived || (h.logs || []).some(l => inM(l.date))).map(h => {
+    const L = (h.logs || []).filter(l => !l.mirror && inM(l.date)), c = countByWeek((h.logs || []).filter(l => inM(l.date)));
+    const ws = weeks.map(x => x.w).filter(w => hTarget(h, w) > 0 && w <= D.weekStart(end)), met = ws.filter(w => weekStatus(c[w] || 0, hTarget(h, w), w, end)).length;
+    return { h, n: L.length, met, of: ws.length };
+  }).filter(x => x.n).sort((a, b) => b.met / Math.max(1, b.of) - a.met / Math.max(1, a.of) || b.n - a.n);
+  const byArea = {}; ev.forEach(e => { if (e.area) byArea[e.area] = (byArea[e.area] || 0) + e.xp; });
+  const topA = Object.entries(byArea).sort((a, b) => b[1] - a[1])[0];
+  const goalsDone = st.goals.filter(g => g.status === 'done' && inM(g.doneAt)), tasksDone = st.tasks.filter(x => x.done && inM(x.doneAt)).length;
+  const logs = Object.values(perDay).reduce((a, b) => a + b, 0), milestones = ev.filter(e => e.tag === 'milestone').length;
+  const pauses = ((st.meta && st.meta.pauses) || []).filter(p => p.start <= end && (!p.end || p.end >= start));
+  const si = streakInfo(st, end) || { count: 0 }, lvl = levelInfo(xpEvents(st, end).reduce((a, e) => a + e.xp, 0), CFG.LEVEL.globalBase);
+  return { ym, y, m, start, end, partial: end < endM, xp, weeks, best, days: days.size, nDays, perDay, hs, top: hs[0] || null, topA: topA ? { a: AREA[topA[0]], xp: topA[1] } : null, goalsDone, tasksDone, logs, milestones, pauses, streak: si.count || 0, lvl };
+}
+function wrapMonths(st) {
+  const t = D.today(), set = new Set(); const add = d => { if (d && d <= t) set.add(d.slice(0, 7)); };
+  st.habits.forEach(h => (h.logs || []).forEach(l => add(l.date))); st.goals.forEach(g => (g.logs || []).forEach(l => add(l.date))); st.tasks.forEach(x => { if (x.done) add(x.doneAt); });
+  return [...set].sort().reverse();
+}
+function wrapSay(W) {
+  const r = W.days / W.nDays;
+  if (W.pauses.length && r < .4) return 'Fue un mes con pausas, y aun así volviste. Eso también es avanzar.';
+  if (r >= .75) return 'Constancia de verdad. Así se construye tu mejor versión.';
+  if (r >= .5) return 'Más de la mitad de los días presente. El siguiente mes, un día más por semana.';
+  if (W.xp > 0) return 'Cada registro contó. El próximo mes empieza con lo que ya construiste.';
+  return 'Un mes tranquilo. El próximo arranca hoy, right now.';
+}
+function wrapOpen(ym) {
+  const st = S(), W = wrapData(st, ym), MM = MES[W.m - 1], cap = MM.charAt(0).toUpperCase() + MM.slice(1);
+  const maxW = Math.max(1, ...W.weeks.map(x => x.xp)), first = D.dow(W.start);
+  const cal = Array.from({ length: first }, () => '<i class="e"></i>').join('') + Array.from({ length: new Date(W.y, W.m, 0).getDate() }, (_, i) => { const d = `${W.ym}-${String(i + 1).padStart(2, '0')}`, n = W.perDay[d] || 0, fut = d > W.end, pz = pausesOn(st, d)[0]; return `<i class="${fut ? 'f' : n ? '' : 'z'}${pz ? ' pz' : ''}" style="--o:${n ? Math.min(.95, .3 + n * .15).toFixed(2) : 0};--d:${i * 25}ms${pz ? ';--pc:' + pauseType(pz).c : ''}">${pz && !n ? pauseType(pz).e : ''}</i>`; }).join('');
+  const T = W.top, A = W.topA;
+  const slides = [
+    `<div class="wr-s wr-intro"><div class="wr-mark">${rnMark(54)}</div><p class="wr-k">Tu resumen</p><h2 class="wr-big">${cap}<span>${W.y}</span></h2><p class="wr-p">${W.partial ? 'Lo que llevas del mes.' : 'Así te fue.'} Toca para avanzar.</p></div>`,
+    `<div class="wr-s"><p class="wr-k">XP ganada</p><h2 class="wr-num" data-n="${W.xp}">0</h2><p class="wr-p">${W.best.xp > 0 ? `Tu mejor semana fue la del <b>${D.weekLabel(W.best.w)}</b>, con <b>${fmt(W.best.xp)} XP</b>.` : 'Este mes aún no suma XP.'}</p><div class="wr-bars">${W.weeks.map(x => `<div class="${x.w === W.best.w && x.xp > 0 ? 'best' : ''}"><i style="--h:${(x.xp / maxW * 100).toFixed(0)}%"></i><small>${D.parse(x.w).getDate()}</small></div>`).join('')}</div></div>`,
+    `<div class="wr-s"><p class="wr-k">Constancia</p><h2 class="wr-big sm"><b>${W.days}</b> de ${W.nDays} días</h2><p class="wr-p">${W.days ? `registraste algo. ${W.streak ? `Racha actual: <b>${W.streak} ${W.streak === 1 ? 'semana' : 'semanas'}</b>.` : ''}` : 'Este mes no hubo registros.'}</p><div class="wr-cal"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>${cal}</div>${W.pauses.length ? `<p class="wr-note">${W.pauses.map(p => `${pauseType(p).e} ${esc(pauseName(p))}`).join(' · ')}: esos días no cuentan como fallados.</p>` : ''}</div>`,
+    T ? `<div class="wr-s"><p class="wr-k">Tu hábito estrella</p><div class="wr-emo">${hEmoji(T.h) || '⭐'}</div><h2 class="wr-big sm">${esc(T.h.title)}</h2><p class="wr-p"><b>${T.n}</b> ${T.n === 1 ? 'registro' : 'registros'}${T.of ? ` · cumpliste <b>${T.met} de ${T.of}</b> semanas` : ''}.</p>${W.hs.length > 1 ? `<div class="wr-list">${W.hs.slice(1, 4).map(x => `<span>${hEmoji(x.h) || '•'} ${esc(x.h.title)} <b>${x.n}</b></span>`).join('')}</div>` : ''}</div>` : '',
+    `<div class="wr-s"><p class="wr-k">Lo que lograste</p><div class="wr-tiles"><div><b class="wr-num" data-n="${W.logs}">0</b><small>registros</small></div><div><b class="wr-num" data-n="${W.tasksDone}">0</b><small>tareas hechas</small></div><div><b class="wr-num" data-n="${W.goalsDone.length + W.milestones}">0</b><small>${W.goalsDone.length ? 'objetivos e hitos' : 'hitos'}</small></div></div>${W.goalsDone.length ? `<p class="wr-p">🏆 ${W.goalsDone.slice(0, 3).map(g => esc(g.title)).join(' · ')}</p>` : ''}</div>`,
+    A ? `<div class="wr-s" style="--ac:${A.a.color}"><p class="wr-k">Tu área más fuerte</p><div class="wr-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="b"/><circle cx="60" cy="60" r="50" class="f"/></svg><span>${fmt(A.xp)}<small>XP</small></span></div><h2 class="wr-big sm" style="color:var(--ac)">${esc(A.a.name)}</h2><p class="wr-p"><b>${fmt(A.xp)} XP</b> este mes · ${W.xp ? Math.round(A.xp / W.xp * 100) : 0}% de todo lo que sumaste.</p></div>` : '',
+    `<div class="wr-s wr-end"><div class="wr-wolf">${wolfOrb(96, 'happy')}</div><p class="wr-k">Wolf</p><h2 class="wr-big sm">${wrapSay(W)}</h2><p class="wr-p">Nivel <b>${W.lvl.level}</b> · ${fmt(W.xp)} XP en ${MM}</p><div class="wr-btns"><button class="btn primary" data-act="wrap-share" data-ym="${ym}">${icon('dl')}Compartir imagen</button><button class="btn ghost" data-act="wrap-close">Cerrar</button></div></div>`
+  ].filter(Boolean);
+  let el = $('#wrap'); if (el) el.remove();
+  el = document.createElement('div'); el.id = 'wrap'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Resumen de ' + MM);
+  el.innerHTML = `<div class="wr-bg" aria-hidden="true"><i></i><i></i></div><div class="wr-prog">${slides.map(() => '<i><b></b></i>').join('')}</div><button class="wr-x" data-act="wrap-close" aria-label="Cerrar">✕</button><div class="wr-stage">${slides.join('')}</div><button class="wr-nav prev" aria-label="Anterior"></button><button class="wr-nav next" aria-label="Siguiente"></button>`;
+  document.body.appendChild(el); requestAnimationFrame(() => el.classList.add('on'));
+  const S2 = [...el.querySelectorAll('.wr-s')], bars = [...el.querySelectorAll('.wr-prog i')], RMw = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i = -1, timer = null; const DUR = 6500;
+  const go = n => {
+    if (n < 0) n = 0; if (n >= S2.length) n = S2.length - 1; i = n; clearTimeout(timer);
+    S2.forEach((s, k) => s.classList.toggle('on', k === i)); bars.forEach((b, k) => { b.className = k < i ? 'done' : k === i ? 'run' : ''; });
+    S2[i].querySelectorAll('.wr-num').forEach(x => { const to = +x.dataset.n, t0 = performance.now(); (function f(tt) { const q = RMw ? 1 : Math.min(1, (tt - t0) / 1100); x.textContent = (x.tagName === 'H2' ? '+' : '') + fmt(Math.round(to * (1 - Math.pow(1 - q, 3)))); if (q < 1) requestAnimationFrame(f); })(t0); });
+    const rf = S2[i].querySelector('.wr-ring .f'); if (rf) { rf.style.strokeDashoffset = 314; requestAnimationFrame(() => requestAnimationFrame(() => { rf.style.strokeDashoffset = 314 * (1 - Math.min(1, (A ? A.xp / Math.max(1, W.xp) : 0) * 1.6)); })); }
+    if (i < S2.length - 1 && !RMw) timer = setTimeout(() => go(i + 1), DUR);
+  };
+  el.querySelector('.wr-nav.next').onclick = () => go(i + 1); el.querySelector('.wr-nav.prev').onclick = () => go(i - 1);
+  el._key = e => { if (e.key === 'ArrowRight') go(i + 1); else if (e.key === 'ArrowLeft') go(i - 1); else if (e.key === 'Escape') wrapClose(); };
+  addEventListener('keydown', el._key); el._stop = () => clearTimeout(timer);
+  LS.set('rn-wrap-seen-' + ym, 1); go(0);
+}
+function wrapClose() { const el = $('#wrap'); if (!el) return; el._stop && el._stop(); removeEventListener('keydown', el._key); el.classList.remove('on'); setTimeout(() => { el.remove(); if (MODE) render(); }, 320); }
+/* Imagen para compartir (1080×1920, como historia de Instagram) */
+async function wrapImage(ym) {
+  const st = S(), W = wrapData(st, ym), MM = MES[W.m - 1], cv = document.createElement('canvas'); cv.width = 1080; cv.height = 1920; const c = cv.getContext('2d');
+  try { await document.fonts.ready; } catch (e) { }
+  const g = c.createLinearGradient(0, 0, 0, 1920); g.addColorStop(0, '#11160F'); g.addColorStop(1, '#0B0D0C'); c.fillStyle = g; c.fillRect(0, 0, 1080, 1920);
+  const glow = (x, y, r, col) => { const rg = c.createRadialGradient(x, y, 0, x, y, r); rg.addColorStop(0, col); rg.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = rg; c.fillRect(0, 0, 1080, 1920); };
+  glow(200, 260, 700, 'rgba(183,243,107,.22)'); glow(900, 1500, 800, 'rgba(63,212,154,.14)'); glow(540, 2050, 700, 'rgba(183,243,107,.28)');
+  // logo RN.
+  c.save(); c.translate(90, 120); c.scale(.2, .2); c.translate(-270, -318); c.fillStyle = '#E7ECE5';
+  c.fill(new Path2D('M278 326H469C552 326 594 382 594 452C594 510 560 552 512 572L624 731H508L386 575V731H278ZM386 410H458C472 410 481 432 481 461C481 490 472 512 458 512H386Z'), 'evenodd'); c.fill(new Path2D('M618 326H729L896 579V326H1005V731H888L725 497V731H618Z'));
+  c.fillStyle = '#B7F36B'; c.beginPath(); c.arc(1092.5, 679, 64.5, 0, 7); c.fill(); c.restore();
+  const F = (w, s, f = 'Archivo') => `${w} ${s}px ${f}, system-ui, sans-serif`, txt = (s, x, y, font, col, al = 'left') => { c.font = font; c.fillStyle = col; c.textAlign = al; c.fillText(s, x, y); };
+  txt('MI RESUMEN DE', 90, 330, F(600, 34, 'Geist'), '#9DA79F'); txt(MM.toUpperCase() + ' ' + W.y, 90, 430, F(800, 104), '#E7ECE5');
+  txt('+' + fmt(W.xp), 90, 640, F(800, 190), '#B7F36B'); txt('XP ganada', 96, 710, F(500, 40, 'Geist'), '#BCC5BD');
+  const maxW = Math.max(1, ...W.weeks.map(x => x.xp)), bw = 900 / W.weeks.length;
+  W.weeks.forEach((x, k) => { const h = Math.max(8, x.xp / maxW * 220), X0 = 90 + k * bw + 8; c.fillStyle = x.w === W.best.w && x.xp > 0 ? '#B7F36B' : 'rgba(183,243,107,.35)'; c.beginPath(); c.roundRect(X0, 990 - h, bw - 16, h, 14); c.fill(); });
+  const box = (x, y, big, small) => { c.fillStyle = 'rgba(255,255,255,.05)'; c.beginPath(); c.roundRect(x, y, 430, 220, 36); c.fill(); c.strokeStyle = 'rgba(255,255,255,.08)'; c.lineWidth = 2; c.stroke(); txt(big, x + 40, y + 120, F(800, 84), '#E7ECE5'); txt(small, x + 40, y + 180, F(500, 34, 'Geist'), '#9DA79F'); };
+  box(90, 1070, `${W.days}/${W.nDays}`, 'días con registro'); box(560, 1070, String(W.logs), 'registros'); box(90, 1320, String(W.tasksDone), 'tareas hechas'); box(560, 1320, 'Nv ' + W.lvl.level, W.streak ? `racha de ${W.streak} sem` : 'nivel actual');
+  if (W.top) { txt('HÁBITO ESTRELLA', 90, 1650, F(600, 30, 'Geist'), '#9DA79F'); txt(`${hEmoji(W.top.h) || '⭐'} ${W.top.h.title}`.slice(0, 32), 90, 1720, F(700, 58), '#E7ECE5'); }
+  txt('Build your prime · RN.', 990, 1840, F(500, 30, 'Geist'), '#7E887F', 'right');
+  return new Promise(r => cv.toBlob(r, 'image/png'));
+}
+function wrapCard(st) {
+  if (!st.meta.onboarded) return ''; const t = D.today(), d = D.parse(t).getDate(); if (d > 7) return '';
+  const prev = D.add(`${t.slice(0, 7)}-01`, -1).slice(0, 7); if (LS.get('rn-wrap-seen-' + prev) || !wrapMonths(st).includes(prev)) return '';
+  const MM = MES[+prev.slice(5, 7) - 1];
+  return `<div class="wr-card" data-act="wrap-open" data-ym="${prev}" role="button" tabindex="0"><span class="wr-card-i">✦</span><div class="grow"><b>Tu resumen de ${MM} está listo</b><small>Tu XP, tu constancia y tu hábito estrella del mes.</small></div><span class="btn sm primary">Verlo</span></div>`;
+}
 const PZ_WOLF = { viaje: 'Disfruta tu viaje. Tus hábitos te esperan; si te dan ganas de leer o moverte, regístralo y suma.', enfermo: 'Primero recupérate. Pausé lo que no puedes hacer; lo demás va a tu ritmo.', lesion: 'Lo importante ahora es sanar. Cuando regreses armamos tu plan de regreso juntos.', tiempo: 'Semana apretada. Bajé tus metas: con lo mínimo bien hecho es suficiente.', pesada: 'Semana de entregas. Enfócate en lo importante; tus tareas difíciles valen más.', otra: 'Entendido. Lo tomo en cuenta como me dijiste.' };
 function pzTitle() { const d = UI.pz, T = d && d.type && PAUSE_TYPES[d.type]; return T ? `${T.e} ${T.n}` : '¿Pasó algo?'; }
 function pzSheet() {
@@ -5879,6 +6035,14 @@ const ACT = {
   'week-unname': d => { UI.weekEdit = null; mut(st => { if (st.meta.weekNames) delete st.meta.weekNames[d.wk]; }); },
   'week-shift': d => { UI.week = D.add(UI.week || D.weekStart(D.today()), +d.n); render(); },
   'week-today': () => { UI.week = null; render(); },
+  'wrap-open': d => wrapOpen(d.ym || D.today().slice(0, 7)),
+  'wrap-pick': () => { const v = ($('#ev-wrap-m') || {}).value; if (v) wrapOpen(v); },
+  'wrap-close': () => wrapClose(),
+  'wrap-share': async d => {
+    const blob = await wrapImage(d.ym), name = `RN-resumen-${d.ym}.png`;
+    try { const f = new File([blob], name, { type: 'image/png' }); if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: 'Mi resumen en RN.' }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); toast('Imagen descargada');
+  },
   'hist-open': async () => {
     openSheet('Historial de versiones', `<div class="hist-body"><p class="sub">Cargando…</p></div>`, 'none');
     const box = () => $('#layer .hist-body'), r = window.RN_WEB && await window.RN_WEB.history(); if (!box()) return;
@@ -6101,6 +6265,7 @@ function saveGoalLog(g, f) {
 function saveHabitLog(h, f) { let lid; UI.pulse = h.id; mut(() => { lid = addHabitLog(h, { date: f['h-date'] || D.today(), value: num(f['h-value']), note: (f['h-note'] || '').trim() }).id; }); closeSheet(); UI.hDay = null; const dd = f['h-date'] || D.today(), when = dd === D.today() ? 'hoy' : dd === D.add(D.today(), -1) ? 'ayer' : 'antier'; toast(`${h.title}: registrado ${when}`, () => mut(() => removeHabitLog(h, lid))); }
 
 const CHG = {
+  'wrap-month': el => { if (el.value) wrapOpen(el.value); },
   gtype: el => { const t = el.value; $('#gtype-fields').innerHTML = goalTypeFields(t, {}); $('#type-hint').innerHTML = `${icon('review')}<span><b>Cómo se registra:</b> ${TYPES[t].how}</span>`; },
   'task-day': el => { const t = findT(el.dataset.id); if (!t || !el.value) return; mut(() => { t.day = el.value; t.week = D.weekStart(el.value); }); toast('Tarea asignada al ' + D.DOWF[D.dow(el.value)].toLowerCase()); },
   'auto-hoy': el => mut(st => { st.meta.autoHoy = el.checked; }),
