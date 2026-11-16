@@ -45,7 +45,7 @@
   async function start(session) {
     const uid = session.user.id;
     // Si en este navegador había otra cuenta, su copia local no debe mezclarse con esta.
-    try { if (localStorage.getItem('rn-uid') !== uid) { ['sos-real', 'sos-mode', 'sos-demo'].forEach(k => localStorage.removeItem(k)); localStorage.setItem('rn-uid', uid); } } catch (e) { }
+    try { if (localStorage.getItem('rn-uid') !== uid) { ['sos-real', 'sos-mode', 'sos-demo', 'sos-pend', 'sos-base'].forEach(k => localStorage.removeItem(k)); localStorage.setItem('rn-uid', uid); } } catch (e) { }
     const caps = { db: makeDB(uid), user: { id: async () => uid }, downloads };
     window.claude = { use: async n => caps[n] || null };
     window.RN_WEB = { email: session.user.email, logout, changePassword: async (cur, nw) => {
@@ -59,7 +59,7 @@
   }
   async function logout() {
     try { await sb.auth.signOut(); } catch (e) { }
-    try { ['sos-real', 'sos-mode', 'sos-demo', 'rn-uid'].forEach(k => localStorage.removeItem(k)); } catch (e) { }
+    try { ['sos-real', 'sos-mode', 'sos-demo', 'sos-pend', 'sos-base', 'rn-uid'].forEach(k => localStorage.removeItem(k)); } catch (e) { }
     location.replace(location.pathname.replace(/app\.html$/, ''));
   }
 
@@ -131,11 +131,15 @@
 
   (async () => {
     let session = null;
-    try { const r = await sb.auth.getSession(); session = r.data.session; } catch (e) { }
+    let netFail = false;
+    try { const r = await sb.auth.getSession(); session = r.data.session; if (r.error && /fetch|network|failed/i.test(r.error.message || '')) netFail = true; } catch (e) { netFail = true; }
     if (hp.get('access_token') || hp.get('error') || location.hash.includes('access_token')) history.replaceState(null, '', location.pathname + location.search);
     if (linkError) return screen('login', ERR(linkError));
     if (session && (linkType === 'invite' || linkType === 'recovery')) return screen('newpass');
     if (session) return start(session);
+    // Sin internet: la sesión guardada basta para abrir tu copia local; se sincroniza al volver la conexión
+    try { const saved = JSON.parse(localStorage.getItem('rn-auth') || 'null'), u = saved && (saved.user || (saved.currentSession && saved.currentSession.user));
+      if (u && u.id && (navigator.onLine === false || netFail) && localStorage.getItem('rn-uid') === u.id) return start({ user: u }); } catch (e) { }
     screen('login');
   })();
 })();

@@ -4,6 +4,9 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="RN.">
+<script>if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => { }));</script>
 </head><body>
 <title>RN.</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -3074,15 +3077,26 @@ const Store = {
     let id = null; if (user) { try { id = await user.id(); } catch (e) { } }
     if (db && id) {
       this.db = db; this.uid = id;
+      if (navigator.onLine === false) { this.status = 'local'; this.err = 'Sin conexión: estás usando la copia de este dispositivo. Todo se sube solo al volver internet.'; return local && local.meta ? local : null; }
       try {
         const docs = {};
         for (const k of DOCS) {
-          let s; try { s = await this.ref(k).get(); } catch (e) { await sleep(400 + Math.random() * 500); s = await this.ref(k).get(); }
+          const get = () => Promise.race([this.ref(k).get(), sleep(8000).then(() => { throw { code: 'unavailable', message: 'timeout' }; })]);
+          let s; try { s = await get(); } catch (e) { await sleep(400 + Math.random() * 500); s = await get(); }
           docs[k] = s.exists ? JSON.parse(JSON.stringify(s.data())) : null;
           if (docs[k]) this.last[k] = JSON.stringify(docs[k]);
         }
         this.cloud = true; this.status = 'ok';
-        if (docs.meta) return this.unpack(docs);
+        if (docs.meta) {
+          // ¿Quedaron cambios sin subir (por ejemplo, sin internet)? → se combinan con la nube en vez de perderse
+          const base = LS.get('sos-base'), pend = LS.get('sos-pend');
+          if (pend && local && local.meta && base) {
+            const lp = this.pack(local), out = {};
+            DOCS.forEach(k => { const b = base[k] != null ? JSON.parse(base[k]) : null; out[k] = docs[k] ? merge3(b, lp[k], docs[k]) : lp[k]; });
+            this.needFlush = true; return this.unpack(out);
+          }
+          this.saveBase(); return this.unpack(docs);
+        }
         if (local && local.meta && local.meta.onboarded) { REAL = local; this.schedule(true); return local; }
         return null;
       } catch (e) { this.cloud = false; this.err = 'No se pudo leer el almacenamiento de tu cuenta (' + (e && e.code || 'error') + '). Usando la copia local de este navegador.'; }
@@ -3090,8 +3104,29 @@ const Store = {
     this.status = 'local';
     return local && local.meta ? local : null;
   },
+  saveBase() { LS.set('sos-base', Object.assign({}, this.last)); },
+  /* Sin conexión al abrir o al guardar: reintenta en cuanto vuelva internet */
+  watchNet() {
+    if (this._net) return; this._net = true;
+    const retry = () => { if (navigator.onLine === false) return; if (!this.cloud && this.db) this.reconnect(); else if (this.cloud && (this.status === 'err' || LS.get('sos-pend'))) this.schedule(true); };
+    addEventListener('online', () => setTimeout(retry, 800)); document.addEventListener('visibilitychange', () => { if (!document.hidden) retry(); }); setInterval(retry, 30000);
+    if (this.needFlush) { this.needFlush = false; setTimeout(() => { if (REAL) { this.schedule(true); toast('Subí los cambios que hiciste sin conexión'); } }, 1500); }
+  },
+  async reconnect() {
+    if (this._rc) return; this._rc = true;
+    try {
+      const docs = {}; for (const k of DOCS) { const s = await this.ref(k).get(); docs[k] = s.exists ? JSON.parse(JSON.stringify(s.data())) : null; }
+      const base = LS.get('sos-base') || {}, lp = REAL ? this.pack(REAL) : null, out = {};
+      DOCS.forEach(k => { const b = base[k] != null ? JSON.parse(base[k]) : null; out[k] = lp ? (docs[k] ? merge3(b, lp[k], docs[k]) : lp[k]) : docs[k]; if (docs[k]) this.last[k] = JSON.stringify(docs[k]); });
+      this.cloud = true; this.status = 'ok'; this.err = '';
+      if (out.meta) { const st = this.unpack(out); if (REAL) DOCS.forEach(k => applyDoc(REAL, k, k === 'meta' ? st.meta : { items: st[k] })); else REAL = st; }
+      if (this.onRemote && !this._subbed) this.subscribe(this.onRemote);
+      if (REAL) this.schedule(true); if (MODE === 'real') { render(); toast('De vuelta en línea · todo sincronizado'); }
+    } catch (e) { } finally { this._rc = false; paintStatus(); }
+  },
   subscribe(onRemote) {
-    if (!this.cloud) return;
+    this.onRemote = onRemote; this.watchNet();
+    if (!this.cloud) return; this._subbed = true;
     DOCS.forEach(k => this.ref(k).onSnapshot(s => {
       if (s.metadata.hasPendingWrites || !s.exists) return;
       const js = JSON.stringify(s.data());
@@ -3100,7 +3135,7 @@ const Store = {
     }, () => { }));
   },
   schedule(now) {
-    LS.set('sos-real', REAL);
+    LS.set('sos-real', REAL); LS.set('sos-pend', 1);
     if (!this.cloud) { this.status = 'local'; paintStatus(); return; }
     this.dirty = true; this.status = 'saving'; paintStatus();
     clearTimeout(this.timer);
@@ -3128,12 +3163,12 @@ const Store = {
         catch (e) { if (e && e.code === 'unavailable') { await sleep(500 + Math.random() * 700); await this.ref(k).set(JSON.parse(js)); } else throw e; }
         this.last[k] = js;
       }
-      this.dirty = !!this.timer; this.status = 'ok'; this.err = ''; this.savedAt = new Date();
+      this.dirty = !!this.timer; this.status = 'ok'; this.err = ''; this.savedAt = new Date(); this.saveBase(); if (!this.dirty) LS.del('sos-pend');
       if (merged) { LS.set('sos-real', REAL); if (MODE === 'real') { render(); toast('Combiné tus cambios con los de otro dispositivo'); } if (stab(this.pack(REAL)) !== stab(p)) this.schedule(true); }
-    } catch (e) { this.status = 'err'; this.err = errMsg(e); this.dirty = false; }
+    } catch (e) { this.status = 'err'; this.err = navigator.onLine === false ? 'Sin conexión: tus cambios están a salvo en este dispositivo y se suben solos al volver internet.' : errMsg(e); this.dirty = false; }
     paintStatus();
   },
-  async wipe() { LS.del('sos-real'); if (this.cloud) { await this.chain; for (const k of DOCS) { await this.ref(k).delete(); delete this.last[k]; } } },
+  async wipe() { LS.del('sos-real'); LS.del('sos-pend'); LS.del('sos-base'); if (this.cloud) { await this.chain; for (const k of DOCS) { await this.ref(k).delete(); delete this.last[k]; } } },
   usage() { const p = this.pack(REAL || emptyState()); return DOCS.map(k => ({ k, kb: JSON.stringify(p[k]).length / 1024 })); }
 };
 function errMsg(e) {
