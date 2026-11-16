@@ -32,6 +32,10 @@ create table if not exists public.rn_vapid (
 );
 alter table public.rn_vapid enable row level security;   -- sin reglas: solo la función (con permisos de servidor) la usa
 revoke all on public.rn_vapid from anon, authenticated;
+-- La función rn-push trabaja con permisos de servidor (service_role): necesita poder leer y escribir aquí.
+grant select, insert, update on public.rn_vapid to service_role;
+grant select, insert, update, delete on public.rn_push to service_role;
+grant select on public.rn_docs to service_role;
 
 -- Aviso cada hora a la función rn-push (ella decide a quién le toca según su hora y horarios).
 create extension if not exists pg_cron;
