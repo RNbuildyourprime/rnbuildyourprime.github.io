@@ -71,7 +71,7 @@ Nunca subir al repo: claves `secret` / `service_role`, contraseña de la base de
 2. **Authentication → Sign In / Providers → Email**:
    - "Allow new users to sign up": **ON** (el disparador de invitaciones bloquea a quien no esté invitado).
    - "Confirm email": **OFF**, para entrar directo. Si lo dejas ON, el usuario debe confirmar desde su correo y el correo gratis de Supabase tiene límite por hora.
-3. **Invitar a alguien:** Table Editor → `rn_invites` → Insert row → `email`, y opcionalmente `note` (ej. "Papá"). Mándale `https://leotiburciogo-alt.github.io/RN/app.html#crear`.
+3. **Invitar a alguien:** Table Editor → `rn_invites` → Insert row → `email`, y opcionalmente `note` (ej. "Papá"). Mándale `https://rnbuildyourprime.github.io/app.html#crear`.
    - Ojo: "Add user" del panel también pasa por la invitación; agrega el correo a `rn_invites` primero.
 4. **Ping:** GitHub → repo → Actions → "keepalive" → Run workflow. Debe salir verde. Si sale rojo, normalmente es porque el paso 1 no se ha corrido.
 
