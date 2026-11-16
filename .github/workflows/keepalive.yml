@@ -9,8 +9,9 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Consulta rn_ping
         run: |
-          URL=$(grep -o "https://[a-z0-9]*\.supabase\.co" <<< "$(curl -fsSL https://raw.githubusercontent.com/${{ github.repository }}/main/config.js)")
-          KEY=$(curl -fsSL https://raw.githubusercontent.com/${{ github.repository }}/main/config.js | grep -o "sb_publishable_[A-Za-z0-9_]*")
-          curl -fsS -X POST "$URL/rest/v1/rpc/rn_ping" -H "apikey: $KEY" -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" -d '{}'
+          URL=$(grep -o "https://[a-z0-9]*\.supabase\.co" config.js)
+          KEY=$(grep -o "sb_publishable_[A-Za-z0-9_]*" config.js)
+          curl -fsS -X POST "$URL/rest/v1/rpc/rn_ping" -H "apikey: $KEY" -H "Content-Type: application/json" -d '{}'
