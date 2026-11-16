@@ -43,7 +43,7 @@
       }
     }; } }; } };
   }
-  const downloads = { async save({ filename, data }) { const b = new Blob([data], { type: /\.csv$/.test(filename) ? 'text/csv' : 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); } };
+  const downloads = { async save({ filename, data }) { const b = new Blob([data], { type: /\.csv$/.test(filename) ? 'text/csv' : 'application/json' }); if (matchMedia('(pointer: coarse)').matches && navigator.canShare) { try { const f = new File([b], filename, { type: b.type }); if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: filename }); return; } } catch (e) { if (e && e.name === 'AbortError') throw { code: 'declined' }; } } const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); } };
 
   async function start(session) {
     const uid = session.user.id;
@@ -53,6 +53,11 @@
     window.claude = { use: async n => caps[n] || null };
     window.RN_WEB = { email: session.user.email, logout,
       history: async () => { try { const { data, error } = await sb.from('rn_history').select('doc,created_at').order('created_at', { ascending: false }).limit(400); if (error) return { error: /relation|does not exist|schema cache/i.test(error.message) ? 'El historial aún no está activado: falta correr supabase_v2.sql en Supabase.' : ERR(error.message) }; return { rows: data || [] }; } catch (e) { return { error: ERR(e && e.message) }; } },
+      fn: (window.RN_CONFIG || {}).url + '/functions/v1/rn-push',
+      pushSave: async (sub, prefs, tz) => { try { const { error } = await sb.from('rn_push').upsert({ endpoint: sub.endpoint, user_id: session.user.id, sub, prefs, tz, updated_at: new Date().toISOString() }, { onConflict: 'endpoint' }); return error ? { error: /relation|does not exist|schema cache/i.test(error.message) ? 'Los recordatorios aún no están activados: falta correr supabase_v3.sql en Supabase.' : ERR(error.message) } : {}; } catch (e) { return { error: ERR(e && e.message) }; } },
+      pushPrefs: async (endpoint, prefs) => { try { const { error } = await sb.from('rn_push').update({ prefs, updated_at: new Date().toISOString() }).eq('endpoint', endpoint); return error ? { error: ERR(error.message) } : {}; } catch (e) { return { error: ERR(e && e.message) }; } },
+      pushDel: async endpoint => { try { await sb.from('rn_push').delete().eq('endpoint', endpoint); } catch (e) { } return {}; },
+      stats: async days => { try { const { data, error } = await sb.rpc('rn_stats', { p_days: days || 30 }); return error ? { error: ERR(error.message) } : { data }; } catch (e) { return { error: ERR(e && e.message) }; } },
       restore: async at => { try { const { error } = await sb.rpc('rn_restore', { p_at: at }); return error ? { error: ERR(error.message) } : {}; } catch (e) { return { error: ERR(e && e.message) }; } },
       changePassword: async (cur, nw) => {
       try {

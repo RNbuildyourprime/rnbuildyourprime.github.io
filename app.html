@@ -2197,6 +2197,78 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .ev-wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
 .ev-wrap select{padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--bg);color:var(--fg);font:500 .84rem var(--body)}
 @media (prefers-reduced-motion:reduce){.wr-bg i{animation:none}.wr-s{transition:opacity .2s}.wr-s.on .wr-big,.wr-s.on .wr-num,.wr-s.on .wr-emo{animation:none}.wr-bars i,.wr-cal i{transform:none;transition:none}.wr-prog i.run b{animation:none;width:100%}}
+.bk-cnt{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin-bottom:12px}.bk-cnt div{padding:10px 4px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}.bk-cnt b{display:block;font:700 1.15rem var(--display)}.bk-cnt small{font-size:.72rem;color:var(--muted)}
+
+/* ===== Registro rápido ===== */
+.ql{display:flex;flex-direction:column;gap:12px}
+.ql-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:radial-gradient(90% 140% at 0 0,#B7F36B1a,transparent 60%),var(--s2);border:1px solid var(--line2)}
+.ql-ring{width:44px;height:44px;flex:none}.ql-ring circle{fill:none;stroke-width:5}.ql-ring .b{stroke:#ffffff14}.ql-ring .f{stroke:var(--lime);stroke-linecap:round;transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px #B7F36B66)}
+.ql-head b{display:block;font:700 1rem var(--display)}.ql-head small{color:var(--fg2);font-size:.78rem}
+.ql-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.qh{position:relative;text-align:left;border-radius:16px;padding:12px;background:var(--s2);border:1px solid var(--line2);cursor:pointer;display:grid;gap:7px;transition:border-color .2s,background .2s,transform .15s;min-width:0}
+.qh:hover{border-color:var(--line3)}.qh:active{transform:scale(.97)}
+.qh-top{display:flex;justify-content:space-between;align-items:center}.qh-emo{font-size:1.3rem;line-height:1}
+.qh-ck{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line3);display:grid;place-items:center;color:transparent;transition:all .25s}.qh-ck .ic{width:14px;height:14px}
+.qh b{font:600 .9rem/1.2 var(--body);overflow-wrap:anywhere}
+.qh-dots{display:flex;gap:3px}.qh-dots i{flex:1;height:4px;border-radius:3px;background:#ffffff12}.qh-dots i.on{background:var(--c)}
+.qh small{font-size:.72rem;color:var(--muted)}
+.qh.done{border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 10%,var(--s2))}
+.qh.done .qh-ck{background:var(--c);border-color:var(--c);color:#0B0D0C}
+.qh.open{border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+.qh-xp{position:absolute;right:10px;top:-6px;font:700 .78rem var(--display);color:var(--lime);opacity:0;pointer-events:none}
+.qh.pop .qh-xp{animation:qhXp .9s ease-out}.qh.pop .qh-ck{animation:qhCk .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes qhXp{0%{opacity:0;transform:translateY(6px)}25%{opacity:1}100%{opacity:0;transform:translateY(-20px)}}
+@keyframes qhCk{0%{transform:scale(.4)}100%{transform:scale(1)}}
+.ql-qty{grid-column:1/-1;display:grid;gap:10px;padding:12px;border-radius:14px;background:var(--s3);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);animation:qlIn .25s ease}
+@keyframes qlIn{from{opacity:0;transform:translateY(-4px)}}
+.ql-qty>span{font-size:.84rem;color:var(--fg2)}.ql-qty em{font-style:normal;color:var(--muted)}
+.ql-chips{display:flex;gap:6px;flex-wrap:wrap}
+.ql-chip{font:600 .86rem var(--body);padding:8px 14px;border-radius:999px;border:1px solid var(--line3);background:transparent;cursor:pointer;transition:background .15s,color .15s}
+.ql-chip:hover{background:var(--lime);color:#0B1505;border-color:transparent}
+.ql-other{display:flex;gap:8px}.ql-other input{flex:1;min-width:0}
+.ql-goals{display:flex;flex-direction:column;gap:6px}
+.ql-g{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;background:var(--s2);border:1px solid var(--line2);font-size:.88rem;cursor:pointer;text-align:left;transition:border-color .2s}
+.ql-g:hover{border-color:var(--line3)}.ql-g .d,.ql-gh .d{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}.ql-g .t{min-width:0;overflow-wrap:anywhere}
+.ql-g em{font-style:normal;margin-left:auto;font-size:.76rem;color:var(--fg2);padding:4px 9px;border-radius:8px;border:1px solid var(--line3);white-space:nowrap}
+.ql-g .good{font-size:.74rem}
+.ql-gh{display:flex;align-items:center;gap:10px;font-size:1rem}.ql-back{align-self:flex-start}
+.shake{animation:qlShake .35s}@keyframes qlShake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.qh.pop .qh-xp,.qh.pop .qh-ck,.ql-qty{animation:none}}
+
+/* ===== Atajos ===== */
+.sc-pick{display:flex;gap:6px;flex-wrap:wrap}.ql-chip.on{background:var(--lime);color:#0B1505;border-color:transparent}
+.sc-url{display:flex;gap:8px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--bg);border:1px dashed #B7F36B55}
+.sc-url code{flex:1;min-width:0;font:500 .78rem var(--body);color:var(--fg2);overflow-wrap:anywhere}
+.sc-steps{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--fg2);font-size:.9rem}.sc-steps b{color:var(--fg)}
+.sc-note{margin:0}
+
+/* ===== Cierre de semana guiado ===== */
+.gr{display:flex;flex-direction:column;gap:14px}
+.gr-steps{display:flex;gap:5px}.gr-stp{flex:1;min-width:0;height:32px;border-radius:10px;border:1px solid var(--line2);background:var(--s2);color:var(--muted);font:600 .74rem var(--body);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 6px}
+.gr-stp.on{border-color:#B7F36B66;color:var(--lime);background:#B7F36B12}.gr-stp.done{color:var(--fg2)}
+.gr-pane{display:flex;flex-direction:column;gap:12px;animation:qlIn .3s ease}
+.gr-big{font:800 2.4rem/1 var(--display);letter-spacing:-.04em;color:var(--lime)}
+.gr-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.gr-stats div{padding:12px;border-radius:14px;background:var(--s2);border:1px solid var(--line2)}.gr-stats b{display:block;font:700 1.2rem var(--display)}.gr-stats small{color:var(--fg2);font-size:.76rem}
+.gr-wolf{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:#B7F36B0d;border:1px solid #B7F36B33}.gr-wolf p{margin:0;font-size:.86rem;color:var(--fg2)}
+.gr-chips{display:flex;gap:6px;flex-wrap:wrap}
+.gr-note{display:grid;gap:6px;font-size:.8rem;color:var(--muted)}.gr-note textarea{min-height:64px}
+.gr-adj{padding:12px;border-radius:14px;background:var(--s2);border:1px solid var(--line2);display:grid;gap:8px}
+.gr-adj-h{display:flex;gap:8px;align-items:center;font-size:.9rem}.gr-adj-h em{font-style:normal;margin-left:auto;color:#E8835E;font-size:.78rem}
+.gr-opt{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;border:1px solid var(--line2);font-size:.84rem;cursor:pointer;background:transparent;text-align:left}
+.gr-opt i{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line3);flex:none}.gr-opt.on{border-color:#B7F36B66;background:#B7F36B10}.gr-opt.on i{border:5px solid var(--lime)}
+.gr-chk{display:flex;gap:10px;align-items:center;font-size:.86rem;color:var(--fg2);padding:10px 12px;border-radius:12px;border:1px solid var(--line2)}.gr-chk b{color:var(--fg)}
+.gr-pri{display:flex;flex-direction:column;gap:6px}
+.gr-p{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:12px;background:var(--s2);border:1px solid var(--line2);font-size:.86rem;cursor:pointer;text-align:left}
+.gr-p .n{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line3);font:700 .74rem/19px var(--display);text-align:center;flex:none}
+.gr-p.on{border-color:#B7F36B66;background:#B7F36B10}.gr-p.on .n{background:var(--lime);border-color:var(--lime);color:#0B1505}
+.gr-cta{margin:0 0 14px}.gr-card .btn{margin-left:auto;pointer-events:none}
+
+.push-row .set-ctl{display:flex;gap:10px;align-items:center}.push-row select{width:auto;padding:6px 8px;font-size:.84rem}
+
+.st-wrap{grid-column:1/-1}.st-wrap>.card{height:100%}
+.st-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.st-kpis div{padding:12px;border-radius:14px;background:var(--s2);border:1px solid var(--line2)}.st-kpis b{display:block;font:700 1.5rem var(--display)}.st-kpis small{color:var(--fg2);font-size:.78rem}
+.st-bars{display:flex;align-items:flex-end;gap:3px;height:70px;padding:6px 0;border-bottom:1px solid var(--line2)}.st-bars i{flex:1;height:max(3px,var(--h));border-radius:4px 4px 0 0;background:#B7F36B88}
+.st-refs{display:flex;gap:6px;flex-wrap:wrap}.st-refs span{font-size:.8rem;color:var(--fg2);padding:5px 10px;border-radius:999px;border:1px solid var(--line2)}.st-refs b{color:var(--fg);font-weight:600}
 </style>
 <div id="root"><div class="ob"><div class="ob-card"><svg height="72" viewBox="270 318 900 432" fill="#E7ECE5" aria-label="RN."><path fill-rule="evenodd" d="M278 326H469C552 326 594 382 594 452C594 510 560 552 512 572L624 731H508L386 575V731H278ZM386 410H458C472 410 481 432 481 461C481 490 472 512 458 512H386Z"/><path d="M618 326H729L896 579V326H1005V731H888L725 497V731H618Z"/><circle cx="1092.5" cy="679" r="64.5"/></svg><p class="tagline" style="font:600 .82rem var(--display);letter-spacing:.22em;text-transform:uppercase;color:#B7F36B">It's time to unlock your prime.</p><p class="muted">Conectando con el almacenamiento de tu cuenta.</p></div></div></div>
 <div id="layer"></div>
@@ -3067,6 +3139,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const pctTxt = p => p == null ? '—' : Math.round(p * 100) + ' %';
 const hhmm = d => d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
 const ICON = {
+  bell: '<path d="M5.5 13.5V9a4.5 4.5 0 0 1 9 0v4.5l1.5 2h-12z"/><path d="M8.5 17.5a1.6 1.6 0 0 0 3 0"/>',
   dots: '<circle cx="5" cy="10" r="1.3"/><circle cx="10" cy="10" r="1.3"/><circle cx="15" cy="10" r="1.3"/>',
   user: '<circle cx="10" cy="7" r="3.2"/><path d="M3.8 17a6.2 6.2 0 0 1 12.4 0"/>',
   spark: '<path d="M10 2.8l1.6 4.1 4.1 1.6-4.1 1.6L10 14.2l-1.6-4.1-4.1-1.6 4.1-1.6z"/><path d="M15.5 13.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',
@@ -3444,7 +3517,7 @@ function render() {
   { const mp = document.getElementById('more-pop'); if (mp && !UI.moreOpen) mp.remove(); }
   if (UI.storyCleanup) UI.storyCleanup();
   { const tip = tutTip(r.v, st); if (tip) { const k = body.indexOf('</header>'); if (k >= 0) body = body.slice(0, k + 9) + tip + body.slice(k + 9); } }
-  root.innerHTML = layout(r.v, body); document.body.classList.toggle('glass-more', SIMP.glass); ['cTiles', 'cAch', 'cRec', 'cToday', 'cDone'].forEach(k => document.body.classList.toggle('c-' + k.slice(1).toLowerCase(), !!SIMP[k])); document.body.classList.toggle('wolf-lime', st.meta.wolfColor === 'lime'); initWolf(r.v); wolfLight();
+  root.innerHTML = layout(r.v, body); if (r.v === 'ajustes') setTimeout(() => { fillPush(); fillStats(); }, 0); document.body.classList.toggle('glass-more', SIMP.glass); ['cTiles', 'cAch', 'cRec', 'cToday', 'cDone'].forEach(k => document.body.classList.toggle('c-' + k.slice(1).toLowerCase(), !!SIMP[k])); document.body.classList.toggle('wolf-lime', st.meta.wolfColor === 'lime'); initWolf(r.v); wolfLight();
   if (r.v === 'rueda') initStory();
   if (r.v === 'evolucion') initEvo();
   if (r.v === 'guia') { UI.guideStop = null; if (r.p === 'personas') initGuiaPer(); else if (r.p === 'objetivos') initGuiaObj(); else if (r.p === 'xp') initGuiaXp(); else if (r.p === 'pausas') initGuiaPz(); else initGuiaHab(); }
@@ -3782,7 +3855,7 @@ VIEWS.dashboard = () => {
   return pageTop(st.meta.name ? `Hola, <button class="name-edit" data-act="name-edit" title="Cambiar nombre o apodo">${esc(st.meta.name)}</button>` : `Hola <button class="btn sm" data-act="name-edit" style="vertical-align:middle;margin-left:6px">${icon('plus')}Añadir tu nombre</button>`, `Semana del ${D.weekLabel(wk)} · hoy ${D.short(t)}${(() => { const k = kickState(st, wk); return k.done ? ` <a class="kick-chip done" href="#hoy-arranque">${icon('check')}Semana arrancada</a>` : ` <a class="kick-chip ${D.dow(t) <= 1 ? 'hot' : ''}" href="#hoy-arranque">${icon('star')}Arrancar semana</a>`; })()}`) + `
   <div class="quote-row"><div class="quote ${qEnter ? 'enter' : ''}"><span class="qmark" aria-hidden="true">“</span><p class="qtext">${esc(Q)}</p></div>${streakBox(st, t)}</div>
   ${todayStrip}
-  ${pzBand(st)}${wrapCard(st)}
+  ${pzBand(st)}${wrapCard(st)}${grCard(st)}
   ${ydayCard(st)}
   ${backupStrip(st)}
   <div class="grid">
@@ -5259,6 +5332,7 @@ function revisionesView() {
     const ok = R.practices.filter(x => x.n >= x.target).length;
     return pageTop('Reflexiones', 'Tu pausa de la semana', seg) + `
     <div class="rf-nav"><button class="btn sm" data-act="rev-shift" data-n="-7" aria-label="Semana anterior">${icon('left')}</button><div class="rf-wk"><b>${esc(weekName(st, wk) || 'Semana del ' + D.short(wk))}</b><small class="num">${D.weekLabel(wk)}</small></div><button class="btn sm" data-act="rev-shift" data-n="7" aria-label="Semana siguiente" ${wk >= D.weekStart(t) ? 'disabled' : ''}>${icon('right')}</button></div>
+    ${wk <= D.weekStart(t) && !(R.review && R.review.guided) ? `<button class="btn primary sm gr-cta" data-act="gr-open" data-wk="${wk}">${icon('review')}Cierre guiado en 4 pasos</button>` : ''}
     ${reflectHero(st, wk, R)}
     <div class="rf-wolf">${wolfOrb(40, R.review && R.review.mood != null && R.review.mood <= 1 ? 'worry' : 'calm')}<p><b>Wolf:</b> ${wolfReflect(R, prev.xp)}</p></div>
     <p class="hab-foot"><span>La semana en números</span></p>
@@ -5320,10 +5394,13 @@ VIEWS.ajustes = () => {
     ${sec('area', 'Áreas activas', 'Cada una tiene su página, nivel y evolución', `<div class="set-chips">${AREAS.map(a => `<label class="set-chip area ${(m.areas || []).includes(a.id) ? 'on' : ''}" style="--c:${a.color}"><input type="checkbox" data-change="area-toggle" value="${a.id}" ${(m.areas || []).includes(a.id) ? 'checked' : ''}><i></i>${esc(a.short || a.name)}</label>`).join('')}</div>`)}
   </div></div>
   <div class="set-grid">
+    <div id="stats-panel" class="c-wide st-wrap" hidden></div>
     <div id="set-datos" class="set-anchor"></div>
+    ${sec('bell', 'Recordatorios', 'Avisos en tu teléfono a la hora que elijas', `<div id="push-panel"><p class="sub" style="margin:0">Cargando…</p></div>`)}
+    ${sec('check', 'Atajos de un toque', 'Registra un hábito desde tu pantalla de inicio', `<div class="set-row"><span class="set-txt"><b>Crear un atajo</b><small>Eliges el hábito, copias su link y lo agregas al inicio con la app Atajos del iPhone</small></span><span class="set-ctl"><button class="btn sm primary" data-act="sc-open">Crear atajo</button></span></div>`)}
     ${sec('dl', 'Datos y respaldo', MODE === 'demo' ? 'Estás en la demo: estos botones usan los datos de demostración' : 'Tus datos son privados y solo tuyos', (MODE === 'real' ? `<div class="bk-last ${age === null || age >= 7 ? 'due' : ''}"><span>Último respaldo</span><b>${age === null ? 'Nunca' : age === 0 ? 'Hoy' : age === 1 ? 'Ayer' : `Hace ${age} días`}</b></div>` : '')
-      + `<div class="row set-btns"><button class="btn primary" data-act="export-json">${icon('dl')}Respaldar (JSON)</button><button class="btn" data-act="import">Importar respaldo…</button><button class="btn" data-act="export-csv">Exportar CSV</button><input type="file" id="imp" accept="application/json,.json" data-change="import" hidden></div>
-      <p class="sub">JSON es el respaldo completo: con él recuperas todo. CSV sirve para abrir tus registros en Excel.</p>
+      + `<div class="row set-btns"><button class="btn primary" data-act="export-json">${icon('dl')}Descargar respaldo</button><button class="btn" data-act="import">Restaurar desde archivo…</button><button class="btn" data-act="export-csv">Exportar CSV</button><input type="file" id="imp" accept="application/json,.json" data-change="import" hidden></div>
+      <p class="sub">El respaldo es un archivo .json con todo lo tuyo: guárdalo en Archivos, iCloud o Drive. CSV sirve para abrir tus registros en Excel.</p>
       ${window.RN_WEB && MODE === 'real' ? `<div class="set-row"><span class="set-txt"><b>Historial de versiones</b><small>Cada cambio guarda cómo estaba todo. Puedes volver a cualquier momento de los últimos 30 días.</small></span><span class="set-ctl"><button class="btn sm" data-act="hist-open">${icon('cal')}Ver historial</button></span></div>` : ''}
       <details class="set-more"><summary>Dónde se guardan tus datos</summary>${storage_html()}${usage_html()}</details>`, 'c-wide')}
     ${sec('eye', 'Demostración', 'Datos ficticios, separados de los tuyos', `<p class="sub" style="margin:0">Entrar o salir de la demo nunca modifica tus datos reales.</p><div class="row set-btns">${MODE === 'demo' ? `<button class="btn" data-act="demo-reset">Restablecer demo</button><button class="btn primary" data-act="demo-exit">Volver a mis datos</button>` : `<button class="btn" data-act="demo-start">Explorar con datos de demostración</button>`}</div>`)}
@@ -5406,7 +5483,7 @@ function openSheet(title, inner, formName, data = {}) {
   $('#layer').innerHTML = `<div class="overlay" data-act="overlay"><form class="sheet" data-form="${formName}" ${attrs} role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="sheet-h"><h2>${title}</h2><span class="sp"></span><button type="button" class="btn ghost sm" data-act="close" aria-label="Cerrar">${icon('x')}</button></div>${inner}</form></div>`;
   const f = $('#layer input:not([type=hidden]):not([type=checkbox]):not([type=radio]), #layer select, #layer textarea'); if (f && window.innerWidth > 860) f.focus();
 }
-function closeSheet() { $('#layer').innerHTML = ''; UI.ql = null; }
+function closeSheet() { $('#layer').innerHTML = ''; UI.ql = null; UI.qlOpen = null; }
 
 /* ---------- Selector de fecha RN (se despliega hacia abajo: Hoy · Mañana · En una semana + calendario) ---------- */
 const MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -5548,13 +5625,39 @@ function taskSheet(t, preset = {}) {
     ${fld('t-note', 'Nota (opcional)', inp('t-note', 'text', t.note || ''), 'full')}
   </div><div class="row">${e ? `<button type="button" class="btn ghost danger" data-act="task-del" data-id="${t.id}" data-arm="1">Eliminar</button>${!t.done ? `<button type="button" class="btn ghost" data-act="task-next" data-id="${t.id}">Mover a la siguiente semana</button>` : ''}` : ''}<span style="flex:1"></span><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn primary">${e ? 'Guardar' : 'Agregar'}</button></div>`, 'task', e ? { id: t.id } : {});
 }
+function qlHabitCard(h, t, wk) {
+  const today = (h.logs || []).filter(l => l.date === t), done = today.length > 0, c = (h.logs || []).filter(l => D.weekStart(l.date) === wk).length;
+  const tg = Math.max(1, Math.min(7, hTarget(h, wk) || 1)), col = (AREA[h.area] || {}).color || '#8E988F', amt = h.measure === 'amount';
+  const sub = done ? (amt && today[0].value != null ? `Hoy · ${fmt(today.reduce((a, l) => a + (+l.value || 0), 0), 1)} ${esc(h.unit || '')}` : 'Hecho hoy') : `${c}/${tg} esta semana${amt && h.unit ? ' · ' + esc(h.unit) : ''}`;
+  return `<button type="button" class="qh${done ? ' done' : ''}${UI.qlOpen === h.id ? ' open' : ''}" style="--c:${col}" data-act="ql-tap" data-id="${h.id}" aria-pressed="${done}"><span class="qh-xp">+${CFG.XP.habitLog} XP</span><span class="qh-top"><span class="qh-emo">${hEmoji(h) || '•'}</span><span class="qh-ck">${icon('check')}</span></span><b>${esc(h.title)}</b><span class="qh-dots">${Array.from({ length: tg }, (_, k) => `<i class="${k < c ? 'on' : ''}"></i>`).join('')}</span><small>${sub}</small></button>`;
+}
+function qlChips(h) {
+  if (/min/i.test(h.unit || '')) return [10, 15, 30, 45, 60];
+  const v = [...new Set((h.logs || []).filter(l => l.value != null && l.value !== '').slice(-12).map(l => +l.value).filter(x => x > 0))].slice(-4).sort((a, b) => a - b);
+  return v.length ? v : [1, 2, 5, 10];
+}
+function qlBody() {
+  const st = S(), t = D.today(), wk = D.weekStart(t), goals = goalsActive(st), habits = st.habits.filter(h => !h.archived), q = UI.ql;
+  if (q && q.kind === 'g') { const g = goals.find(x => x.id === q.id); if (g) return `<button type="button" class="btn ghost sm ql-back" data-act="ql-back">← Volver</button><div class="ql-gh" style="--c:${(AREA[g.area] || {}).color || '#8E988F'}"><span class="d"></span><b>${esc(g.title)}</b></div>${logFields(g)}<div class="row"><span style="flex:1"></span><button class="btn primary">Guardar registro</button></div>`; }
+  if (!goals.length && !habits.length) return emptyBox('Crea un objetivo o hábito primero.', '<button type="button" class="btn primary sm" data-act="goal-new">Nuevo objetivo</button>');
+  const nDone = habits.filter(h => (h.logs || []).some(l => l.date === t)).length, R = 2 * Math.PI * 18, off = habits.length ? R * (1 - nDone / habits.length) : R;
+  const open = UI.qlOpen && habits.find(h => h.id === UI.qlOpen);
+  const qty = open ? `<div class="ql-qty" style="--c:${(AREA[open.area] || {}).color || '#8E988F'}"><span>¿Cuánto${/min/i.test(open.unit || '') ? ' tiempo' : ''} de ${esc(open.title.toLowerCase())}?${open.unit ? ` <em>${esc(open.unit)}</em>` : ''}</span><div class="ql-chips">${qlChips(open).map(v => `<button type="button" class="ql-chip" data-act="ql-amt" data-id="${open.id}" data-v="${v}">${fmt(v, 1)}</button>`).join('')}</div><div class="ql-other"><input id="ql-v" type="number" inputmode="decimal" min="0" step="any" placeholder="Otra cantidad" aria-label="Otra cantidad"><button type="button" class="btn sm primary" data-act="ql-amt" data-id="${open.id}">Guardar</button></div></div>` : '';
+  const G_LBL = { performance: 'Sesión', practice: 'Sesión', outcome: 'Avance', project: 'Avance', binary: 'Avance', financial: 'Aportación', academic: 'Resultado', qualitative: 'Reflexión' };
+  return `${habits.length ? `<div class="ql-head"><svg class="ql-ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="b" cx="22" cy="22" r="18"/><circle class="f" cx="22" cy="22" r="18" stroke-dasharray="${R.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 22 22)"/></svg><div><b>${nDone === habits.length ? '¡Todos tus hábitos de hoy!' : `${nDone} de ${habits.length} hábitos hoy`}</b><small>${D.DOWF[D.dow(t)]} ${D.parse(t).getDate()} ${MES[D.parse(t).getMonth()].slice(0, 3)} · toca para marcar, otra vez para quitar</small></div></div>
+    <div class="eyebrow">Hábitos</div><div class="ql-grid">${habits.map(h => qlHabitCard(h, t, wk)).join('')}</div>${qty}` : ''}
+    ${goals.length ? `<div class="eyebrow">Objetivos</div><div class="ql-goals">${goals.map(g => { const n = (g.logs || []).filter(l => l.date === t).length; return `<button type="button" class="ql-g" style="--c:${(AREA[g.area] || {}).color || '#8E988F'}" data-act="ql-pick" data-kind="g" data-id="${g.id}"><span class="d"></span><span class="t">${esc(g.title)}</span>${n ? `<span class="good">hoy${n > 1 ? ' ×' + n : ''}</span>` : ''}<em>+ ${G_LBL[g.type] || 'Registro'}</em></button>`; }).join('')}</div>` : ''}`;
+}
 function quickLogSheet() {
-  const st = S(), goals = goalsActive(st), habits = st.habits.filter(h => !h.archived), q = UI.ql;
-  const pick = (kind, x) => { const n = (x.logs || []).filter(l => l.date === D.today()).length; return `<button type="button" data-act="ql-pick" data-kind="${kind}" data-id="${x.id}" aria-pressed="${q && q.id === x.id}">${n ? `<span class="hstat on sm">${icon('check')}</span>` : `<span class="dot" style="background:${(AREA[x.area] || {}).color || '#5F6860'}"></span>`}${esc(x.title)}${n ? `<span class="good" style="font-size:.74rem">hoy${n > 1 ? ' ×' + n : ''}</span>` : ''}</button>`; };
-  let form = '<p class="sub">Elige qué quieres registrar.</p>';
-  if (q) { const x = q.kind === 'g' ? goals.find(g => g.id === q.id) : habits.find(h => h.id === q.id); if (x) form = (q.kind === 'g' ? logFields(x) : habitLogFields(x)) + `<div class="row"><span style="flex:1"></span><button class="btn primary">Guardar registro</button></div>`; }
-  openSheet('Registro rápido', `${habits.length ? `<div class="eyebrow">Hábitos</div><div class="picker">${habits.map(h => pick('h', h)).join('')}</div>` : ''}
-    ${goals.length ? `<div class="eyebrow">Objetivos</div><div class="picker">${goals.map(g => pick('g', g)).join('')}</div>` : ''}${!goals.length && !habits.length ? emptyBox('Crea un objetivo o hábito primero.', '<button type="button" class="btn primary sm" data-act="goal-new">Nuevo objetivo</button>') : ''}<div id="ql-form" class="stack">${form}</div>`, 'quick', q ? { kind: q.kind, id: q.id } : {});
+  const q = UI.ql; openSheet('Registro rápido', `<div class="ql">${qlBody()}</div>`, 'quick', q ? { kind: q.kind, id: q.id } : {});
+  $('#layer .sheet').classList.add('ql-sheet');
+}
+function qlRefresh(popId) {
+  const box = $('#layer .ql'); if (!box) return quickLogSheet();
+  const f = box.closest('form'), q = UI.ql; if (f) { f.dataset.kind = q ? q.kind : ''; f.dataset.id = q ? q.id : ''; }
+  box.innerHTML = qlBody();
+  if (popId) { const c = box.querySelector(`.qh[data-id="${popId}"]`); if (c) c.classList.add('pop'); }
+  const v = $('#ql-v'); if (v && UI.qlOpen && window.innerWidth > 860) v.focus();
 }
 function replanSheet(g) {
   openSheet(`Replantear · ${esc(g.title)}`, `<p class="sub">Cambiar de estrategia no es fracasar. Ajusta lo necesario; se guarda una nota con fecha en el objetivo.</p>
@@ -5722,6 +5825,168 @@ function pzBody() {
   return h;
 }
 function pzSun(x) { const t = D.today(); return D.add(D.weekStart(x.start > t ? x.start : t), 6); }
+/* ============ Recordatorios (notificaciones) ============ */
+const PUSH_KINDS = [['habits', 'Hábitos pendientes', 'Solo si te falta alguno para cumplir la semana', 20, true], ['review', 'Cierre de semana', 'Domingos, si no lo has hecho', 19, true], ['wrap', 'Resumen del mes', 'El día 1 de cada mes', 10, false]];
+function pushPrefs() { const p = LS.get('rn-push-prefs') || {}; PUSH_KINDS.forEach(([k, , , h, on]) => { p[k] = Object.assign({ h, on }, p[k]); }); if (p.pauseMute == null) p.pauseMute = true; return p; }
+function pushSupport() {
+  if (!window.RN_WEB || MODE !== 'real') return { ok: false, why: 'demo' };
+  const ios = /iP(hone|ad|od)/.test(navigator.userAgent), standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) return { ok: false, why: ios && !standalone ? 'install' : 'nope' };
+  if (Notification.permission === 'denied') return { ok: false, why: 'denied' };
+  return { ok: true };
+}
+const b64uBytes = s => { const p = '='.repeat((4 - s.length % 4) % 4), b = atob((s + p).replace(/-/g, '+').replace(/_/g, '/')); return Uint8Array.from(b, c => c.charCodeAt(0)); };
+async function pushSub() { try { const r = await navigator.serviceWorker.getRegistration(); return r ? await r.pushManager.getSubscription() : null; } catch (e) { return null; } }
+async function fillPush() {
+  const el = $('#push-panel'); if (!el) return; const sp = pushSupport();
+  if (!sp.ok) { el.innerHTML = `<p class="sub" style="margin:0">${{ demo: 'Los recordatorios funcionan con tu cuenta, no en la demo.', install: 'En iPhone, los recordatorios solo funcionan con RN. instalada: Safari → Compartir → "Agregar a pantalla de inicio", y ábrela desde ese ícono.', denied: 'Bloqueaste las notificaciones para RN. Actívalas en Ajustes del teléfono → Notificaciones → RN. (o en los permisos del navegador) y vuelve aquí.', nope: 'Este navegador no permite notificaciones. Prueba con RN. instalada en tu teléfono o con Chrome.' }[sp.why]}</p>`; return; }
+  const sub = await pushSub(), on = !!sub && Notification.permission === 'granted' && pushPrefs().on !== false, P = pushPrefs();
+  const hours = h => Array.from({ length: 18 }, (_, i) => i + 6).map(x => `<option value="${x}" ${x === +h ? 'selected' : ''}>${x === 12 ? '12:00 p.m.' : x > 12 ? (x - 12) + ':00 p.m.' : x + ':00 a.m.'}</option>`).join('');
+  const sw = (chg, v, label, extra = '') => `<span class="sw"><input type="checkbox" role="switch" aria-label="${label}" data-change="${chg}" ${v ? 'checked' : ''} ${extra}><i></i></span>`;
+  el.innerHTML = `<label class="set-row"><span class="set-txt"><b>Recordatorios</b><small>${on ? 'Activados en este dispositivo' : 'Notificaciones del teléfono, como las de cualquier app. Apagar aquí las quita todas.'}</small></span>${sw('push-on', on, 'Recordatorios')}</label>
+    ${on ? PUSH_KINDS.map(([k, t, sub2]) => `<div class="set-row push-row"><span class="set-txt"><b>${t}</b><small>${sub2}</small></span><span class="set-ctl"><select data-change="push-h" data-k="${k}" aria-label="Hora de ${t.toLowerCase()}">${hours(P[k].h)}</select>${sw('push-k', P[k].on, t, `data-k="${k}"`)}</span></div>`).join('')
+      + `<label class="set-row"><span class="set-txt"><b>En pausa no te escribo</b><small>Si tienes una pausa activa (viaje, enfermo…), no llegan recordatorios</small></span>${sw('push-pz', P.pauseMute, 'Silenciar en pausa')}</label>
+      <div class="row set-btns"><button class="btn sm" data-act="push-test">Probar notificación</button></div>` : ''}`;
+}
+async function fillStats() {
+  const el = $('#stats-panel'); if (!el || !window.RN_WEB || !RN_WEB.stats || MODE !== 'real') return;
+  const r = await RN_WEB.stats(UI.statDays || 30); if (!r.data) return; const d = r.data;
+  const days = []; for (let i = d.days - 1; i >= 0; i--) days.push(D.add(D.today(), -i)); const by = Object.fromEntries((d.by_day || []).map(x => [x.d, x.n])), mx = Math.max(1, ...days.map(x => by[x] || 0));
+  el.hidden = false;
+  el.innerHTML = `<section class="card set-sec c-wide"><div class="set-h"><span class="set-ic">${icon('trend')}</span><div><h2>Tu página de bienvenida</h2><p class="sub">Solo tú ves esto · sin cookies ni datos personales</p></div></div><div class="set-body"><div class="seg" role="group" style="align-self:flex-start"><button data-act="stat-days" data-v="7" aria-pressed="${d.days === 7}">7 días</button><button data-act="stat-days" data-v="30" aria-pressed="${d.days === 30}">30 días</button></div>
+    <div class="st-kpis"><div><b class="num">${fmt(d.views)}</b><small>visitas</small></div><div><b class="num">${fmt(d.waitlist)}</b><small>en lista de espera (${fmt(d.waitlist_total)} en total)</small></div><div><b class="num">${fmt(d.signup_click)}</b><small>clics en "Crear cuenta"</small></div><div><b class="num">${d.views ? Math.round(100 * d.mobile / d.views) : 0}%</b><small>desde celular</small></div></div>
+    <div class="st-bars" aria-label="Visitas por día">${days.map(x => `<i style="--h:${((by[x] || 0) / mx * 100).toFixed(0)}%" title="${D.short(x)}: ${by[x] || 0}"></i>`).join('')}</div>
+    ${(d.refs || []).length ? `<div class="st-refs">${d.refs.map(x => `<span><b>${esc(x.ref)}</b> ${fmt(x.n)}</span>`).join('')}</div>` : ''}
+    <p class="sub" style="margin:0">Tip: comparte el link con <b>?utm_source=instagram</b> (o whatsapp, tiktok…) al final para saber de dónde llega la gente.</p></div></section>`;
+}
+async function pushSync() { const sub = await pushSub(); if (!sub) return; const r = await RN_WEB.pushPrefs(sub.endpoint, pushPrefs()); if (r.error) toast(r.error); }
+async function pushEnable() {
+  try {
+    const perm = await Notification.requestPermission(); if (perm !== 'granted') { toast('Sin permiso no puedo mandarte recordatorios'); return fillPush(); }
+    const reg = await navigator.serviceWorker.ready; let key;
+    try { key = (await (await fetch(RN_WEB.fn, { headers: { apikey: (window.RN_CONFIG || {}).key } })).json()).publicKey; } catch (e) { }
+    if (!key) { toast('Falta activar la función rn-push en Supabase (paso 2 de la guía)'); return fillPush(); }
+    let sub = await reg.pushManager.getSubscription(); if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uBytes(key) });
+    const P = pushPrefs(); P.on = true; LS.set('rn-push-prefs', P);
+    const r = await RN_WEB.pushSave(sub.toJSON(), P, Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Mexico_City');
+    if (r.error) { toast(r.error); return fillPush(); }
+    toast('Recordatorios activados'); fillPush();
+  } catch (e) { toast('No se pudieron activar: ' + ((e && e.message) || 'error')); fillPush(); }
+}
+async function pushDisable() { const sub = await pushSub(); const P = pushPrefs(); P.on = false; LS.set('rn-push-prefs', P); if (sub) { await RN_WEB.pushDel(sub.endpoint); try { await sub.unsubscribe(); } catch (e) { } } toast('Recordatorios apagados'); fillPush(); }
+/* ============ Cierre de semana guiado (4 pasos) ============ */
+const GR_GOOD = ['Dormí bien', 'Entrené', 'Me organicé', 'Avancé en la escuela', 'Avancé en el trabajo', 'Tiempo con familia o amigos', 'Comí bien', 'Descansé', 'Cumplí mis hábitos', 'Aprendí algo nuevo'];
+function grWeek(t = D.today()) { const w = D.dow(t); return w >= 4 ? D.weekStart(t) : w === 0 ? D.add(D.weekStart(t), -7) : null; }
+function grCard(st) {
+  if (!st.meta.onboarded || (!st.habits.length && !st.goals.length)) return ''; const wk = grWeek(); if (!wk) return '';
+  const r = st.reviews.find(x => x.period === wk); if (r && r.done) return '';
+  if (LS.get('rn-gr-skip') === wk) return '';
+  return `<div class="wr-card gr-card" data-act="gr-open" data-wk="${wk}" role="button" tabindex="0"><span class="wr-card-i">${icon('review')}</span><div><b>Cierra tu semana en 3 minutos</b><small>${D.weekLabel(wk)} · qué salió bien, qué ajustas y tus 3 prioridades</small></div><span class="btn sm primary">Empezar</span></div>`;
+}
+function grShort(st, wk) {
+  return st.habits.filter(h => !h.archived && hTarget(h, wk) > 0).map(h => {
+    const c = countByWeek(h.logs || []), T = hTarget(h, wk), n = c[wk] || 0; if (weekStatus(n, T, wk) || n >= T) return null;
+    let streak = 0; for (let w = wk; streak < 6; w = D.add(w, -7)) { const tw = hTarget(h, w); if (tw > 0 && (c[w] || 0) < tw && !weekStatus(c[w] || 0, tw, w)) streak++; else break; }
+    return { h, n, T, streak };
+  }).filter(Boolean).sort((a, b) => a.n / a.T - b.n / b.T).slice(0, 2);
+}
+function grBody() {
+  const st = S(), G = UI.gr, wk = G.wk, Rw = weekReview(st, wk), prev = weekReview(st, D.add(wk, -7)), steps = ['Semana', 'Bien', 'Ajustar', 'Plan'];
+  const nav = `<div class="gr-steps">${steps.map((x, i) => `<button type="button" class="gr-stp${i === G.step ? ' on' : i < G.step ? ' done' : ''}" data-act="gr-go" data-s="${i}">${i + 1} · ${x}</button>`).join('')}</div>`;
+  const next = (lbl = 'Siguiente') => `<div class="row"><span style="flex:1"></span>${G.step ? '<button type="button" class="btn ghost" data-act="gr-go" data-s="' + (G.step - 1) + '">Atrás</button>' : ''}<button type="button" class="btn primary" data-act="gr-go" data-s="${G.step + 1}">${lbl}</button></div>`;
+  let body = '';
+  if (G.step === 0) {
+    const end = D.add(wk, 6), days = new Set(); st.habits.forEach(h => (h.logs || []).forEach(l => { if (l.date >= wk && l.date <= end) days.add(l.date); })); st.goals.forEach(g => (g.logs || []).forEach(l => { if (l.date >= wk && l.date <= end) days.add(l.date); })); Rw.done.forEach(x => x.doneAt && days.add(x.doneAt));
+    const ok = Rw.practices.filter(x => x.n >= x.target).length, past = Math.min(7, D.diff(D.today() < end ? D.today() : end, wk) + 1);
+    body = `<div class="eyebrow">${D.weekLabel(wk)}</div><div class="gr-big num">+${fmt(Rw.xp)} XP</div>
+      <div class="gr-stats"><div><b class="num">${days.size}/${past}</b><small>días con registro</small></div><div><b class="num">${ok} de ${Rw.practices.length}</b><small>hábitos cumplidos</small></div><div><b class="num">${Rw.done.length}</b><small>tareas hechas</small></div><div><b class="num">${Rw.advanced.length}</b><small>objetivos avanzaron</small></div></div>
+      <div class="gr-wolf">${wolfOrb(34, 'calm')}<p>${Rw.xp > prev.xp && prev.xp > 0 ? `Sumaste <b>${fmt(Rw.xp - prev.xp)} XP más</b> que la semana pasada. Así se construye.` : ok === Rw.practices.length && ok ? 'Cumpliste <b>todos</b> tus hábitos. Semana sólida.' : Rw.practices.length ? `Cumpliste <b>${ok} de ${Rw.practices.length}</b> hábitos. En el paso 3 vemos qué ajustar.` : `Sumaste <b>${fmt(Rw.xp)} XP</b> esta semana.`}</p></div>${next()}`;
+  }
+  if (G.step === 1) body = `<div class="eyebrow">¿Qué salió bien?</div><p class="sub" style="margin:0">Toca todo lo que aplique.</p><div class="gr-chips">${GR_GOOD.map(x => `<button type="button" class="ql-chip${G.good.includes(x) ? ' on' : ''}" data-act="gr-good" data-v="${esc(x)}">${esc(x)}</button>`).join('')}</div>
+      <label class="gr-note"><span>Nota (opcional)</span><textarea id="gr-note" rows="2" placeholder="Ej. Entregué el proyecto un día antes.">${esc(G.note || '')}</textarea></label>${next()}`;
+  if (G.step === 2) {
+    const sh = grShort(st, wk), pend = Rw.pending;
+    body = `<div class="eyebrow">Lo que se quedó corto</div>${sh.length ? sh.map(x => { const ch = G.adj[x.h.id] || 'keep', low = Math.max(1, (+x.h.target || 1) - 1); return `<div class="gr-adj"><div class="gr-adj-h"><span>${hEmoji(x.h) || ''} ${esc(x.h.title)}</span><em>${x.n} de ${x.T}${x.streak > 1 ? ` · ${x.streak}ª semana así` : ''}</em></div>
+        ${(+x.h.target || 1) > 1 ? `<button type="button" class="gr-opt${ch === 'low' ? ' on' : ''}" data-act="gr-adj" data-id="${x.h.id}" data-v="low"><i></i>Bajarlo a ${low} por semana durante un mes</button>` : ''}
+        <button type="button" class="gr-opt${ch === 'keep' ? ' on' : ''}" data-act="gr-adj" data-id="${x.h.id}" data-v="keep"><i></i>Dejarlo igual, fue una semana rara</button></div>`; }).join('') + `<div class="gr-wolf">${wolfOrb(34, 'calm')}<p>Bajar la meta no es rendirse. Una vez por semana que sí cumples suma más que dos que no.</p></div>` : `<div class="gr-wolf">${wolfOrb(34, 'happy')}<p>Cumpliste todos tus hábitos. Nada que ajustar.</p></div>`}
+      ${pend.length ? `<label class="gr-chk"><input type="checkbox" id="gr-move" ${G.move ? 'checked' : ''} data-change="gr-move"><span>Pasar mis <b>${pend.length}</b> tarea${pend.length > 1 ? 's' : ''} pendiente${pend.length > 1 ? 's' : ''} a la próxima semana</span></label>` : ''}${next()}`;
+  }
+  if (G.step === 3) {
+    const nw = D.add(wk, 7), cands = [];
+    Rw.pending.forEach(x => cands.push({ k: 't:' + x.id, label: x.title }));
+    st.tasks.filter(x => x.week === nw && !x.done).forEach(x => cands.push({ k: 't:' + x.id, label: x.title }));
+    goalsActive(st).forEach(g => cands.push({ k: 'g:' + g.id, label: g.nextAction ? g.nextAction : 'Avanzar: ' + g.title }));
+    const seen = new Set(), list = cands.filter(c => !seen.has(c.k) && seen.add(c.k)).slice(0, 7);
+    G.custom.forEach((c, i) => list.push({ k: 'c:' + i, label: c }));
+    body = `<div class="eyebrow">Tus 3 prioridades para la semana del ${D.weekLabel(nw)}</div><p class="sub" style="margin:0">Elige hasta 3. Se vuelven tareas de prioridad alta.</p>
+      <div class="gr-pri">${list.map(c => { const i = G.prios.indexOf(c.k); return `<button type="button" class="gr-p${i >= 0 ? ' on' : ''}" data-act="gr-pri" data-k="${esc(c.k)}"><span class="n">${i >= 0 ? i + 1 : ''}</span>${esc(c.label)}</button>`; }).join('')}</div>
+      <div class="ql-other"><input id="gr-custom" type="text" maxlength="90" placeholder="Otra prioridad…" aria-label="Otra prioridad"><button type="button" class="btn sm" data-act="gr-add">Agregar</button></div>
+      <div class="row"><span style="flex:1"></span><button type="button" class="btn ghost" data-act="gr-go" data-s="2">Atrás</button><button type="button" class="btn primary" data-act="gr-done">Cerrar semana · +${CFG.XP.review} XP</button></div>`;
+  }
+  return nav + `<div class="gr-pane">${body}</div>`;
+}
+function grOpen(wk) {
+  const st = S(), r = st.reviews.find(x => x.period === wk) || {};
+  UI.gr = { wk, step: 0, good: (r.good || []).slice(), note: r.note || '', adj: {}, move: true, prios: [], custom: [] };
+  openSheet('Cierre de semana', `<div class="gr">${grBody()}</div>`, 'none'); $('#layer .sheet').classList.add('gr-sheet');
+}
+function grRefresh() { const n = $('#gr-note'); if (n && UI.gr) UI.gr.note = n.value; const b = $('#layer .gr'); if (b) b.innerHTML = grBody(); }
+function grFinish() {
+  const G = UI.gr; if (!G) return; const n = $('#gr-note'); if (n) G.note = n.value;
+  const st0 = S(), wk = G.wk, nw = D.add(wk, 7), Rw = weekReview(st0, wk), sh = grShort(st0, wk);
+  mut(st => {
+    const adaptTxt = [];
+    sh.forEach(x => { const h = st.habits.find(y => y.id === x.h.id); if (!h) return; if (G.adj[h.id] === 'low') { const low = Math.max(1, (+h.target || 1) - 1); h.adj = Object.assign({}, h.adj); for (let i = 1; i <= 4; i++) h.adj[D.add(wk, 7 * i)] = low; adaptTxt.push(`${h.title}: ${low}×/semana un mes`); } });
+    if (G.move) Rw.pending.forEach(x => { const t = st.tasks.find(y => y.id === x.id); if (t && !t.done) { t.week = nw; t.day = null; } });
+    let made = 0;
+    G.prios.forEach(k => {
+      const [kind, id] = [k.slice(0, 1), k.slice(2)];
+      if (kind === 't') { const t = st.tasks.find(y => y.id === id); if (t) { t.priority = 1; if (t.week < nw) { t.week = nw; t.day = null; } } }
+      else { const g = kind === 'g' ? st.goals.find(y => y.id === id) : null, title = g ? (g.nextAction || 'Avanzar: ' + g.title) : G.custom[+id]; if (title) { st.tasks.push({ id: uid(), title, priority: 1, week: nw, day: null, area: g ? g.area : null, goalId: g ? g.id : null, done: false, doneAt: null }); made++; } }
+    });
+    let r = st.reviews.find(x => x.period === wk); if (!r) { r = { id: uid(), period: wk }; st.reviews.push(r); }
+    const good = G.good.length ? 'Salió bien: ' + G.good.join(', ').toLowerCase() + '.' : '';
+    Object.assign(r, { good: G.good, note: G.note, guided: true, learned: [good, G.note].filter(Boolean).join(' ') || r.learned || '', adapt: adaptTxt.join(' · ') || r.adapt || '' });
+    if (!r.done) { r.done = true; r.doneAt = D.today(); }
+  });
+  UI.gr = null; closeSheet(); toast(`Semana cerrada · +${CFG.XP.review} XP${G.prios.length ? ' · prioridades en Tareas' : ''}`);
+}
+/* ============ Atajos de un toque (#log=ID, #quick) ============ */
+function takeLogHash() {
+  const h = location.hash || ''; let m = /^#log=([^&]+)/.exec(h);
+  if (m) { history.replaceState(null, '', location.pathname + location.search + '#dashboard'); UI.lastHash = '#dashboard'; return { log: decodeURIComponent(m[1]) }; }
+  if (h === '#cierre') { history.replaceState(null, '', location.pathname + location.search + '#dashboard'); UI.lastHash = '#dashboard'; return { cierre: 1 }; }
+  if (h === '#resumen') { history.replaceState(null, '', location.pathname + location.search + '#dashboard'); UI.lastHash = '#dashboard'; return { resumen: 1 }; }
+  if (h === '#quick' || h === '#registro') { history.replaceState(null, '', location.pathname + location.search + '#dashboard'); UI.lastHash = '#dashboard'; return { quick: 1 }; }
+  return null;
+}
+function runShortcut(x) {
+  if (!x) return; const st = S(); if (!st || !st.meta || !st.meta.onboarded) return;
+  if (x.quick) { UI.ql = null; UI.qlOpen = null; return quickLogSheet(); }
+  if (x.cierre) return grOpen(grWeek() || D.add(D.weekStart(D.today()), -7));
+  if (x.resumen) { const ms = wrapMonths(st), cm = D.today().slice(0, 7); return wrapOpen(ms.find(m => m < cm) || ms[0] || cm); }
+  const h = st.habits.find(y => y.id === x.log);
+  if (!h || h.archived) return toast('Ese atajo ya no sirve: el hábito se borró o se archivó.');
+  if ((h.logs || []).some(l => l.date === D.today())) return toast(`${h.title} ya estaba registrado hoy ✓`);
+  if (h.measure === 'amount') { UI.ql = null; UI.qlOpen = h.id; return quickLogSheet(); }
+  ACT['hab-log']({ id: h.id });
+}
+function shortcutUrl(id) { return location.origin + location.pathname + '#log=' + encodeURIComponent(id); }
+function shortcutsSheet(id) {
+  const st = S(), hs = st.habits.filter(h => !h.archived), h = hs.find(x => x.id === id) || hs[0];
+  if (!h) return openSheet('Atajos de un toque', '<p class="sub">Primero crea un hábito.</p>', 'none');
+  const url = shortcutUrl(h.id);
+  openSheet('Atajos de un toque', `<p class="sub">Un ícono en tu pantalla de inicio que registra un hábito de hoy con un toque. Abre RN. un segundo, lo registra y te deja deshacerlo.</p>
+    <div class="sc-pick">${hs.map(x => `<button type="button" class="ql-chip${x.id === h.id ? ' on' : ''}" data-act="sc-open" data-id="${x.id}">${hEmoji(x) || ''} ${esc(x.title)}</button>`).join('')}</div>
+    <div class="sc-url"><code id="sc-url">${esc(url)}</code><button type="button" class="btn sm primary" data-act="sc-copy">Copiar link</button></div>
+    <ol class="sc-steps">
+      <li><b>Copia el link</b> de arriba.</li>
+      <li>Abre la app <b>Atajos</b> del iPhone → <b>+</b> → <b>Agregar acción</b> → busca <b>"Abrir URLs"</b> y pega el link.</li>
+      <li>Toca la flechita junto al nombre del atajo → <b>Agregar a pantalla de inicio</b>. Ponle nombre (ej. "${esc(h.title)}") y un ícono → <b>Agregar</b>.</li>
+      <li>Listo: tocarlo registra ${esc(h.title.toLowerCase())} de hoy. Si ya estaba, solo te avisa.</li>
+    </ol>
+    <p class="sub sc-note">En iPhone el atajo abre RN. en Safari; la primera vez inicia sesión ahí (con tu contraseña guardada es un toque). En Android y en la compu, deja presionado el ícono de RN. para ver "Registro rápido".${h.measure === 'amount' ? ` Como ${esc(h.title.toLowerCase())} pide cantidad, el atajo te abre los botones de cantidad.` : ''}</p>`, 'none');
+}
 /* ============ Resumen del mes (estilo historias) ============ */
 function wrapData(st, ym) {
   const [y, m] = ym.split('-').map(Number), start = `${ym}-01`, last = new Date(y, m, 0).getDate(), endM = `${ym}-${String(last).padStart(2, '0')}`, t = D.today(), end = endM < t ? endM : t, inM = d => d && d >= start && d <= end;
@@ -5919,11 +6184,36 @@ const ACT = {
   },
   'nav-to': d => { closeSheet(); location.hash = '#' + d.to; },
   copy: () => { const t = $('#copy-area'); if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(() => toast('Copiado')).catch(() => { t.select(); }); else t.select(); },
-  quicklog: () => { UI.ql = null; quickLogSheet(); },
+  quicklog: () => { UI.ql = null; UI.qlOpen = null; quickLogSheet(); },
   'ql-pick': d => {
     const x = d.kind === 'h' ? findH(d.id) : findG(d.id);
-    if (d.kind === 'h' && x.measure !== 'amount') { closeSheet(); return ACT['hab-log']({ id: d.id }); }
-    UI.ql = { kind: d.kind, id: d.id }; quickLogSheet();
+    if (d.kind === 'h') return ACT['ql-tap']({ id: d.id });
+    UI.ql = { kind: d.kind, id: d.id }; UI.qlOpen = null; qlRefresh();
+  },
+  'ql-back': () => { UI.ql = null; qlRefresh(); },
+  'sc-open': d => shortcutsSheet(d.id),
+  'gr-open': d => grOpen(d.wk || grWeek() || D.weekStart(D.today())),
+  'gr-go': d => { const G = UI.gr; if (!G) return; G.step = Math.max(0, Math.min(3, +d.s)); grRefresh(); const sh = $('#layer .sheet'); if (sh) sh.scrollTop = 0; },
+  'gr-good': d => { const G = UI.gr, i = G.good.indexOf(d.v); i >= 0 ? G.good.splice(i, 1) : G.good.push(d.v); grRefresh(); },
+  'gr-adj': d => { UI.gr.adj[d.id] = d.v; grRefresh(); },
+  'gr-pri': d => { const P = UI.gr.prios, i = P.indexOf(d.k); if (i >= 0) P.splice(i, 1); else if (P.length < 3) P.push(d.k); else return toast('Máximo 3: quita una para cambiarla'); grRefresh(); },
+  'gr-add': () => { const i = $('#gr-custom'), v = (i && i.value || '').trim(); if (!v) return i && i.focus(); const G = UI.gr; G.custom.push(v); if (G.prios.length < 3) G.prios.push('c:' + (G.custom.length - 1)); grRefresh(); },
+  'gr-done': () => grFinish(),
+  'stat-days': d => { UI.statDays = +d.v; fillStats(); },
+  'push-test': async () => { const sub = await pushSub(); if (!sub) return toast('Primero activa los recordatorios'); try { const r = await fetch(RN_WEB.fn, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: (window.RN_CONFIG || {}).key }, body: JSON.stringify({ test: true, endpoint: sub.endpoint }) }); toast(r.ok ? 'Enviada: debería llegarte en unos segundos' : 'No se pudo enviar. Revisa la guía (función rn-push).'); } catch (e) { toast('No se pudo enviar. Revisa tu internet.'); } },
+  'sc-copy': () => { const t = ($('#sc-url') || {}).textContent || ''; const ok = () => toast('Link copiado. Ahora ábrelo en la app Atajos.'); if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok).catch(() => { const r = document.createRange(); r.selectNodeContents($('#sc-url')); getSelection().removeAllRanges(); getSelection().addRange(r); }); },
+  'ql-tap': d => {
+    const h = findH(d.id); if (!h) return; const t = D.today(), mine = (h.logs || []).filter(l => l.date === t);
+    if (mine.length) { const last = mine[mine.length - 1]; mut(() => removeHabitLog(h, last.id)); UI.qlOpen = null; qlRefresh(); return toast(`${h.title}: quitado de hoy`, () => { mut(() => { addHabitLog(h, { date: t, value: last.value, note: last.note }); }); qlRefresh(); }); }
+    if (h.measure === 'amount') { UI.qlOpen = UI.qlOpen === h.id ? null : h.id; return qlRefresh(); }
+    let lid; UI.pulse = h.id; mut(() => { lid = addHabitLog(h, { date: t }).id; }); qlRefresh(h.id);
+    toast(`${h.title}: registrado hoy`, () => { mut(() => removeHabitLog(h, lid)); qlRefresh(); });
+  },
+  'ql-amt': d => {
+    const h = findH(d.id); if (!h) return; const v = d.v != null ? +d.v : num(($('#ql-v') || {}).value);
+    if (!(v > 0)) { const i = $('#ql-v'); if (i) { i.focus(); i.classList.add('shake'); setTimeout(() => i.classList.remove('shake'), 400); } return; }
+    let lid; UI.pulse = h.id; mut(() => { lid = addHabitLog(h, { date: D.today(), value: v }).id; }); UI.qlOpen = null; qlRefresh(h.id);
+    toast(`${h.title}: ${fmt(v, 1)} ${h.unit || ''} hoy`, () => { mut(() => removeHabitLog(h, lid)); qlRefresh(); });
   },
   log: d => logSheet(findG(d.id)),
   'yd-log': d => { const h = findH(d.id), y = D.add(D.today(), -1); if (!h) return;
@@ -6266,6 +6556,11 @@ function saveGoalLog(g, f) {
 function saveHabitLog(h, f) { let lid; UI.pulse = h.id; mut(() => { lid = addHabitLog(h, { date: f['h-date'] || D.today(), value: num(f['h-value']), note: (f['h-note'] || '').trim() }).id; }); closeSheet(); UI.hDay = null; const dd = f['h-date'] || D.today(), when = dd === D.today() ? 'hoy' : dd === D.add(D.today(), -1) ? 'ayer' : 'antier'; toast(`${h.title}: registrado ${when}`, () => mut(() => removeHabitLog(h, lid))); }
 
 const CHG = {
+  'push-on': el => { el.disabled = true; (el.checked ? pushEnable() : pushDisable()); },
+  'push-k': el => { const P = pushPrefs(); P[el.dataset.k].on = el.checked; LS.set('rn-push-prefs', P); pushSync(); },
+  'push-h': el => { const P = pushPrefs(); P[el.dataset.k].h = +el.value; LS.set('rn-push-prefs', P); pushSync(); toast('Hora guardada'); },
+  'push-pz': el => { const P = pushPrefs(); P.pauseMute = el.checked; LS.set('rn-push-prefs', P); pushSync(); },
+  'gr-move': el => { if (UI.gr) UI.gr.move = el.checked; },
   'wrap-month': el => { if (el.value) wrapOpen(el.value); },
   gtype: el => { const t = el.value; $('#gtype-fields').innerHTML = goalTypeFields(t, {}); $('#type-hint').innerHTML = `${icon('review')}<span><b>Cómo se registra:</b> ${TYPES[t].how}</span>`; },
   'task-day': el => { const t = findT(el.dataset.id); if (!t || !el.value) return; mut(() => { t.day = el.value; t.week = D.weekStart(el.value); }); toast('Tarea asignada al ' + D.DOWF[D.dow(el.value)].toLowerCase()); },
@@ -6280,7 +6575,8 @@ const CHG = {
     const file = el.files && el.files[0]; if (!file) return; const r = new FileReader();
     r.onload = () => { try { const obj = JSON.parse(r.result), st = obj.state || obj; if (!st.meta || !Array.isArray(st.goals) || !Array.isArray(st.habits) || !Array.isArray(st.tasks)) throw new Error('formato');
       st.reviews = st.reviews || []; UI.pendingImport = st;
-      openSheet('Importar respaldo', `<p>El archivo contiene <b>${st.goals.length}</b> objetivos, <b>${st.habits.length}</b> hábitos y <b>${st.tasks.length}</b> tareas${obj.mode === 'demo' ? ' (exportado desde la demo)' : ''}.</p><p class="sub">Reemplazará tus datos reales actuales${REAL && REAL.meta.onboarded ? ` (${REAL.goals.length} objetivos)` : ''}. Exporta antes si quieres conservarlos.</p><div class="row"><span style="flex:1"></span><button type="button" class="btn" data-act="close">Cancelar</button><button type="button" class="btn primary" data-act="import-confirm">Importar y reemplazar</button></div>`, 'none');
+      const when = obj.exported ? new Date(obj.exported).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+      openSheet('¿Restaurar este respaldo?', `<div class="bk-cnt"><div><b>${st.goals.length}</b><small>objetivos</small></div><div><b>${st.habits.length}</b><small>hábitos</small></div><div><b>${st.tasks.length}</b><small>tareas</small></div><div><b>${st.reviews.length}</b><small>revisiones</small></div></div><p class="sub">${when ? `Respaldo del <b>${when}</b>${obj.mode === 'demo' ? ' (de la demo)' : ''}. ` : ''}Reemplaza lo que tienes ahora${REAL && REAL.meta.onboarded ? ` (${REAL.goals.length} objetivos, ${REAL.habits.length} hábitos)` : ''}.${window.RN_WEB ? ' Antes de cambiar nada, lo actual queda en el Historial de versiones, así que puedes deshacerlo.' : ' Exporta antes si quieres conservarlo.'}</p><div class="row"><span style="flex:1"></span><button type="button" class="btn" data-act="close">Cancelar</button><button type="button" class="btn primary" data-act="import-confirm">Restaurar</button></div>`, 'none');
     } catch (e) { toast('El archivo no es un respaldo válido de esta app.'); } el.value = ''; };
     r.readAsText(file);
   }
@@ -6364,7 +6660,7 @@ function navTo() {
   vt.finished.finally(() => { UI.vtBusy = false; UI.noAsm = false; if (UI.vtDst) { UI.vtDst.style.viewTransitionName = ''; UI.vtDst = null; } document.documentElement.classList.remove('vt-morph'); });
 }
 UI.lastHash = location.hash;
-window.addEventListener('hashchange', navTo);
+window.addEventListener('hashchange', e => { const x = takeLogHash(); if (x) { render(); runShortcut(x); } else navTo(e); });
 
 const QUOTES = [
   'La disciplina es elegir entre lo que quieres ahora y lo que más quieres.',
@@ -6645,7 +6941,9 @@ window.__rnBoot = (async function boot() {
     if (MODE === 'real' && !$('#layer').innerHTML) render();
   });
   { const st0 = S(), today = D.today(), k = 'rn-hoy-day-' + MODE; if (st0 && st0.meta && st0.meta.onboarded && st0.meta.autoHoy === true && LS.get(k) !== today && (!location.hash || location.hash === '#dashboard')) { LS.set(k, today); history.replaceState(null, '', '#hoy'); } }
+  const scx = takeLogHash();
   render(); UI.introStarted = true; rnIntro();
+  if (scx) setTimeout(() => runShortcut(scx), 500);
 });
 
 </script>

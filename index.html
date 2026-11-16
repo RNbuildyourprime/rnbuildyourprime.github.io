@@ -2328,6 +2328,15 @@ main,.lp-foot{overflow-x:clip}
   .lp-nav{-webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important}
 }
 .lp-off,.lp-off *{animation-play-state:paused!important}
+
+.lp-wl-ok[hidden],form.lp-wl[hidden]{display:none!important}
+.lp-end{max-width:480px;margin:0 auto;display:grid;gap:14px}
+.lp-wl-end .lp-wl-in{margin:0;padding:6px;border-radius:18px;background:rgba(20,25,22,.85);border:1px solid rgba(255,255,255,.1);box-shadow:0 20px 60px -20px #B7F36B33}
+.lp-wl-end .lp-wl-in input{border:0;background:transparent;font-size:1rem}
+.lp-wl-end .lp-wl-in input:focus{box-shadow:none}
+.lp-wl-end .lp-wl-msg{text-align:center}
+.lp-end-links{margin:0;text-align:center;color:var(--muted);font-size:.9rem}.lp-end-links a{color:var(--fg);text-underline-offset:3px}
+@media (max-width:460px){.lp-wl-end .lp-wl-in{flex-direction:column}.lp-wl-end .lp-wl-in .lp-btn{justify-content:center}}
 </style>
 </head>
 <body class="lp glass-more">
@@ -2843,8 +2852,15 @@ main,.lp-foot{overflow-x:clip}
   <div class="lp-w">
     <div class="lp-rv"><svg class="rn-mark " height="64" viewBox="270 318 900 432" fill="currentColor" role="img" aria-label="RN."><title>RN. — Right Now</title><path fill-rule="evenodd" d="M278 326H469C552 326 594 382 594 452C594 510 560 552 512 572L624 731H508L386 575V731H278ZM386 410H458C472 410 481 432 481 461C481 490 472 512 458 512H386Z"/><path d="M618 326H729L896 579V326H1005V731H888L725 497V731H618Z"/><circle cx="1092.5" cy="679" r="64.5"/></svg></div>
     <h2 class="lp-rv" style="--d:1">No mañana. No el lunes.<br><em>Right now.</em></h2>
-    <p class="lp-p lp-rv" style="--d:2;margin:0 auto 34px;text-align:center">Crea tu cuenta, responde 7 preguntas y empieza tu primera semana en menos de 3 minutos.</p>
-    <div class="lp-cta lp-rv" style="--d:3"><a class="lp-btn pri lg" href="#acceso" data-go="signup">Crear cuenta <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4l6 6-6 6"/></svg></a><a class="lp-btn lg" href="app.html" data-go="login">Ya tengo cuenta</a></div>
+    <p class="lp-p lp-rv" style="--d:2;margin:0 auto 28px;text-align:center">RN. está en acceso por invitación. Deja tu correo y te avisamos en cuanto haya lugar para ti.</p>
+    <div class="lp-end lp-rv" style="--d:3">
+      <form class="lp-wl lp-wl-end" id="lp-wl2" data-ok="lp-wl-ok2" data-src="final" novalidate>
+        <div class="lp-wl-in"><input type="email" id="lp-wl-email2" placeholder="tu@correo.com" autocomplete="email" inputmode="email" required aria-label="Tu correo"><button class="lp-btn pri" type="submit"><span>Apartar mi lugar</span></button></div>
+        <p class="lp-wl-msg" role="status"></p>
+      </form>
+      <div class="lp-wl-ok" id="lp-wl-ok2" hidden><span class="lp-wl-check"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#0B1505" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>¡Listo, estás en la lista!</b><span>Te escribimos en cuanto haya lugar para ti.</span></div>
+      <p class="lp-end-links">¿Te invitaron? <a href="app.html#crear">Crea tu cuenta</a> · <a href="app.html" data-go="login">Ya tengo cuenta</a></p>
+    </div>
   </div>
 </section>
 </main>
@@ -2857,7 +2873,7 @@ main,.lp-foot{overflow-x:clip}
     <div class="lp-acc">
       <div class="lp-acc-o"><b>¿Te invitaron?</b><span>Crea tu cuenta con el correo con el que te invitaron.</span><div class="lp-acc-b"><a class="lp-btn pri" href="app.html#crear">Crear mi cuenta <svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4l6 6-6 6"/></svg></a><a class="lp-btn txt" href="app.html" data-go="login">Ya tengo cuenta</a></div></div>
       <div class="lp-or"><span>o</span></div>
-      <form class="lp-acc-o lp-wl" id="lp-wl" novalidate>
+      <form class="lp-acc-o lp-wl" id="lp-wl" data-ok="lp-wl-ok" novalidate>
         <b>Apúntate a la lista de espera</b><span>Te avisamos en cuanto haya lugar. Sin spam: un solo correo.</span>
         <div class="lp-wl-in"><input type="email" id="lp-wl-email" placeholder="tu@correo.com" autocomplete="email" inputmode="email" required aria-label="Tu correo"><button class="lp-btn pri" type="submit"><span>Apuntarme</span></button></div>
         <div class="lp-wl-q"><small>¿Qué quieres mejorar primero? (opcional)</small><div class="lp-wl-c"><button type="button" class="lp-wl-chip" data-v="🏋️ Cuerpo">🏋️ Cuerpo</button><button type="button" class="lp-wl-chip" data-v="🧠 Mente">🧠 Mente</button><button type="button" class="lp-wl-chip" data-v="💼 Carrera">💼 Carrera</button><button type="button" class="lp-wl-chip" data-v="🫂 Relaciones">🫂 Relaciones</button><button type="button" class="lp-wl-chip" data-v="💰 Dinero">💰 Dinero</button><button type="button" class="lp-wl-chip" data-v="🌱 Hábitos">🌱 Hábitos</button></div></div>
@@ -3117,23 +3133,39 @@ main,.lp-foot{overflow-x:clip}
 
   var note = $('#lp-note');
 
-  /* lista de espera */
+  /* estadísticas propias: sin cookies ni datos personales (solo página, sitio de origen y tipo de dispositivo) */
   (function(){
-    var f = document.getElementById('lp-wl'); if (!f) return;
-    var inp = document.getElementById('lp-wl-email'), msg = document.getElementById('lp-wl-msg'), ok = document.getElementById('lp-wl-ok'), btn = f.querySelector('button[type=submit]'), picks = [];
-    f.querySelectorAll('.lp-wl-chip').forEach(function(c){ c.addEventListener('click', function(){ c.classList.toggle('on'); var v = c.dataset.v, i = picks.indexOf(v); if (i >= 0) picks.splice(i, 1); else picks.push(v); }); });
-    inp.addEventListener('input', function(){ inp.classList.remove('bad'); msg.textContent = ''; });
-    f.addEventListener('submit', function(e){
-      e.preventDefault(); var em = inp.value.trim().toLowerCase();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ inp.classList.remove('bad'); void inp.offsetWidth; inp.classList.add('bad'); msg.textContent = em ? 'Ese correo no se ve completo.' : 'Escribe tu correo.'; inp.focus(); return; }
-      var C = window.RN_CONFIG || {}; if (!C.url){ msg.textContent = 'No se pudo conectar. Intenta más tarde.'; return; }
-      btn.classList.add('busy'); btn.disabled = true; msg.textContent = '';
-      fetch(C.url + '/rest/v1/rn_waitlist', { method:'POST', headers:{ apikey:C.key, 'Content-Type':'application/json', Prefer:'return=minimal' }, body: JSON.stringify({ email: em, note: picks.join(', ') || null }) })
-        .then(function(r){ if (r.ok || r.status === 409) { f.hidden = true; ok.hidden = false; try { localStorage.setItem('rn-wl', em); } catch (x) {} } else throw r; })
-        .catch(function(){ msg.textContent = 'No se pudo guardar. Revisa tu internet e inténtalo de nuevo.'; })
-        .then(function(){ btn.classList.remove('busy'); btn.disabled = false; });
+    var C = window.RN_CONFIG || {}, off = navigator.doNotTrack === '1' || /localhost|127\.0\.0\.1/.test(location.hostname) || !C.url;
+    window.rnTrack = function(ev){ if (off) return; try {
+      var ref = '', q = new URLSearchParams(location.search), utm = [q.get('utm_source'), q.get('utm_campaign')].filter(Boolean).join(' / ');
+      try { var r = document.referrer && new URL(document.referrer); if (r && r.hostname !== location.hostname) ref = r.hostname.replace(/^www\./, ''); } catch (x) {}
+      fetch(C.url + '/rest/v1/rn_visits', { method:'POST', keepalive:true, headers:{ apikey:C.key, 'Content-Type':'application/json', Prefer:'return=minimal' }, body: JSON.stringify({ event: ev, path: location.pathname.slice(0, 120), ref: ref || null, utm: utm.slice(0, 120) || null, device: matchMedia('(pointer: coarse)').matches ? 'móvil' : 'compu' }) }).catch(function(){});
+    } catch (x) {} };
+    try { if (!sessionStorage.getItem('rn-v')) { sessionStorage.setItem('rn-v', '1'); rnTrack('view'); } } catch (x) { rnTrack('view'); }
+    document.addEventListener('click', function(e){ var a = e.target.closest('a,button'); if (!a) return;
+      if (a.dataset.go === 'signup') rnTrack('signup_click'); else if (a.dataset.go === 'login') rnTrack('login_click'); else if (/#crear$/.test(a.getAttribute('href') || '')) rnTrack('invite_click'); }, true);
+  })();
+
+  /* lista de espera (modal y final de la página) */
+  (function(){
+    var forms = [].slice.call(document.querySelectorAll('form.lp-wl')); if (!forms.length) return;
+    function doneAll(){ forms.forEach(function(f){ f.hidden = true; var ok = document.getElementById(f.dataset.ok); if (ok) ok.hidden = false; }); }
+    forms.forEach(function(f){
+      var inp = f.querySelector('input[type=email]'), msg = f.querySelector('.lp-wl-msg'), btn = f.querySelector('button[type=submit]'), picks = [];
+      f.querySelectorAll('.lp-wl-chip').forEach(function(c){ c.addEventListener('click', function(){ c.classList.toggle('on'); var v = c.dataset.v, i = picks.indexOf(v); if (i >= 0) picks.splice(i, 1); else picks.push(v); }); });
+      inp.addEventListener('input', function(){ inp.classList.remove('bad'); msg.textContent = ''; });
+      f.addEventListener('submit', function(e){
+        e.preventDefault(); var em = inp.value.trim().toLowerCase();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ inp.classList.remove('bad'); void inp.offsetWidth; inp.classList.add('bad'); msg.textContent = em ? 'Ese correo no se ve completo.' : 'Escribe tu correo.'; inp.focus(); return; }
+        var C = window.RN_CONFIG || {}; if (!C.url){ msg.textContent = 'No se pudo conectar. Intenta más tarde.'; return; }
+        btn.classList.add('busy'); btn.disabled = true; msg.textContent = '';
+        fetch(C.url + '/rest/v1/rn_waitlist', { method:'POST', headers:{ apikey:C.key, 'Content-Type':'application/json', Prefer:'return=minimal' }, body: JSON.stringify({ email: em, note: (picks.join(', ') || '') + (f.dataset.src ? (picks.length ? ' · ' : '') + f.dataset.src : '') || null }) })
+          .then(function(r){ if (r.ok || r.status === 409) { doneAll(); try { localStorage.setItem('rn-wl', em); } catch (x) {} if (window.rnTrack) rnTrack('waitlist'); } else throw r; })
+          .catch(function(){ msg.textContent = 'No se pudo guardar. Revisa tu internet e inténtalo de nuevo.'; })
+          .then(function(){ btn.classList.remove('busy'); btn.disabled = false; });
+      });
     });
-    try { if (localStorage.getItem('rn-wl')) { f.hidden = true; ok.hidden = false; } } catch (x) {}
+    try { if (localStorage.getItem('rn-wl')) doneAll(); } catch (x) {}
     if (/^#acceso/.test(location.hash)) setTimeout(function(){ var b = document.querySelector('[data-go=signup]'); if (b) b.click(); }, 1200);
   })();
   var inv = $('#lp-inv'), invLast = null;
