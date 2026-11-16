@@ -2269,6 +2269,9 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .st-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.st-kpis div{padding:12px;border-radius:14px;background:var(--s2);border:1px solid var(--line2)}.st-kpis b{display:block;font:700 1.5rem var(--display)}.st-kpis small{color:var(--fg2);font-size:.78rem}
 .st-bars{display:flex;align-items:flex-end;gap:3px;height:70px;padding:6px 0;border-bottom:1px solid var(--line2)}.st-bars i{flex:1;height:max(3px,var(--h));border-radius:4px 4px 0 0;background:#B7F36B88}
 .st-refs{display:flex;gap:6px;flex-wrap:wrap}.st-refs span{font-size:.8rem;color:var(--fg2);padding:5px 10px;border-radius:999px;border:1px solid var(--line2)}.st-refs b{color:var(--fg);font-weight:600}
+
+.st-share{display:grid;gap:6px}.st-share small{color:var(--muted);font-size:.78rem;margin-bottom:4px}
+.st-link{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;background:var(--s2);border:1px solid var(--line2)}.st-link span{font-weight:600;font-size:.84rem;min-width:84px}.st-link code{flex:1;min-width:0;font:500 .74rem var(--body);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 <div id="root"><div class="ob"><div class="ob-card"><svg height="72" viewBox="270 318 900 432" fill="#E7ECE5" aria-label="RN."><path fill-rule="evenodd" d="M278 326H469C552 326 594 382 594 452C594 510 560 552 512 572L624 731H508L386 575V731H278ZM386 410H458C472 410 481 432 481 461C481 490 472 512 458 512H386Z"/><path d="M618 326H729L896 579V326H1005V731H888L725 497V731H618Z"/><circle cx="1092.5" cy="679" r="64.5"/></svg><p class="tagline" style="font:600 .82rem var(--display);letter-spacing:.22em;text-transform:uppercase;color:#B7F36B">It's time to unlock your prime.</p><p class="muted">Conectando con el almacenamiento de tu cuenta.</p></div></div></div>
 <div id="layer"></div>
@@ -5857,7 +5860,7 @@ async function fillStats() {
     <div class="st-kpis"><div><b class="num">${fmt(d.views)}</b><small>visitas</small></div><div><b class="num">${fmt(d.waitlist)}</b><small>en lista de espera (${fmt(d.waitlist_total)} en total)</small></div><div><b class="num">${fmt(d.signup_click)}</b><small>clics en "Crear cuenta"</small></div><div><b class="num">${d.views ? Math.round(100 * d.mobile / d.views) : 0}%</b><small>desde celular</small></div></div>
     <div class="st-bars" aria-label="Visitas por día">${days.map(x => `<i style="--h:${((by[x] || 0) / mx * 100).toFixed(0)}%" title="${D.short(x)}: ${by[x] || 0}"></i>`).join('')}</div>
     ${(d.refs || []).length ? `<div class="st-refs">${d.refs.map(x => `<span><b>${esc(x.ref)}</b> ${fmt(x.n)}</span>`).join('')}</div>` : ''}
-    <p class="sub" style="margin:0">Tip: comparte el link con <b>?utm_source=instagram</b> (o whatsapp, tiktok…) al final para saber de dónde llega la gente.</p></div></section>`;
+    <div class="st-share"><b>Links para compartir</b><small>Usa el de cada red y aquí verás de dónde llega la gente.</small>${['instagram', 'whatsapp', 'tiktok', 'linkedin', 'x'].map(k => { const u = 'https://leotiburciogo-alt.github.io/RN/?utm_source=' + k; return `<div class="st-link"><span>${k === 'x' ? 'X (Twitter)' : k[0].toUpperCase() + k.slice(1)}</span><code>${u}</code><button type="button" class="btn sm" data-act="st-copy" data-u="${u}">Copiar</button></div>`; }).join('')}</div></div></section>`;
 }
 async function pushSync() { const sub = await pushSub(); if (!sub) return; const r = await RN_WEB.pushPrefs(sub.endpoint, pushPrefs()); if (r.error) toast(r.error); }
 async function pushEnable() {
@@ -6200,6 +6203,7 @@ const ACT = {
   'gr-add': () => { const i = $('#gr-custom'), v = (i && i.value || '').trim(); if (!v) return i && i.focus(); const G = UI.gr; G.custom.push(v); if (G.prios.length < 3) G.prios.push('c:' + (G.custom.length - 1)); grRefresh(); },
   'gr-done': () => grFinish(),
   'stat-days': d => { UI.statDays = +d.v; fillStats(); },
+  'st-copy': d => { if (navigator.clipboard) navigator.clipboard.writeText(d.u).then(() => toast('Link copiado')).catch(() => toast(d.u)); else toast(d.u); },
   'push-test': async () => { const sub = await pushSub(); if (!sub) return toast('Primero activa los recordatorios'); try { const r = await fetch(RN_WEB.fn, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: (window.RN_CONFIG || {}).key }, body: JSON.stringify({ test: true, endpoint: sub.endpoint }) }); toast(r.ok ? 'Enviada: debería llegarte en unos segundos' : 'No se pudo enviar. Revisa la guía (función rn-push).'); } catch (e) { toast('No se pudo enviar. Revisa tu internet.'); } },
   'sc-copy': () => { const t = ($('#sc-url') || {}).textContent || ''; const ok = () => toast('Link copiado. Ahora ábrelo en la app Atajos.'); if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok).catch(() => { const r = document.createRange(); r.selectNodeContents($('#sc-url')); getSelection().removeAllRanges(); getSelection().addRange(r); }); },
   'ql-tap': d => {
