@@ -2125,6 +2125,7 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 .au-spin{position:absolute;right:16px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;border:2px solid #0B0D0C44;border-top-color:#0B0D0C;opacity:0;transition:opacity .15s}
 .au-btn.busy .au-spin{opacity:1;animation:auSpin .8s linear infinite}@keyframes auSpin{to{transform:rotate(360deg)}}
 .au-link{align-self:center;background:none;border:0;color:var(--muted);font:500 .86rem var(--body);cursor:pointer;padding:10px;border-radius:10px}.au-link:hover{color:var(--fg)}
+.au-link b{color:var(--lime);font-weight:600}.au-note a{color:var(--fg2);text-decoration:underline;text-underline-offset:3px}.au-note a:hover{color:var(--lime)}
 .au-note{margin:2px 0 0;text-align:center;font-size:.78rem;color:var(--muted);opacity:.85;text-wrap:pretty}
 .au-meter{display:flex;gap:5px;margin-top:-4px}.au-meter i{flex:1;height:4px;border-radius:9px;background:#232A25;transition:background-color .25s}
 .au-meter i.on.s1{background:#FF8A7A}.au-meter i.on.s2{background:#E6B65C}.au-meter i.on.s3,.au-meter i.on.s4{background:#B7F36B}
@@ -2133,6 +2134,9 @@ form.sheet:invalid #wipe-go{opacity:.45;pointer-events:none}
 @media (prefers-reduced-motion:no-preference){.au-check{animation:auPop .5s cubic-bezier(.3,1.6,.4,1) both}}@keyframes auPop{from{transform:scale(.3);opacity:0}}
 .au-foot{position:relative;margin:0;color:var(--muted);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
 
+.hist-list{display:grid;gap:6px;max-height:55vh;overflow:auto;margin-top:12px}
+.hist-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.hist-row b{display:block;font-weight:600;font-size:.92rem}.hist-row small{color:var(--muted);font-size:.78rem}
 </style>
 <div id="root"><div class="ob"><div class="ob-card"><svg height="72" viewBox="270 318 900 432" fill="#E7ECE5" aria-label="RN."><path fill-rule="evenodd" d="M278 326H469C552 326 594 382 594 452C594 510 560 552 512 572L624 731H508L386 575V731H278ZM386 410H458C472 410 481 432 481 461C481 490 472 512 458 512H386Z"/><path d="M618 326H729L896 579V326H1005V731H888L725 497V731H618Z"/><circle cx="1092.5" cy="679" r="64.5"/></svg><p class="tagline" style="font:600 .82rem var(--display);letter-spacing:.22em;text-transform:uppercase;color:#B7F36B">It's time to unlock your prime.</p><p class="muted">Conectando con el almacenamiento de tu cuenta.</p></div></div></div>
 <div id="layer"></div>
@@ -5260,6 +5264,7 @@ VIEWS.ajustes = () => {
     ${sec('dl', 'Datos y respaldo', MODE === 'demo' ? 'Estás en la demo: estos botones usan los datos de demostración' : 'Tus datos son privados y solo tuyos', (MODE === 'real' ? `<div class="bk-last ${age === null || age >= 7 ? 'due' : ''}"><span>Último respaldo</span><b>${age === null ? 'Nunca' : age === 0 ? 'Hoy' : age === 1 ? 'Ayer' : `Hace ${age} días`}</b></div>` : '')
       + `<div class="row set-btns"><button class="btn primary" data-act="export-json">${icon('dl')}Respaldar (JSON)</button><button class="btn" data-act="import">Importar respaldo…</button><button class="btn" data-act="export-csv">Exportar CSV</button><input type="file" id="imp" accept="application/json,.json" data-change="import" hidden></div>
       <p class="sub">JSON es el respaldo completo: con él recuperas todo. CSV sirve para abrir tus registros en Excel.</p>
+      ${window.RN_WEB && MODE === 'real' ? `<div class="set-row"><span class="set-txt"><b>Historial de versiones</b><small>Cada cambio guarda cómo estaba todo. Puedes volver a cualquier momento de los últimos 30 días.</small></span><span class="set-ctl"><button class="btn sm" data-act="hist-open">${icon('cal')}Ver historial</button></span></div>` : ''}
       <details class="set-more"><summary>Dónde se guardan tus datos</summary>${storage_html()}${usage_html()}</details>`, 'c-wide')}
     ${sec('eye', 'Demostración', 'Datos ficticios, separados de los tuyos', `<p class="sub" style="margin:0">Entrar o salir de la demo nunca modifica tus datos reales.</p><div class="row set-btns">${MODE === 'demo' ? `<button class="btn" data-act="demo-reset">Restablecer demo</button><button class="btn primary" data-act="demo-exit">Volver a mis datos</button>` : `<button class="btn" data-act="demo-start">Explorar con datos de demostración</button>`}</div>`)}
     ${MODE === 'real' && real ? sec('alert', 'Zona de cuidado', '', `<p class="sub" style="margin:0">Borra todo de tu cuenta y de este navegador. No se puede deshacer: respalda antes.</p><div class="row set-btns"><button class="btn danger" data-act="real-wipe">Borrar todos mis datos</button></div>`, 'danger') : ''}
@@ -5874,6 +5879,24 @@ const ACT = {
   'week-unname': d => { UI.weekEdit = null; mut(st => { if (st.meta.weekNames) delete st.meta.weekNames[d.wk]; }); },
   'week-shift': d => { UI.week = D.add(UI.week || D.weekStart(D.today()), +d.n); render(); },
   'week-today': () => { UI.week = null; render(); },
+  'hist-open': async () => {
+    openSheet('Historial de versiones', `<div class="hist-body"><p class="sub">Cargando…</p></div>`, 'none');
+    const box = () => $('#layer .hist-body'), r = window.RN_WEB && await window.RN_WEB.history(); if (!box()) return;
+    if (!r || r.error) { box().innerHTML = `<p class="sub">${esc((r && r.error) || 'No se pudo cargar el historial.')}</p>`; return; }
+    // agrupa copias cercanas (10 min) en puntos para volver
+    const pts = []; r.rows.forEach(x => { const t = new Date(x.created_at), last = pts[pts.length - 1]; if (last && last.t - t < 10 * 60000) { last.docs.add(x.doc); last.at = x.created_at; } else pts.push({ t, at: x.created_at, docs: new Set([x.doc]) }); });
+    const DN = { meta: 'ajustes y perfil', goals: 'objetivos', habits: 'hábitos', tasks: 'tareas', reviews: 'reflexiones' };
+    const fmtT = t => { const x = t.toLocaleString('es-MX', { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }).replace(/ de /g, ' ').replace(/\s?p\.\s?m\./i, ' p.m.').replace(/\s?a\.\s?m\./i, ' a.m.'); return x.charAt(0).toUpperCase() + x.slice(1); };
+    box().innerHTML = pts.length ? `<p class="sub" style="margin-top:0">Elige un momento para volver a cómo estaba todo <b>justo antes</b> de esos cambios. Antes de restaurar guardo cómo está ahora, así que siempre puedes deshacerlo.</p>
+      <div class="hist-list">${pts.slice(0, 40).map(p => `<div class="hist-row"><div class="grow"><b>${esc(fmtT(p.t))}</b><small>Cambios en ${[...p.docs].map(d => DN[d] || d).join(', ')}</small></div><button class="btn sm ghost" data-act="hist-restore" data-at="${p.at}" data-id="${p.at}" data-arm="1">Volver aquí</button></div>`).join('')}</div>`
+      : `<p class="sub">Aún no hay versiones guardadas. Se irán guardando solas cada vez que cambies algo (una por sección cada 10 minutos, durante 30 días).</p>`;
+  },
+  'hist-restore': async (d, el) => {
+    if (!armed(el)) return; el.disabled = true; el.textContent = 'Restaurando…';
+    const r = await window.RN_WEB.restore(d.at);
+    if (r && r.error) { el.disabled = false; el.textContent = 'Volver aquí'; return toast(r.error); }
+    LS.del('sos-real'); LS.del('sos-pend'); LS.del('sos-base'); toast('Listo. Recargando con esa versión…'); setTimeout(() => location.reload(), 900);
+  },
   'pz-open': d => { const st = S(), p = d.id && (st.meta.pauses || []).find(x => x.id === d.id); UI.pz = pzDraft(p, { type: d.type, start: d.start }); pzSheet(); },
   'pz-sit': d => { const x = UI.pz; if (!x) return; if (!d.v) { x.type = null; return pzSheet(); } pzPick(x, d.v, x.start !== D.today() && x.start < D.today()); pzSheet(); },
   'pz-mode': d => { UI.pz.mode = d.v; pzSheet(); },

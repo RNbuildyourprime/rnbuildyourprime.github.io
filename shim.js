@@ -18,6 +18,9 @@
     if (/password should be at least|weak/i.test(m)) return 'La contraseña es muy corta: usa al menos 8 caracteres.';
     if (/same.*password|different from the old/i.test(m)) return 'Usa una contraseña distinta a la anterior.';
     if (/expired|invalid.*(link|token)|otp/i.test(m)) return 'El enlace ya expiró o ya se usó. Pide uno nuevo.';
+    if (/RN_NO_INVITE|database error saving new user/i.test(m)) return 'Ese correo aún no tiene invitación. Pídele a quien te compartió RN. que te agregue, o apúntate en la lista de espera.';
+    if (/already registered|already been registered|user already exists/i.test(m)) return 'Ese correo ya tiene cuenta. Inicia sesión o recupera tu contraseña.';
+    if (/signups? not allowed|signup.*disabled/i.test(m)) return 'El registro está cerrado por ahora. Pide tu invitación.';
     if (/network|fetch/i.test(m)) return 'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
     return 'Algo salió mal (' + m + ').';
   };
@@ -48,7 +51,10 @@
     try { if (localStorage.getItem('rn-uid') !== uid) { ['sos-real', 'sos-mode', 'sos-demo', 'sos-pend', 'sos-base'].forEach(k => localStorage.removeItem(k)); localStorage.setItem('rn-uid', uid); } } catch (e) { }
     const caps = { db: makeDB(uid), user: { id: async () => uid }, downloads };
     window.claude = { use: async n => caps[n] || null };
-    window.RN_WEB = { email: session.user.email, logout, changePassword: async (cur, nw) => {
+    window.RN_WEB = { email: session.user.email, logout,
+      history: async () => { try { const { data, error } = await sb.from('rn_history').select('doc,created_at').order('created_at', { ascending: false }).limit(400); if (error) return { error: /relation|does not exist|schema cache/i.test(error.message) ? 'El historial aún no está activado: falta correr supabase_v2.sql en Supabase.' : ERR(error.message) }; return { rows: data || [] }; } catch (e) { return { error: ERR(e && e.message) }; } },
+      restore: async at => { try { const { error } = await sb.rpc('rn_restore', { p_at: at }); return error ? { error: ERR(error.message) } : {}; } catch (e) { return { error: ERR(e && e.message) }; } },
+      changePassword: async (cur, nw) => {
       try {
         const v = await sb.auth.signInWithPassword({ email: session.user.email, password: cur });   // confirma que eres tú
         if (v.error) return { error: /invalid/i.test(v.error.message) ? 'La contraseña actual no es correcta.' : ERR(v.error.message) };
@@ -71,6 +77,8 @@
       login: ['Bienvenido de vuelta', 'Entra para seguir construyendo tu mejor versión.'],
       reset: ['Recupera tu acceso', 'Te mandamos un enlace a tu correo para crear una contraseña nueva.'],
       newpass: [linkType === 'invite' ? 'Te invitaron a RN.' : 'Crea tu contraseña nueva', linkType === 'invite' ? 'Crea tu contraseña para entrar. Con ella abrirás RN. en cualquier dispositivo.' : 'Elige una contraseña que no uses en otro lado.'],
+      signup: ['Crea tu cuenta', 'RN. está en acceso por invitación: usa el correo con el que te invitaron.'],
+      confirm: ['Confirma tu correo', 'Te mandamos un enlace para activar tu cuenta. Ábrelo en este mismo dispositivo.'],
       sent: ['Revisa tu correo', 'Si ese correo tiene cuenta, te llegará un enlace en un minuto. Ábrelo en este mismo dispositivo.']
     }[mode];
     const field = (id, type, label, ac, extra = '') => `<label class="au-f"><span>${label}</span><span class="au-in"><input id="${id}" type="${type}" autocomplete="${ac}" required ${extra}>${type === 'password' ? `<button type="button" class="au-eye" data-eye="${id}" aria-label="Mostrar contraseña">${eye}</button>` : ''}</span></label>`;
@@ -78,7 +86,11 @@
     if (mode === 'login') body = `<form id="au-form">${field('au-email', 'email', 'Correo', 'email', 'inputmode="email"')}${field('au-pass', 'password', 'Contraseña', 'current-password', 'minlength="6"')}
       <button class="au-btn" type="submit"><span>Entrar</span><i class="au-spin"></i></button></form>
       <button class="au-link" data-go="reset">¿Olvidaste tu contraseña?</button>
-      <p class="au-note">RN. está en prueba privada. Si aún no tienes cuenta, pídele acceso a quien te compartió la app.</p>`;
+      <button class="au-link" data-go="signup">¿Te invitaron? <b>Crea tu cuenta</b></button>
+      <p class="au-note">RN. está en acceso por invitación. <a href="./#acceso">¿Quieres entrar? Apúntate en la lista de espera</a></p>`;
+    if (mode === 'signup') body = `<form id="au-form">${field('au-email', 'email', 'Correo con el que te invitaron', 'email', 'inputmode="email"')}${field('au-pass', 'password', 'Contraseña', 'new-password', 'minlength="8"')}<div class="au-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="au-hint" id="au-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
+      ${field('au-pass2', 'password', 'Repítela', 'new-password', 'minlength="8"')}<button class="au-btn" type="submit"><span>Crear cuenta</span><i class="au-spin"></i></button></form><button class="au-link" data-go="login">Ya tengo cuenta · <b>Entrar</b></button>`;
+    if (mode === 'confirm') body = `<div class="au-sent"><div class="au-check">✓</div></div><button class="au-link" data-go="login">← Volver a entrar</button>`;
     if (mode === 'reset') body = `<form id="au-form">${field('au-email', 'email', 'Correo', 'email', 'inputmode="email"')}<button class="au-btn" type="submit"><span>Mandar enlace</span><i class="au-spin"></i></button></form><button class="au-link" data-go="login">← Volver a entrar</button>`;
     if (mode === 'newpass') body = `<form id="au-form">${field('au-pass', 'password', 'Contraseña nueva', 'new-password', 'minlength="8"')}<div class="au-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div><small class="au-hint" id="au-hint">Mínimo 8 caracteres. Mejor si mezclas letras, números y símbolos.</small>
       ${field('au-pass2', 'password', 'Repítela', 'new-password', 'minlength="8"')}<button class="au-btn" type="submit"><span>Guardar y entrar</span><i class="au-spin"></i></button></form>`;
@@ -87,7 +99,7 @@
       <p class="au-err" role="alert" ${msg ? '' : 'hidden'}>${msg || ''}</p>${body}</main><p class="au-foot">Build your prime. Right now.</p>`;
     w.classList.remove('out'); requestAnimationFrame(() => w.classList.add('in'));
     const f = $('#au-form'); if (f) { const first = f.querySelector('input'); if (first && matchMedia('(pointer:fine)').matches) first.focus(); f.addEventListener('submit', e => { e.preventDefault(); submit(mode, f); }); }
-    const p = $('#au-pass'); if (p && mode === 'newpass') p.addEventListener('input', () => meter(p.value));
+    const p = $('#au-pass'); if (p && (mode === 'newpass' || mode === 'signup')) p.addEventListener('input', () => meter(p.value));
     // brillo que sigue al cursor sobre la tarjeta
     const card = w.querySelector('.au-card'); card.addEventListener('pointermove', e => { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', (e.clientX - r.left) + 'px'); card.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
   }
@@ -108,6 +120,15 @@
       if (mode === 'reset') {
         const { error } = await sb.auth.resetPasswordForEmail($('#au-email').value.trim(), { redirectTo: location.origin + location.pathname.replace(/app\.html$/, '') });
         if (error) throw error; busy(false); return screen('sent');
+      }
+      if (mode === 'signup') {
+        const em = $('#au-email').value.trim(), a = $('#au-pass').value, b = $('#au-pass2').value;
+        if (a !== b) { busy(false); return setErr('Las contraseñas no coinciden.'); }
+        const { data, error } = await sb.auth.signUp({ email: em, password: a, options: { emailRedirectTo: location.origin + location.pathname.replace(/app\.html$/, '') } });
+        if (error) throw error;
+        if (data && data.user && Array.isArray(data.user.identities) && !data.user.identities.length) throw { message: 'already registered' };
+        if (data && data.session) return enter(data.session);
+        busy(false); return screen('confirm');
       }
       if (mode === 'newpass') {
         const a = $('#au-pass').value, b = $('#au-pass2').value;
@@ -137,6 +158,7 @@
     if (linkError) return screen('login', ERR(linkError));
     if (session && (linkType === 'invite' || linkType === 'recovery')) return screen('newpass');
     if (session) return start(session);
+    if (/^#crear/.test(hashAtLoad)) { history.replaceState(null, '', location.pathname); return screen('signup'); }
     // Sin internet: la sesión guardada basta para abrir tu copia local; se sincroniza al volver la conexión
     try { const saved = JSON.parse(localStorage.getItem('rn-auth') || 'null'), u = saved && (saved.user || (saved.currentSession && saved.currentSession.user));
       if (u && u.id && (navigator.onLine === false || netFail) && localStorage.getItem('rn-uid') === u.id) return start({ user: u }); } catch (e) { }
