@@ -2,6 +2,14 @@
 
 Estado al 15 nov 2026 (noche). Este archivo explica qué hay, cómo funciona y qué falta, para seguir sin contexto previo (otro chat, plan gratis u otra persona).
 
+## 0. Dónde vive todo (actualizado 15 nov, noche)
+
+- **Página:** https://rnbuildyourprime.github.io (landing) · https://rnbuildyourprime.github.io/app.html (app)
+- **Código:** organización de GitHub **RNbuildyourprime**, repo **rnbuildyourprime.github.io**. El link viejo `leotiburciogo-alt.github.io/RN` ya no existe.
+- **Supabase:** Site URL y Redirect URL ya apuntan al link nuevo. `supabase_v3.sql` ya corrido, función `rn-push` desplegada (JWT apagado) y Leo ya es admin.
+- **Google Search Console:** propiedad verificada con la cuenta de Google de RN. (etiqueta en `index.html`) y `sitemap.xml` enviado.
+- **Pendiente opcional:** correo propio por SMTP (Gmail de RN. + contraseña de aplicación) y plantillas de correo con la marca. Los pasos están en la guía "RN. Activación".
+
 ## 1. Qué es cada archivo
 
 | Archivo | Qué hace |
