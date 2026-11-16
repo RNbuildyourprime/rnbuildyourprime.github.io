@@ -1,6 +1,6 @@
 # RN. · Guía para continuar
 
-Estado al 15 nov 2026. Este archivo explica qué hay, cómo funciona y qué falta, para seguir sin contexto previo (otro chat, plan gratis u otra persona).
+Estado al 15 nov 2026 (noche). Este archivo explica qué hay, cómo funciona y qué falta, para seguir sin contexto previo (otro chat, plan gratis u otra persona).
 
 ## 1. Qué es cada archivo
 
@@ -13,6 +13,9 @@ Estado al 15 nov 2026. Este archivo explica qué hay, cómo funciona y qué falt
 | `sw.js` | Service worker: permite instalar la app y abrirla sin internet. Al cambiar `app.html`, sube la versión `rn-v2` → `rn-v3` para que los teléfonos tomen lo nuevo más rápido. |
 | `manifest.webmanifest` + `icon-*.png` + `apple-touch-icon.png` | Lo que hace que se instale como app. |
 | `supabase.sql` | Tablas base (ya corrido). |
+| `supabase_v3.sql` | Recordatorios (tabla `rn_push`, aviso cada hora) y estadísticas de la landing (`rn_visits`, `rn_stats`). **Correr una vez.** |
+| `supabase/functions/rn-push/index.ts` | Función que manda los recordatorios. Se pega en Supabase → Edge Functions. |
+| `sitemap.xml` | Lista de páginas para Google. |
 | `supabase_v2.sql` | Historial, invitaciones, lista de espera y ping. **Correr una vez** (ver §3). Se puede repetir sin problema. |
 | `.github/workflows/keepalive.yml` | Avisa a Supabase lunes y jueves para que el proyecto gratis no se pause. |
 
@@ -45,6 +48,22 @@ Nunca subir al repo: claves `secret` / `service_role`, contraseña de la base de
 - Del día 1 al 7 aparece una tarjeta en Inicio con el mes anterior; desaparece al verla.
 - Siempre disponible en Evolución → "Resumen de…" (con selector de mes).
 - "Compartir imagen" crea una imagen vertical 1080×1920 (historia de Instagram).
+
+
+## 2b. Funciones nuevas (15 nov, noche)
+
+- **Registro rápido:** tarjetas por hábito. Un toque registra, otro toque quita. Los hábitos con cantidad muestran botones (10/15/30/45/60 min o tus valores recientes). Los objetivos dicen qué registran ("+ Sesión", "+ Avance").
+- **Atajos:** Ajustes → Atajos de un toque. Cada hábito tiene un link `app.html#log=ID` que lo registra. También existen `#quick` (registro rápido), `#cierre` (cierre de semana) y `#resumen` (resumen del mes).
+- **Cierre de semana guiado:** tarjeta en Inicio de viernes a lunes, y botón en Reflexiones. Tiene 4 pasos: semana, bien, ajustar y plan.
+  - "Bajar la meta" usa `h.adj` durante 4 semanas.
+  - Las prioridades se vuelven tareas de prioridad alta de la semana siguiente.
+- **Respaldo:** Ajustes → Datos y respaldo → "Descargar respaldo" (en el celular abre Compartir para guardarlo en Archivos) y "Restaurar desde archivo".
+- **Recordatorios:** Ajustes → Recordatorios.
+  - Se pueden apagar todos o uno por uno, cada uno a la hora que elijas, y no llegan en pausa.
+  - Necesitan `supabase_v3.sql` y la función `rn-push`.
+- **Estadísticas de la landing:** sin cookies. Aparecen en Ajustes solo para administradores (tabla `rn_admins`).
+- **Landing:** formulario de lista de espera también al final de la página.
+- **Contraseñas:** el navegador o el Llavero las guardan y sugieren tu correo.
 
 ## 3. Lo que tienes que hacer tú en Supabase (una sola vez)
 
